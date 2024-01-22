@@ -1,0 +1,172 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  expires      DateTime
+  sessionToken String   @unique
+  accessToken  String   @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
+
+model User {
+  id            String       @id @default(cuid())
+  name          String?
+  email         String?      @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+  bankAccount   BankAccount?
+}
+
+model BankAccount {
+  id                String @id @default(cuid())
+  owner             User   @relation(fields: [ownerId], references: [id])
+  ownerId           String @unique
+  accountName       String
+  image             String
+  password          String
+  bankAccountNumber String
+  email             String
+
+  balance Int
+
+  transactions       Transaction[]
+  subAccount         SubAccount[]
+  subAccountLoggedIn SubAccountLoggedIn[]
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  QuickSendMoney     QuickSendMoney[]
+}
+
+model SubAccount {
+  id                String @id @default(cuid())
+  name              String
+  balance           Int
+  creditCard_number String
+  creditCard_color  String
+
+  bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id])
+  bankAccountId String
+
+  transaction        Transaction[]
+  SubAccountLoggedIn SubAccountLoggedIn[]
+
+  @@index([bankAccountId])
+}
+
+model SubAccountLoggedIn {
+  id            String      @id @default(cuid())
+  bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id])
+  bankAccountId String
+  subAccount    SubAccount  @relation(fields: [subAccountId], references: [id])
+  subAccountId  String
+
+  company   RegisteredCompany @relation(fields: [companyId], references: [id])
+  companyId String
+  createdAt DateTime          @default(now())
+
+  @@index([bankAccountId])
+  @@index([companyId])
+  @@index([subAccountId])
+}
+
+model Transaction {
+  id              String          @id @default(cuid())
+  account         BankAccount     @relation(fields: [bankAccountId], references: [id])
+  bankAccountId   String
+  amount          Int
+  transactionType TransactionType
+  createdAt       DateTime        @default(now())
+
+  company             RegisteredCompany? @relation(fields: [registeredCompanyId], references: [id])
+  registeredCompanyId String?
+  product             String?
+
+  subAccount   SubAccount? @relation(fields: [subAccountId], references: [id])
+  subAccountId String?
+
+  @@index([createdAt])
+  @@index([bankAccountId])
+  @@index([registeredCompanyId])
+  @@index([subAccountId])
+}
+
+model QuickSendMoney {
+  id                 String      @id @default(cuid())
+  // this is the user's bank account id
+  bankAccountId      String
+  // this is the bank account that is being saved
+  savedBankAccount   BankAccount @relation(fields: [savedBankAccountId], references: [id])
+  savedBankAccountId String
+
+  @@index([savedBankAccountId])
+}
+
+model RegisteredCompany {
+  id             String               @id @default(cuid())
+  name           String
+  transactions   Transaction[]
+  apiKey         APIKey?
+  createdAt      DateTime             @default(now())
+  subAccountUsed SubAccountLoggedIn[]
+
+  @@unique([id], name: "OneToOneRegisteredCompanyAPIKey")
+}
+
+model APIKey {
+  id                  String            @id @default(cuid())
+  key                 String
+  company             RegisteredCompany @relation(fields: [registeredCompanyId], references: [id])
+  registeredCompanyId String
+  createdAt           DateTime          @default(now())
+
+  @@unique([registeredCompanyId], name: "OneToOneRegisteredCompanyAPIKey")
+}
+
+enum TransactionType {
+  DEPOSIT
+  WITHDRAW
+  SPEND
+  SEND
+  ADD
+  TAKE
+}

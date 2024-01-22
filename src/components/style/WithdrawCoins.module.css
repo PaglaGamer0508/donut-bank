@@ -1,0 +1,4 @@
+.amount_input::-webkit-outer-spin-button,
+.amount_input::-webkit-inner-spin-button {
+  display: none;
+}
