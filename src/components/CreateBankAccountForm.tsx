@@ -168,6 +168,7 @@ const CreateBankAccountForm: React.FC<CreateBankAccountFormProps> = ({
         <div className="mt-2">
           <Button
             isLoading={isPending}
+            disabled={isPending}
             type="submit"
             className="w-full text-xl font-semibold rounded p-2 text-green-500 hover:text-white border border-green-500 bg-white hover:bg-green-500 transition-all duration-75 active:scale-95"
           >

@@ -245,6 +245,7 @@ const AddMoney: React.FC<AddMoneyProps> = ({
         </p>
         <Button
           isLoading={isPending}
+          disabled={isPending}
           variant={"primary"}
           className="w-full mt-1"
           type="submit"

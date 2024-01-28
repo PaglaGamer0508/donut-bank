@@ -10,7 +10,7 @@ import { Lato } from "next/font/google";
 import Link from "next/link";
 import React from "react";
 import CreditCardSection from "./CreditCardSection";
-import QuickTransferAvtar from "./QuickTransferAvtar";
+import QuickTransferAavtar from "./QuickTransferAvatar";
 import ShowBalance from "./ShowBalance";
 import UserAccountNav from "./UserAccountNav";
 import styles from "./style/Dashboard.module.css";
@@ -118,7 +118,7 @@ const Dashboard: React.FC<DashboardProps> = async ({
           </div>
 
           {/* Others section */}
-          <div className="flex flex-col md:flex-row gap-x-2 w-full md:w-[40%] h-[15rem] md:h-auto border">
+          <div className="flex flex-col md:flex-row gap-x-2 w-full md:w-[40%] h-[22rem] md:h-auto border">
             <div className="flex flex-col md:w-1/2 h-full border">
               {/* send money */}
               <div className="flex flex-col h-1/2">
@@ -136,16 +136,15 @@ const Dashboard: React.FC<DashboardProps> = async ({
                   </div>
 
                   {/* quick send money accounts */}
-                  <div className="flex gap-x-2">
+                  <div className="flex gap-x-1">
                     {quickSendMoneyAccounts.length > 0 ? (
-                      <div className="flex gap-x-2">
+                      <div className="flex justify-between gap-x-1">
                         {quickSendMoneyAccounts.map((account) => (
-                          <QuickTransferAvtar
+                          <QuickTransferAavtar
                             key={account.id}
                             id={account.savedBankAccount.id}
                             image={account.savedBankAccount.image}
                             name={account.savedBankAccount.accountName}
-                            className="w-10 h-10"
                           />
                         ))}
                       </div>

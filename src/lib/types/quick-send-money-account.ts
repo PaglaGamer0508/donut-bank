@@ -1,6 +1,6 @@
 import { BankAccount } from "./bank-account";
 
-export type QuickSendMoneyAccounts = {
+export type QuickSendMoneyAccount = {
   id: string;
   bankAccountId: string;
   savedBankAccountId: string;

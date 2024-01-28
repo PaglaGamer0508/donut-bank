@@ -1,4 +1,3 @@
-import AddQuickSendMoneyAccount from "@/components/AddQuickSendMoneyAccount";
 import { getAuthSession } from "@/lib/auth";
 import { getBankAccount } from "@/lib/getBankAccount";
 import React from "react";

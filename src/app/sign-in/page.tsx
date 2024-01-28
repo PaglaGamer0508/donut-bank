@@ -14,7 +14,7 @@ const page: React.FC<pageProps> = async ({}) => {
     redirect("/dashboard");
   } else {
     return (
-      <div className="md:flex md:flex-row-reverse min-h-screen pt-3 md:p-0">
+      <div className="md:flex md:flex-row-reverse justify-center md:justify-normal min-h-screen pt-3 md:p-0">
         {/* right */}
         <div className="flex justify-center md:justify-start md:items-center w-full md:w-[40%]">
           <div className="flex items-center">
@@ -33,10 +33,8 @@ const page: React.FC<pageProps> = async ({}) => {
           </div>
         </div>
         {/* left */}
-        <div className="flex md:items-center justify-end w-full md:w-[60%] pt-4">
-          <div className="">
-            <SignIn />
-          </div>
+        <div className="flex md:items-center justify-end w-full md:w-[60%] pt-4 mx-auto">
+          <SignIn />
         </div>
       </div>
     );

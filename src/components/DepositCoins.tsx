@@ -199,6 +199,7 @@ const DepositCoins: React.FC<DepositCoinsProps> = ({
         </p>
         <Button
           isLoading={isPending}
+          disabled={isPending}
           variant={"primary"}
           className="w-full mt-1"
           type="submit"
