@@ -10,6 +10,7 @@ import { Check, Plus, User } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { Button } from "./ui/Button";
 
 type addButtonStateType = "default" | "loading" | "added";
 
@@ -70,6 +71,15 @@ const BankAccountSearchResult: React.FC<BankAccountSearchResultProps> = ({
         title: "Success",
         description: "Quick Send Money Account Added",
         duration: 5000,
+        action: (
+          <Button
+            className="active:scale-95 transition-all duration-75"
+            onClick={() => router.push("/dashboard/quick-send-money-accounts")}
+            variant={"secondary"}
+          >
+            Check
+          </Button>
+        ),
       });
     },
   });

@@ -86,8 +86,8 @@ const AddQuickSendMoneyAccountSearch: React.FC<
               required
               className={`${styles.amount_input} w-[85%] text-lg font-medium border border-green-500 rounded focus:outline-none py-1 px-3`}
             />
-            <Button className="w-[10%]" type="submit" variant={"primary"}>
-              <Search className="w-10 h-10" />
+            <Button className="w-[15%]" type="submit" variant={"primary"}>
+              <Search className="w-8 h-8" />
             </Button>
           </div>
           <p className="h-4 text-sm text-red-500 font-medium text-center">

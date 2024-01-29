@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { AddQuickSendMoneyAccountValidator } from "@/lib/validators/AddQuickSendMoneyAccountValidator";
 import { NextResponse } from "next/server";
+import { z } from "zod";
 
 export const POST = async (req: Request, res: NextResponse) => {
   try {
@@ -33,6 +34,12 @@ export const POST = async (req: Request, res: NextResponse) => {
       status: 200,
     });
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      return new NextResponse(error.issues[0].message, {
+        status: 422,
+      });
+    }
+
     return new NextResponse(`Error processing the request: ` + error, {
       status: 500,
     });

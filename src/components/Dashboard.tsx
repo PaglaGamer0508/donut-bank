@@ -34,7 +34,7 @@ const Dashboard: React.FC<DashboardProps> = async ({
   const hasQuickSendMoneyAccounts = quickSendMoneyAccounts.length > 0;
 
   return (
-    <div className="px-1 md:px-4 lg:px-8 pt-3">
+    <div className="px-1 md:px-3 lg:px-6 pt-3 mb-2 md:mb-0">
       {/* upper section */}
       <div className="flex justify-between items-start">
         <div>
@@ -85,7 +85,7 @@ const Dashboard: React.FC<DashboardProps> = async ({
         {/* LOWER SECTION */}
         <div className="flex flex-col-reverse md:flex md:flex-row md:gap-x-2">
           {/* Transactions section */}
-          <div className="md:w-[60%]">
+          <div className="md:w-[60%] lg:w-[65%]">
             <div className="flex justify-between items-center px-2">
               <h1 className={`${lato.className} text-xl text-green-500`}>
                 Transactions
@@ -118,65 +118,68 @@ const Dashboard: React.FC<DashboardProps> = async ({
           </div>
 
           {/* Others section */}
-          <div className="flex flex-col md:flex-row gap-x-2 w-full md:w-[40%] h-[22rem] md:h-auto border">
-            <div className="flex flex-col md:w-1/2 h-full border">
-              {/* send money */}
-              <div className="flex flex-col h-1/2">
-                <h1 className={`${lato.className} text-xl text-green-500`}>
-                  Send Money
-                </h1>
-                <div className="flex-1 flex flex-col justify-between border border-green-500 rounded-lg bg-green-100/60 p-1 pt-0">
-                  <div className="flex items-center justify-between">
-                    <p className="text-slate-500 text-sm font-medium">
-                      Quick Transfer
-                    </p>
-                    {/* <span className="group grid place-items-center bg-emerald-500 hover:bg-emerald-600 active:scale-90 transition-all duration-75 w-4 h-4 rounded-full">
+          <div className="gap-x-2 w-full md:w-[40%] lg:w-[35%] h-[18rem] md:h-auto">
+            {/* send money */}
+            <div className="flex flex-col h-1/2">
+              <h1 className={`${lato.className} text-xl text-green-500`}>
+                Send Money
+              </h1>
+              <div className="flex-1 flex flex-col justify-between border border-green-500 rounded-lg bg-green-100/60 p-1 pt-0">
+                <div className="flex items-center justify-between">
+                  <p className="text-slate-500 text-sm font-medium">
+                    Quick Transfer
+                  </p>
+
+                  <Link
+                    href="/dashboard/quick-send-money-accounts"
+                    className="text-slate-500 hover:text-green-500 text-sm font-medium"
+                  >
+                    See All
+                  </Link>
+                  {/* <span className="group grid place-items-center bg-emerald-500 hover:bg-emerald-600 active:scale-90 transition-all duration-75 w-4 h-4 rounded-full">
                       <Plus className="text-green-900 w-4 h-4 group-active:scale-90 group-hover:text-white" />
                     </span> */}
-                  </div>
+                </div>
 
-                  {/* quick send money accounts */}
-                  <div className="flex gap-x-1">
-                    {quickSendMoneyAccounts.length > 0 ? (
-                      <div className="flex justify-between gap-x-1">
-                        {quickSendMoneyAccounts.map((account) => (
-                          <QuickTransferAavtar
-                            key={account.id}
-                            id={account.savedBankAccount.id}
-                            image={account.savedBankAccount.image}
-                            name={account.savedBankAccount.accountName}
-                          />
-                        ))}
-                      </div>
-                    ) : null}
-                    <Link
-                      href="/dashboard/quick-send-money-accounts/add"
-                      title="Add Quick Transfer Account"
-                      className="bg-green-500 hover:bg-green-600 active:scale-90 transition-all duration-75 grid place-items-center w-10 h-10 rounded-full"
-                    >
-                      <Plus className="text-white w-10 h-10" />
-                    </Link>
-                  </div>
+                {/* quick send money accounts */}
+                <div className="flex gap-x-1">
+                  {quickSendMoneyAccounts.length > 0 ? (
+                    <div className="flex justify-between gap-x-1">
+                      {quickSendMoneyAccounts.map((account) => (
+                        <QuickTransferAavtar
+                          key={account.id}
+                          id={account.savedBankAccount.id}
+                          image={account.savedBankAccount.image}
+                          name={account.savedBankAccount.accountName}
+                        />
+                      ))}
+                    </div>
+                  ) : null}
                   <Link
-                    className={`${buttonVariants({
-                      variant: "primary",
-                    })} active:scale-95 w-full`}
-                    href=""
+                    href="/dashboard/quick-send-money-accounts/add"
+                    title="Add Quick Transfer Account"
+                    className="bg-green-500 hover:bg-green-600 active:scale-90 transition-all duration-75 grid place-items-center w-10 h-10 rounded-full"
                   >
-                    Send Money
+                    <Plus className="text-white w-10 h-10" />
                   </Link>
                 </div>
-              </div>
-              {/* comapies */}
-              <div className="flex flex-col h-1/2">
-                <h1 className={`${lato.className} text-xl text-green-500`}>
-                  Companies
-                </h1>
-                <div className="flex-1 border border-green-500 rounded-lg bg-green-100/60"></div>
+                <Link
+                  className={`${buttonVariants({
+                    variant: "primary",
+                  })} active:scale-95 w-full`}
+                  href="/dashboard/send-money"
+                >
+                  Send Money
+                </Link>
               </div>
             </div>
-            {/* side section */}
-            <div className="border border-blue-500 md:w-1/2">Hello</div>
+            {/* comapies */}
+            <div className="flex flex-col h-1/2">
+              <h1 className={`${lato.className} text-xl text-green-500`}>
+                Companies
+              </h1>
+              <div className="flex-1 border border-green-500 rounded-lg bg-green-100/60"></div>
+            </div>
           </div>
         </div>
       </div>
