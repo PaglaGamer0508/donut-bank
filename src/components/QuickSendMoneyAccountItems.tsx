@@ -41,7 +41,7 @@ const QuickSendMoneyAccountItems: React.FC<QuickSendMoneyAccountItemsProps> = ({
 
       <div className="flex gap-x-1">
         <Link
-          href={`/dashboard/send-money/${quickSendMoneyAccount.savedBankAccountId}`}
+          href={`/dashboard/send-money/${quickSendMoneyAccount.savedBankAccount.bankAccountNumber}`}
           title="Send Money"
           className="group bg-green-500 hover:bg-green-600 transition-all duration-75 rounded-full p-1 focus:outline-transparent"
         >

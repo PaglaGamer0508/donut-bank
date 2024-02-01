@@ -19,7 +19,7 @@ interface BankAccountSearchResultProps {
   accountName: string;
   bankAccountNumber: string;
   imageUrl: string;
-  bankAccount: BankAccount;
+  bankAccountId: string;
   quickSendMoneyAccounts: QuickSendMoneyAccount[];
 }
 
@@ -28,7 +28,7 @@ const BankAccountSearchResult: React.FC<BankAccountSearchResultProps> = ({
   accountName,
   bankAccountNumber,
   imageUrl,
-  bankAccount,
+  bankAccountId,
   quickSendMoneyAccounts,
 }) => {
   const router = useRouter();
@@ -42,10 +42,10 @@ const BankAccountSearchResult: React.FC<BankAccountSearchResultProps> = ({
 
   // checking if the searched account is already added or not or user's own
   const searchedAccountNotAdded =
-    id !== bankAccount.id && !quickSendMoneyAccountIds.includes(id);
+    id !== bankAccountId && !quickSendMoneyAccountIds.includes(id);
 
   const AddQuickSendMoneyAccountData: AddQuickSendMoneyAccountType = {
-    bankAccountId: bankAccount.id,
+    bankAccountId: bankAccountId,
     savedBankAccountId: id,
   };
 
@@ -53,7 +53,7 @@ const BankAccountSearchResult: React.FC<BankAccountSearchResultProps> = ({
   const { mutate: addQuickSendMoneyAccount, isPending } = useMutation({
     mutationFn: async () => {
       await axios.post(
-        `/api/bank-account/quick-send-money-account/add`,
+        `/api/quick-send-money-account/add`,
         AddQuickSendMoneyAccountData
       );
     },
@@ -114,7 +114,7 @@ const BankAccountSearchResult: React.FC<BankAccountSearchResultProps> = ({
       {/* Seached Account State */}
       <div>
         {/* Own account */}
-        {id === bankAccount.id ? (
+        {id === bankAccountId ? (
           <div className="" title="Your Own Account">
             <User className="w-10 h-10 bg-green-500 text-white rounded-full p-1" />
           </div>

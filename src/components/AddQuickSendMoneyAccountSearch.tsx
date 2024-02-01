@@ -4,10 +4,10 @@ import Logo from "@/../public/donut.png";
 import { Search, User2Icon } from "lucide-react";
 import { Lato } from "next/font/google";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import styles from "./style/WithdrawCoins.module.css";
 import { Button } from "./ui/Button";
-import { useRouter } from "next/navigation";
 
 const lato = Lato({ weight: ["900"], subsets: ["latin"] });
 
@@ -57,7 +57,7 @@ const AddQuickSendMoneyAccountSearch: React.FC<
             height={256}
           />
         </div>
-        <h1 className={`${lato.className} text-xl text-green-500 text-center`}>
+        <h1 className={`${lato.className} text-2xl text-green-500 text-center`}>
           Add Quick Send Money Account
         </h1>
       </div>
@@ -84,9 +84,13 @@ const AddQuickSendMoneyAccountSearch: React.FC<
               minLength={10}
               maxLength={10}
               required
-              className={`${styles.amount_input} w-[85%] text-lg font-medium border border-green-500 rounded focus:outline-none py-1 px-3`}
+              className={`${styles.amount_input} w-[85%] md:w-[90%] text-lg font-medium border border-green-500 rounded focus:outline-none py-1 px-3`}
             />
-            <Button className="w-[15%]" type="submit" variant={"primary"}>
+            <Button
+              className="w-[15%] md:w-[10%]"
+              type="submit"
+              variant={"primary"}
+            >
               <Search className="w-8 h-8" />
             </Button>
           </div>

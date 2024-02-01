@@ -13,7 +13,7 @@ interface ShowBalanceProps extends HTMLAttributes<HTMLDivElement> {
 
 const ShowBalance: React.FC<ShowBalanceProps> = ({ balance, ...props }) => {
   return (
-    <div {...props} className="w-fit bg-green-200/75 px-3 py-2 rounded-lg">
+    <div {...props} className="sm:w-fit bg-green-200/75 px-3 py-2 rounded-lg">
       <div className="flex justify-between items-center gap-x-3">
         <p className="text-sm font-medium text-emerald-500">Current Balance</p>
         {/* deposit button */}

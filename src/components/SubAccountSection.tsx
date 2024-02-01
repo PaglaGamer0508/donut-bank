@@ -5,11 +5,11 @@ import CreditCard from "./CreditCard";
 import styles from "./style/Dashboard.module.css";
 import Link from "next/link";
 
-interface CreditCardSectionProps {
+interface SubAccountSectionProps {
   bankAccountId: string;
 }
 
-const CreditCardSection: React.FC<CreditCardSectionProps> = async ({
+const SubAccountSection: React.FC<SubAccountSectionProps> = async ({
   bankAccountId,
 }) => {
   const subAccounts = await getAllSubAccount(bankAccountId);
@@ -43,4 +43,4 @@ const CreditCardSection: React.FC<CreditCardSectionProps> = async ({
   );
 };
 
-export default CreditCardSection;
+export default SubAccountSection;

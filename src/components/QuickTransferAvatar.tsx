@@ -1,21 +1,27 @@
 "use client";
 
+import { QuickSendMoneyAccount } from "@/lib/types/quick-send-money-account";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 interface QuickTransferAvatarProps {
-  id: string;
-  image: string;
-  name: string;
+  quickSendMoneyAccount: QuickSendMoneyAccount;
 }
 
 const QuickTransferAvatar: React.FC<QuickTransferAvatarProps> = ({
-  id,
-  image,
-  name,
+  quickSendMoneyAccount,
 }) => {
+  const router = useRouter();
+  const { accountName, bankAccountNumber, image } =
+    quickSendMoneyAccount.savedBankAccount;
+
   return (
-    <button className="focus:outline-transparent" title={name}>
+    <button
+      className="focus:outline-transparent"
+      onClick={() => router.push(`/dashboard/send-money/${bankAccountNumber}`)}
+      title={accountName}
+    >
       <div className="relative aspect-square h-10 w-10">
         <Image
           fill

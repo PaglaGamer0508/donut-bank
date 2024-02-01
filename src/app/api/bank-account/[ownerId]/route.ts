@@ -21,7 +21,7 @@ export const GET = async (req: Request, { params }: { params: paramProps }) => {
       });
     }
 
-    const bankAccount = await db.bankAccount.findFirst({
+    const bankAccountData = await db.bankAccount.findFirst({
       where: {
         ownerId,
       },
@@ -35,18 +35,35 @@ export const GET = async (req: Request, { params }: { params: paramProps }) => {
         createdAt: true,
         updatedAt: true,
         ownerId: true,
-        transactions: {
-          orderBy: {
-            createdAt: "desc",
-          },
-          take: 10,
-        },
       },
     });
 
-    if (!bankAccount) {
+    if (!bankAccountData) {
       return new NextResponse("Bank Account Not Found", { status: 404 });
     }
+
+    // getting the transactions
+    const transactions = await db.transaction.findMany({
+      where: {
+        OR: [
+          {
+            receiverBankAccountId: bankAccountData.id,
+          },
+          {
+            bankAccountId: bankAccountData.id,
+          },
+        ],
+      },
+      take: 10,
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    const bankAccount = {
+      ...bankAccountData,
+      transactions,
+    };
 
     return NextResponse.json(
       { message: "Bank Account found Successful!", bankAccount },

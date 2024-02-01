@@ -6,7 +6,7 @@ export const getQuickSendMoneyAccounts = async (
 ): Promise<QuickSendMoneyAccount[]> => {
   // try {
   const quickSendMoneyAccountsResponse = await fetch(
-    `${hostName}/api/bank-account/quick-send-money-account/all/${bankAccountId}`
+    `${hostName}/api/quick-send-money-account/all/${bankAccountId}`
   );
 
   if (quickSendMoneyAccountsResponse.status === 404) {

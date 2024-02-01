@@ -1,13 +1,23 @@
-import React from 'react';
+import SendMoneySection from "@/components/SendMoneySection";
+import { getAuthSession } from "@/lib/auth";
+import { getBankAccountId } from "@/lib/getBankAccountId";
+import { getQuickSendMoneyAccounts } from "@/lib/getQuickSendMoneyAccounts";
+import React from "react";
 
-interface pageProps {
+interface pageProps {}
 
-};
+const page: React.FC<pageProps> = async ({}) => {
+  const session = await getAuthSession();
+  const bankAccountId = await getBankAccountId(session?.user?.id!);
+  const quickSendMoneyAccounts = await getQuickSendMoneyAccounts(
+    bankAccountId!
+  );
 
-const page: React.FC<pageProps> = ({}) => {
   return (
     <div>
-      page
+      <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-10">
+        <SendMoneySection quickSendMoneyAccounts={quickSendMoneyAccounts} />
+      </div>
     </div>
   );
 };

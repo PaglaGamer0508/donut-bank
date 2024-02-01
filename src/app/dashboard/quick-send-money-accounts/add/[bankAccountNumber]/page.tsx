@@ -2,6 +2,7 @@ import BankAccountSearchResult from "@/components/BankAccountSearchResult";
 import { Button, buttonVariants } from "@/components/ui/Button";
 import { getAuthSession } from "@/lib/auth";
 import { getBankAccount } from "@/lib/getBankAccount";
+import { getBankAccountId } from "@/lib/getBankAccountId";
 import { getBankAccountWithNumber } from "@/lib/getBankAccountWithNumber";
 import { getQuickSendMoneyAccounts } from "@/lib/getQuickSendMoneyAccounts";
 import { ArrowLeft } from "lucide-react";
@@ -18,7 +19,7 @@ const page: React.FC<pageProps> = async ({ params }) => {
   const { bankAccountNumber } = params;
   // My account
   const session = await getAuthSession();
-  const bankAccount = await getBankAccount(session?.user?.id!);
+  const bankAccountId = await getBankAccountId(session?.user?.id!);
 
   // Checking the format of the bank account number
   const bankAccountNumberFormater = (bankAccountNumber: string) => {
@@ -30,7 +31,7 @@ const page: React.FC<pageProps> = async ({ params }) => {
 
   // Quick send money accounts
   const quickSendMoneyAccounts = await getQuickSendMoneyAccounts(
-    bankAccount.id
+    bankAccountId!
   );
 
   // Searched bank account
@@ -48,7 +49,7 @@ const page: React.FC<pageProps> = async ({ params }) => {
 
               <BankAccountSearchResult
                 quickSendMoneyAccounts={quickSendMoneyAccounts}
-                bankAccount={bankAccount}
+                bankAccountId={bankAccountId!}
                 accountName={searchedBankAccount.accountName}
                 bankAccountNumber={searchedBankAccount.bankAccountNumber}
                 imageUrl={searchedBankAccount.image}

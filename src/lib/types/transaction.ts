@@ -9,10 +9,11 @@ export enum TransactionType {
 
 export type Transaction = {
   id: string;
-  bankAccountId: string;
   amount: number;
+  bankAccountId: string;
   transactionType: TransactionType;
   createdAt: Date;
+  receiverBankAccountId: string | null;
   registeredCompanyId: string | null;
   product: string | null;
   subAccountId: string | null;

@@ -9,12 +9,13 @@ import type { Session } from "next-auth";
 import { Lato } from "next/font/google";
 import Link from "next/link";
 import React from "react";
-import CreditCardSection from "./CreditCardSection";
+import SubAccountSection from "./SubAccountSection";
 import QuickTransferAavtar from "./QuickTransferAvatar";
 import ShowBalance from "./ShowBalance";
 import UserAccountNav from "./UserAccountNav";
 import styles from "./style/Dashboard.module.css";
 import { buttonVariants } from "./ui/Button";
+import TransactionItem from "./TransactionItem";
 
 interface DashboardProps {
   session: Session;
@@ -30,8 +31,6 @@ const Dashboard: React.FC<DashboardProps> = async ({
   const { balance, id: bankAccountId, accountName, transactions } = bankAccount;
   const hasSubAccounts = await hasSubAccount(bankAccountId);
   const quickSendMoneyAccounts = await getQuickSendMoneyAccounts(bankAccountId);
-
-  const hasQuickSendMoneyAccounts = quickSendMoneyAccounts.length > 0;
 
   return (
     <div className="px-1 md:px-3 lg:px-6 pt-3 mb-2 md:mb-0">
@@ -61,16 +60,16 @@ const Dashboard: React.FC<DashboardProps> = async ({
       </div>
 
       <div className="sm:hidden mt-2">
-        <ShowBalance balance={balance} />
+        <ShowBalance className="w-full" balance={balance} />
       </div>
 
       {/* sub-accounts section */}
       <div className="mt-1">
         {hasSubAccounts ? (
-          <CreditCardSection bankAccountId={bankAccountId} />
+          <SubAccountSection bankAccountId={bankAccountId} />
         ) : (
           <div className="flex flex-col items-center justify-center gap-y-1 h-48 border-2 border-green-500 rounded-lg">
-            <h1 className="text-2xl text-red-500">
+            <h1 className="text-2xl text-red-500 text-center">
               You does not have a sub account
             </h1>
             <Link
@@ -101,18 +100,11 @@ const Dashboard: React.FC<DashboardProps> = async ({
               className={`${styles.transactions_scroll_container} flex flex-col gap-y-4 md:h-[280px] md:overflow-y-scroll bg-green-100/60 border border-green-300 p-3 rounded-lg`}
             >
               {transactions.map((transaction) => (
-                <div
+                <TransactionItem
                   key={transaction.id}
-                  className="flex justify-between items-center gap-x-4"
-                >
-                  <p>{formatDate(transaction.createdAt)}</p>
-                  <p>{transaction.transactionType}</p>
-                  <p>{`${
-                    transaction.transactionType === TransactionType.DEPOSIT
-                      ? "+"
-                      : "-"
-                  }${transaction.amount}`}</p>
-                </div>
+                  transaction={transaction}
+                  bankAccountId={bankAccountId}
+                />
               ))}
             </div>
           </div>
@@ -144,13 +136,11 @@ const Dashboard: React.FC<DashboardProps> = async ({
                 {/* quick send money accounts */}
                 <div className="flex gap-x-1">
                   {quickSendMoneyAccounts.length > 0 ? (
-                    <div className="flex justify-between gap-x-1">
-                      {quickSendMoneyAccounts.map((account) => (
+                    <div className="flex items-center gap-x-1">
+                      {quickSendMoneyAccounts.map((quickSendMoneyAccount) => (
                         <QuickTransferAavtar
-                          key={account.id}
-                          id={account.savedBankAccount.id}
-                          image={account.savedBankAccount.image}
-                          name={account.savedBankAccount.accountName}
+                          key={quickSendMoneyAccount.id}
+                          quickSendMoneyAccount={quickSendMoneyAccount}
                         />
                       ))}
                     </div>

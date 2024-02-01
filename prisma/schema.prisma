@@ -77,6 +77,32 @@ model BankAccount {
   QuickSendMoney     QuickSendMoney[]
 }
 
+model Transaction {
+  id     String @id @default(cuid())
+  amount Int
+
+  bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id])
+  bankAccountId String
+
+  receiverBankAccountId String?
+
+  transactionType TransactionType
+
+  company             RegisteredCompany? @relation(fields: [registeredCompanyId], references: [id])
+  registeredCompanyId String?
+  product             String?
+
+  subAccount   SubAccount? @relation(fields: [subAccountId], references: [id])
+  subAccountId String?
+
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([bankAccountId])
+  @@index([registeredCompanyId])
+  @@index([subAccountId])
+}
+
 model SubAccount {
   id                String @id @default(cuid())
   name              String
@@ -106,27 +132,6 @@ model SubAccountLoggedIn {
 
   @@index([bankAccountId])
   @@index([companyId])
-  @@index([subAccountId])
-}
-
-model Transaction {
-  id              String          @id @default(cuid())
-  account         BankAccount     @relation(fields: [bankAccountId], references: [id])
-  bankAccountId   String
-  amount          Int
-  transactionType TransactionType
-  createdAt       DateTime        @default(now())
-
-  company             RegisteredCompany? @relation(fields: [registeredCompanyId], references: [id])
-  registeredCompanyId String?
-  product             String?
-
-  subAccount   SubAccount? @relation(fields: [subAccountId], references: [id])
-  subAccountId String?
-
-  @@index([createdAt])
-  @@index([bankAccountId])
-  @@index([registeredCompanyId])
   @@index([subAccountId])
 }
 

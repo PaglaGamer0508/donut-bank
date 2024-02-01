@@ -152,7 +152,7 @@ const WithdrawCoins: React.FC<WithdrawCoinsProps> = ({
             />
           </div>
           <h1
-            className={`${lato.className} text-xl text-green-500 text-center`}
+            className={`${lato.className} text-2xl text-green-500 text-center`}
           >
             Withdraw Coins
           </h1>
