@@ -55,6 +55,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   bankAccount   BankAccount?
+  Company       Company[]
 }
 
 model BankAccount {
@@ -69,12 +70,11 @@ model BankAccount {
 
   balance Int
 
-  transactions       Transaction[]
-  subAccount         SubAccount[]
-  subAccountLoggedIn SubAccountLoggedIn[]
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-  QuickSendMoney     QuickSendMoney[]
+  transactions   Transaction[]
+  subAccount     SubAccount[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  QuickSendMoney QuickSendMoney[]
 }
 
 model Transaction {
@@ -88,9 +88,9 @@ model Transaction {
 
   transactionType TransactionType
 
-  company             RegisteredCompany? @relation(fields: [registeredCompanyId], references: [id])
-  registeredCompanyId String?
-  product             String?
+  company   Company? @relation(fields: [companyId], references: [id])
+  companyId String?
+  product   String?
 
   subAccount   SubAccount? @relation(fields: [subAccountId], references: [id])
   subAccountId String?
@@ -99,13 +99,15 @@ model Transaction {
 
   @@index([createdAt])
   @@index([bankAccountId])
-  @@index([registeredCompanyId])
+  @@index([companyId])
   @@index([subAccountId])
 }
 
 model SubAccount {
-  id                String @id @default(cuid())
-  name              String
+  id       String @id @default(cuid())
+  name     String
+  password String
+
   balance           Int
   creditCard_number String
   creditCard_color  String
@@ -113,58 +115,80 @@ model SubAccount {
   bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id])
   bankAccountId String
 
-  transaction        Transaction[]
-  SubAccountLoggedIn SubAccountLoggedIn[]
+  transaction     Transaction[]
+  subAccountToken subAccountToken[]
 
   @@index([bankAccountId])
 }
 
-model SubAccountLoggedIn {
-  id            String      @id @default(cuid())
-  bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id])
-  bankAccountId String
-  subAccount    SubAccount  @relation(fields: [subAccountId], references: [id])
-  subAccountId  String
+model subAccountToken {
+  id           String     @id @default(cuid())
+  subAccount   SubAccount @relation(fields: [subAccountId], references: [id])
+  subAccountId String
+  token        String
+  Company      Company    @relation(fields: [companyId], references: [id])
+  companyId    String
+  limit        Int
 
-  company   RegisteredCompany @relation(fields: [companyId], references: [id])
-  companyId String
-  createdAt DateTime          @default(now())
-
-  @@index([bankAccountId])
-  @@index([companyId])
   @@index([subAccountId])
+  @@index([companyId])
 }
+
+// model SubAccountLoggedIn {
+//   id            String      @id @default(cuid())
+//   bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id])
+//   bankAccountId String
+//   subAccount    SubAccount  @relation(fields: [subAccountId], references: [id])
+//   subAccountId  String
+
+//   company   RegisteredCompany @relation(fields: [companyId], references: [id])
+//   companyId String
+//   createdAt DateTime          @default(now())
+
+//   @@index([bankAccountId])
+//   @@index([companyId])
+//   @@index([subAccountId])
+// }
 
 model QuickSendMoney {
   id                 String      @id @default(cuid())
-  // this is the user's bank account id
   bankAccountId      String
-  // this is the bank account that is being saved
   savedBankAccount   BankAccount @relation(fields: [savedBankAccountId], references: [id])
   savedBankAccountId String
 
   @@index([savedBankAccountId])
 }
 
-model RegisteredCompany {
-  id             String               @id @default(cuid())
-  name           String
-  transactions   Transaction[]
-  apiKey         APIKey?
-  createdAt      DateTime             @default(now())
-  subAccountUsed SubAccountLoggedIn[]
+model Company {
+  id           String        @id @default(cuid())
+  logo         String?
+  name         String
+  email        String
+  transactions Transaction[]
+  createdAt    DateTime      @default(now())
 
-  @@unique([id], name: "OneToOneRegisteredCompanyAPIKey")
+  balance Int
+
+  subAccountToken subAccountToken[]
+  apiKey          APIKey[]
+
+  websiteUrl String?
+
+  owner   User   @relation(fields: [ownerId], references: [id])
+  ownerId String
+
+  @@index([ownerId])
 }
 
 model APIKey {
-  id                  String            @id @default(cuid())
-  key                 String
-  company             RegisteredCompany @relation(fields: [registeredCompanyId], references: [id])
-  registeredCompanyId String
-  createdAt           DateTime          @default(now())
+  id        String   @id @default(cuid())
+  key       String
+  secret    String
+  company   Company  @relation(fields: [companyId], references: [id])
+  companyId String
+  createdAt DateTime @default(now())
 
-  @@unique([registeredCompanyId], name: "OneToOneRegisteredCompanyAPIKey")
+  @@unique([companyId], name: "OneToOneCompanyAPIKey")
 }
 
 enum TransactionType {

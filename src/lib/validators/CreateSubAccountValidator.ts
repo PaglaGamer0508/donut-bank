@@ -5,6 +5,7 @@ export const CreateSubAccountValidator = z.object({
     .string()
     .min(4, { message: "Name must be atleast 4 character" })
     .max(30, { message: "Name can't be more that 30 character" }),
+  password: z.string().length(8, { message: "Password must be 8 character" }),
   creditCard_color: z.string(),
   bankAccountId: z.string(),
 });

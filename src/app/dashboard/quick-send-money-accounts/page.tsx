@@ -16,28 +16,6 @@ const page: React.FC<pageProps> = async ({}) => {
   const session = await getAuthSession();
   const bankAccountId = await getBankAccountId(session?.user?.id!);
 
-  // if (!bankAccountId) {
-  //   return (
-  //     <div>
-  //       <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-10">
-  //         <h1 className="text-center text-2xl text-red-500 font-semibold">
-  //           Some Error Occured
-  //         </h1>
-  //         <div className="grid place-items-center">
-  //           <Link
-  //             className={`${buttonVariants({
-  //               variant: "primary",
-  //             })} mt-2 mx-auto`}
-  //             href={`/dashboard`}
-  //           >
-  //             <ArrowLeft />
-  //           </Link>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
   const quickSendMoneyAccounts = await getQuickSendMoneyAccounts(
     bankAccountId!
   );
@@ -52,9 +30,9 @@ const page: React.FC<pageProps> = async ({}) => {
           <Link
             href="/dashboard/quick-send-money-accounts/add"
             title="Add Quick Send Money Account"
-            className="group grid place-items-center bg-emerald-500 hover:bg-emerald-600 active:scale-90 transition-all duration-75 w-4 h-4 rounded-full"
+            className="grid place-items-center bg-green-500 hover:bg-green-600 active:scale-90 transition-all duration-75 w-4 h-4 rounded-full"
           >
-            <Plus className="text-green-900 w-4 h-4 group-active:scale-90 group-hover:text-white" />
+            <Plus className="text-white w-4 h-4 group-active:scale-90" />
           </Link>
         </div>
         <div className="flex flex-col gap-y-2">

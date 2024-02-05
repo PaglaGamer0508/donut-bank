@@ -27,13 +27,14 @@ const CreateSubAccountForm: React.FC<CreateSubAccountFormProps> = ({
   const { creditCardColor } = useSelectCreditCardColorState();
 
   const [subAccountName, setSubAccountName] = useState("");
-
+  const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const CreateSubAccountData: CreateSubAccountValidatorType = {
     bankAccountId,
     creditCard_color: creditCardColor,
     name: subAccountName,
+    password: password,
   };
 
   const { mutate: createSubAccount, isPending } = useMutation({
@@ -52,7 +53,7 @@ const CreateSubAccountForm: React.FC<CreateSubAccountFormProps> = ({
       router.push("/dashboard/sub-accounts");
       return toast({
         title: "Success",
-        description: "Your DonutBank Account has been Created",
+        description: "Sub account created successfully",
       });
     },
   });
@@ -67,6 +68,10 @@ const CreateSubAccountForm: React.FC<CreateSubAccountFormProps> = ({
 
     if (cleanedSubAccountName.length < 5) {
       setErrorMessage("Sub Account name must be at least 5 characters");
+    } else if (/^\d+$/.test(cleanedSubAccountName)) {
+      setErrorMessage("Sub Account name cannot contain only numbers");
+    } else if (password.length !== 8) {
+      setErrorMessage("Password has be 8 characters");
     } else if (cleanedSubAccountName.length > 30) {
       setErrorMessage("Sub Account name can't be more than 30 characters");
     } else {
@@ -78,7 +83,13 @@ const CreateSubAccountForm: React.FC<CreateSubAccountFormProps> = ({
   return (
     <div className="shadow-lg rounded-lg w-[98%] md:w-[60%] lg:w-[40%] border-2 border-green-500 p-2 sm:px-5 pt-0 pb-5">
       <div className="flex justify-center py-2">
-        <Image alt="Logo" src={Logo} className="w-14" />
+        <Image
+          alt="Logo"
+          src={Logo}
+          className="w-14"
+          width={256}
+          height={256}
+        />
       </div>
       <h1
         className={`${lato.className} space-x-1 text-green-500 text-2xl text-center hover:cursor-default`}
@@ -114,6 +125,24 @@ const CreateSubAccountForm: React.FC<CreateSubAccountFormProps> = ({
             required
             className="text-lg font-medium border border-green-500 rounded focus:outline-none py-1 px-3"
           />
+          <div className="flex flex-col">
+            <label
+              htmlFor="password"
+              className="text-lg font-semibold text-green-500"
+            >
+              Password G
+            </label>
+            <input
+              id="password"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter Password (8 Characters)"
+              minLength={8}
+              maxLength={8}
+              required
+              className="text-lg font-medium border border-green-500 rounded focus:outline-none py-1 px-3"
+            />
+          </div>
 
           {/* Select Credit Card Color */}
           <div className="mt-2">

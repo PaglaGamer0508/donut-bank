@@ -9,18 +9,6 @@ export const GET = async (req: Request, { params }: { params: paramProps }) => {
   try {
     const { ownerId } = params;
 
-    const userExist = await db.user.findFirst({
-      where: {
-        id: ownerId,
-      },
-    });
-
-    if (!userExist) {
-      return new NextResponse("Login to create a bank account", {
-        status: 401,
-      });
-    }
-
     const bankAccountData = await db.bankAccount.findFirst({
       where: {
         ownerId,
@@ -66,7 +54,7 @@ export const GET = async (req: Request, { params }: { params: paramProps }) => {
     };
 
     return NextResponse.json(
-      { message: "Bank Account found Successful!", bankAccount },
+      { message: "Bank Account found", bankAccount },
       { status: 200 }
     );
   } catch (error) {

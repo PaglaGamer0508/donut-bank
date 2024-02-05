@@ -4,6 +4,8 @@ import CreditCardIconLowOpacity from "@/../public/credit-card-low.png";
 import CreditCardIcon from "@/../public/credit-card.png";
 import DashBoardIconLowOpacity from "@/../public/dashboard-low.png";
 import DashBoardIcon from "@/../public/dashboard.png";
+import CompanyIcon from "@/../public/company.png";
+import CompanyIconLowOpacity from "@/../public/company-low.png";
 import Logo from "@/../public/donut.png";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,9 +14,11 @@ import React from "react";
 import SignOutModal from "./SignOutModal";
 import { useSlideMenuState } from "@/lib/global-state-store/slideMenuState";
 
-interface DashBoardNavbarProps {}
+interface DashBoardNavbarProps {
+  hasCompany: boolean;
+}
 
-const DashBoardNavbar: React.FC<DashBoardNavbarProps> = () => {
+const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({ hasCompany }) => {
   const pathName = usePathname().split("/")[2];
   const router = useRouter();
 
@@ -63,12 +67,12 @@ const DashBoardNavbar: React.FC<DashBoardNavbarProps> = () => {
                 )}
               </Link>
             </li>
-            {/* sub-accounts */}
+            {/* Company */}
             <li>
               <Link
                 title="Sub-Accounts"
                 onClick={() => closeSlider()}
-                href="/dashboard/sub-accounts"
+                href="/dashboard/company"
               >
                 {pathName === "sub-accounts" ? (
                   <Image
@@ -89,6 +93,34 @@ const DashBoardNavbar: React.FC<DashBoardNavbarProps> = () => {
                 )}
               </Link>
             </li>
+            {/* sub-accounts */}
+            {hasCompany ? (
+              <li>
+                <Link
+                  title="Company"
+                  onClick={() => closeSlider()}
+                  href="/dashboard/company"
+                >
+                  {pathName === "company" ? (
+                    <Image
+                      src={CompanyIcon}
+                      alt="accounts"
+                      width={64}
+                      height={64}
+                      className="w-9 select-none"
+                    />
+                  ) : (
+                    <Image
+                      src={CompanyIconLowOpacity}
+                      alt="accounts"
+                      width={64}
+                      height={64}
+                      className="w-9 select-none"
+                    />
+                  )}
+                </Link>
+              </li>
+            ) : null}
           </ul>
         </div>
 

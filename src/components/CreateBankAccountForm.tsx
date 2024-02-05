@@ -28,10 +28,10 @@ const CreateBankAccountForm: React.FC<CreateBankAccountFormProps> = ({
 
   const [accountName, setAccountName] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState(""); // New state variable
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   // for error messages
-  const [message, setMessage] = useState("");
+  const [errorMassage, setErrorMassage] = useState("");
 
   const clearData = () => {
     setAccountName("");
@@ -74,18 +74,21 @@ const CreateBankAccountForm: React.FC<CreateBankAccountFormProps> = ({
     setAccountName(cleanedAccountName);
 
     if (cleanedAccountName.length < 5) {
-      setMessage("Account name must be at least 5 characters");
+      setErrorMassage("Account name must be at least 5 characters");
     } else if (cleanedAccountName.length > 30) {
-      setMessage("Account name can't be more than 30 characters");
-    } else if (password.length < 8) {
-      setMessage("Password must be 8 characters");
+      setErrorMassage("Account name can't be more than 30 characters");
+    } else if (/^\d+$/.test(cleanedAccountName)) {
+      setErrorMassage("Bank Account name cannot contain only numbers");
+    } else if (password.length !== 8) {
+      setErrorMassage("Password has be 8 characters");
     } else if (password !== confirmPassword) {
-      setMessage("Passwords do not match");
+      setErrorMassage("Passwords do not match");
     } else {
-      setMessage("");
+      setErrorMassage("");
       createBankAccount();
     }
   };
+
   return (
     <div
       className={cn(
@@ -93,11 +96,19 @@ const CreateBankAccountForm: React.FC<CreateBankAccountFormProps> = ({
       )}
     >
       <div className="flex justify-center py-2">
-        <Image alt="Logo" src={Logo} className="w-14" />
+        <Image
+          alt="Logo"
+          src={Logo}
+          className="w-14"
+          width={256}
+          height={256}
+        />
       </div>
-      <h1 className={`${lato} text-green-500 text-2xl hover:cursor-default`}>
-        Create a{" "}
-        <span className="text-white bg-green-500 px-1 rounded">DonutBank</span>{" "}
+      <h1
+        className={`${lato.className} text-green-500 text-2xl text-center hover:cursor-default`}
+      >
+        Create a
+        <span className="text-white bg-green-500 px-1 rounded">DonutBank</span>
         account
       </h1>
       {/* Form */}
@@ -162,7 +173,7 @@ const CreateBankAccountForm: React.FC<CreateBankAccountFormProps> = ({
         </div>
         <div className="my-1">
           <p className="h-5 text-center text-sm text-red-500 font-medium">
-            {message}
+            {errorMassage}
           </p>
         </div>
         <div className="mt-2">
@@ -170,7 +181,7 @@ const CreateBankAccountForm: React.FC<CreateBankAccountFormProps> = ({
             isLoading={isPending}
             disabled={isPending}
             type="submit"
-            className="w-full text-xl font-semibold rounded p-2 text-green-500 hover:text-white border border-green-500 bg-white hover:bg-green-500 transition-all duration-75 active:scale-95"
+            className="w-full text-xl font-semibold rounded p-2 text-green-500 hover:text-white border border-green-500 bg-white hover:bg-green-500 transition-all duration-75 active:scale-95 focus:outline-transparent"
           >
             Create Account
           </Button>

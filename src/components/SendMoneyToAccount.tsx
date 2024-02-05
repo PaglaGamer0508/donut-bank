@@ -78,10 +78,19 @@ const SendMoneyToAccount: React.FC<SendMoneyToAccountProps> = ({
       setAmount(0);
       setPassword("");
       setErrorMessage("");
-      router.push("/dashboard");
       return toast({
         title: "Success",
         description: "Money sent successfully",
+        action: (
+          <Button
+            className="active:scale-95 transition-all duration-75"
+            onClick={() => router.push("/dashboard/sub-accounts")}
+            variant={"secondary"}
+          >
+            Sub Accounts
+          </Button>
+        ),
+        duration: 5000,
       });
     },
   });

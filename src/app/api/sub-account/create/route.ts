@@ -7,7 +7,7 @@ import { z } from "zod";
 export const POST = async (req: Request, res: NextResponse) => {
   try {
     const body = await req.json();
-    const { bankAccountId, creditCard_color, name } =
+    const { bankAccountId, creditCard_color, name, password } =
       CreateSubAccountValidator.parse(body);
 
     // Check if the user already has three sub-accounts
@@ -48,6 +48,7 @@ export const POST = async (req: Request, res: NextResponse) => {
         creditCard_color,
         creditCard_number: creditCardNumber,
         balance: 0,
+        password,
       },
     });
 
