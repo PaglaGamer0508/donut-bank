@@ -72,7 +72,7 @@ const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({ hasCompany }) => {
               <Link
                 title="Sub-Accounts"
                 onClick={() => closeSlider()}
-                href="/dashboard/company"
+                href="/dashboard/sub-accounts"
               >
                 {pathName === "sub-accounts" ? (
                   <Image

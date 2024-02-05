@@ -4,11 +4,15 @@ import React from "react";
 import SlideMenu from "./SlideMenu";
 import { useSlideMenuState } from "@/lib/global-state-store/slideMenuState";
 
-interface SlideMenuContainerProps {}
+interface SlideMenuContainerProps {
+  hasCompany: boolean;
+}
 
-const SlideMenuContainer: React.FC<SlideMenuContainerProps> = ({}) => {
+const SlideMenuContainer: React.FC<SlideMenuContainerProps> = ({
+  hasCompany,
+}) => {
   const { isOpen } = useSlideMenuState();
-  return <>{isOpen && <SlideMenu />}</>;
+  return <>{isOpen && <SlideMenu hasCompany={hasCompany} />}</>;
 };
 
 export default SlideMenuContainer;

@@ -2,7 +2,6 @@ import DashBoardNavbar from "@/components/DashBoardNavbar";
 import HorizontalNavbar from "@/components/HorizontalNavbar";
 import SlideMenuContainer from "@/components/SlideMenuContainer";
 import { getAuthSession } from "@/lib/auth";
-import { getBankAccountId } from "@/lib/getBankAccountId";
 import { hasCompany } from "@/lib/hasCompany";
 import { redirect } from "next/navigation";
 import React from "react";
@@ -18,15 +17,14 @@ const layout: React.FC<layoutProps> = async ({ children }) => {
     redirect("/sign-in");
   }
 
-  const bankAccountId = await getBankAccountId(session.user?.id);
-  const companyExist = await hasCompany(bankAccountId!);
+  const companyExist = await hasCompany(session.user.id!);
 
   return (
     <div className="flex">
-      <SlideMenuContainer />
+      <SlideMenuContainer hasCompany={companyExist} />
       {/* the vertical navigation bar */}
       <div className="hidden sm:block fixed top-0 left-0 h-full">
-        <DashBoardNavbar hasCompany={companyExist!} />
+        <DashBoardNavbar hasCompany={companyExist} />
       </div>
 
       {/* the horizontal navbar */}

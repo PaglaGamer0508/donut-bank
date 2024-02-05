@@ -6,9 +6,11 @@ import { X } from "lucide-react";
 import React, { HTMLAttributes, useEffect, useState } from "react";
 import DashBoardNavbar from "./DashBoardNavbar";
 
-interface SlideMenuProps extends HTMLAttributes<HTMLDivElement> {}
+interface SlideMenuProps {
+  hasCompany: boolean;
+}
 
-const SlideMenu: React.FC<SlideMenuProps> = ({ ...props }) => {
+const SlideMenu: React.FC<SlideMenuProps> = ({ hasCompany }) => {
   const { isOpen, closeSlider } = useSlideMenuState();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -22,7 +24,6 @@ const SlideMenu: React.FC<SlideMenuProps> = ({ ...props }) => {
 
   return (
     <div
-      {...props}
       className={`${
         isOpen ? "block" : "hidden"
       } sm:hidden fixed inset-0 z-[100] bg-green-200/80`}
@@ -39,7 +40,7 @@ const SlideMenu: React.FC<SlideMenuProps> = ({ ...props }) => {
           menuOpen ? "" : "-translate-x-full"
         } transition-all duration-75`}
       >
-        <DashBoardNavbar />
+        <DashBoardNavbar hasCompany={hasCompany} />
       </div>
       <div>Hello</div>
     </div>
