@@ -2,7 +2,7 @@ import DashBoardNavbar from "@/components/DashBoardNavbar";
 import HorizontalNavbar from "@/components/HorizontalNavbar";
 import SlideMenuContainer from "@/components/SlideMenuContainer";
 import { getAuthSession } from "@/lib/auth";
-import { hasCompany } from "@/lib/hasCompany";
+import { hasApplication } from "@/lib/hasApplication";
 import { redirect } from "next/navigation";
 import React from "react";
 
@@ -17,14 +17,14 @@ const layout: React.FC<layoutProps> = async ({ children }) => {
     redirect("/sign-in");
   }
 
-  const companyExist = await hasCompany(session.user.id!);
+  const applicationExist = await hasApplication(session.user.id!);
 
   return (
     <div className="flex">
-      <SlideMenuContainer hasCompany={companyExist} />
+      <SlideMenuContainer hasApplication={applicationExist} />
       {/* the vertical navigation bar */}
       <div className="hidden sm:block fixed top-0 left-0 h-full">
-        <DashBoardNavbar hasCompany={companyExist} />
+        <DashBoardNavbar hasApplication={applicationExist} />
       </div>
 
       {/* the horizontal navbar */}

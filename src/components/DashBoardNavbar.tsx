@@ -4,8 +4,8 @@ import CreditCardIconLowOpacity from "@/../public/credit-card-low.png";
 import CreditCardIcon from "@/../public/credit-card.png";
 import DashBoardIconLowOpacity from "@/../public/dashboard-low.png";
 import DashBoardIcon from "@/../public/dashboard.png";
-import CompanyIcon from "@/../public/company.png";
-import CompanyIconLowOpacity from "@/../public/company-low.png";
+import applicationIcon from "@/../public/company.png";
+import applicationIconLowOpacity from "@/../public/company-low.png";
 import Logo from "@/../public/donut.png";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,10 +15,12 @@ import SignOutModal from "./SignOutModal";
 import { useSlideMenuState } from "@/lib/global-state-store/slideMenuState";
 
 interface DashBoardNavbarProps {
-  hasCompany: boolean;
+  hasApplication: boolean;
 }
 
-const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({ hasCompany }) => {
+const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({
+  hasApplication,
+}) => {
   const pathName = usePathname().split("/")[2];
   const router = useRouter();
 
@@ -67,7 +69,7 @@ const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({ hasCompany }) => {
                 )}
               </Link>
             </li>
-            {/* Company */}
+            {/* application */}
             <li>
               <Link
                 title="Sub-Accounts"
@@ -94,16 +96,16 @@ const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({ hasCompany }) => {
               </Link>
             </li>
             {/* sub-accounts */}
-            {hasCompany ? (
+            {hasApplication ? (
               <li>
                 <Link
-                  title="Company"
+                  title="application"
                   onClick={() => closeSlider()}
-                  href="/dashboard/company"
+                  href="/dashboard/application"
                 >
-                  {pathName === "company" ? (
+                  {pathName === "application" ? (
                     <Image
-                      src={CompanyIcon}
+                      src={applicationIcon}
                       alt="accounts"
                       width={64}
                       height={64}
@@ -111,7 +113,7 @@ const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({ hasCompany }) => {
                     />
                   ) : (
                     <Image
-                      src={CompanyIconLowOpacity}
+                      src={applicationIconLowOpacity}
                       alt="accounts"
                       width={64}
                       height={64}

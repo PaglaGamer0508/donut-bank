@@ -1,13 +1,14 @@
 import { db } from "@/lib/db";
-import { CreateCompanyValidator } from "@/lib/validators/CreateCompanyValidator";
+import { generateapplicationId } from "@/lib/generateCompanyId";
+import { CreateApplicationValidator } from "@/lib/validators/CreateApplicationValidator";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
 export const POST = async (req: Request, res: NextResponse) => {
   try {
     const body = await req.json();
-    const { companyLogo, companyName, email, userId } =
-      CreateCompanyValidator.parse(body);
+    const { applicationLogo, applicationName, email, userId } =
+      CreateApplicationValidator.parse(body);
 
     const userExist = await db.user.findFirst({
       where: { id: userId },
@@ -22,31 +23,21 @@ export const POST = async (req: Request, res: NextResponse) => {
       });
     }
 
-    const companyExists = await db.company.findFirst({
-      where: { ownerId: userId },
-      select: {
-        id: true,
-      },
-    });
+    const applicationId = generateapplicationId();
 
-    if (companyExists) {
-      return new NextResponse(`Company already exists`, {
-        status: 400,
-      });
-    }
-
-    // creating the company
-    await db.company.create({
+    // creating the application
+    await db.application.create({
       data: {
-        logo: companyLogo,
-        name: companyName,
+        logo: applicationLogo,
+        name: applicationName,
         email,
         ownerId: userId,
-        balance: 1_000_000,
+        balance: 1_00_000,
+        applicationId,
       },
     });
 
-    return new NextResponse(`Company created successfully`, {
+    return new NextResponse(`application created successfully`, {
       status: 200,
     });
   } catch (error) {

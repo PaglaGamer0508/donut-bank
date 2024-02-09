@@ -45,17 +45,17 @@ model Session {
 }
 
 model User {
-  id            String       @id @default(cuid())
+  id            String        @id @default(cuid())
   name          String?
-  email         String?      @unique
+  email         String?       @unique
   emailVerified DateTime?
   image         String?
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
   accounts      Account[]
   sessions      Session[]
   bankAccount   BankAccount?
-  Company       Company[]
+  Application   Application[]
 }
 
 model BankAccount {
@@ -88,9 +88,9 @@ model Transaction {
 
   transactionType TransactionType
 
-  company   Company? @relation(fields: [companyId], references: [id])
-  companyId String?
-  product   String?
+  application   Application? @relation(fields: [applicationId], references: [id])
+  applicationId String?
+  product       String?
 
   subAccount   SubAccount? @relation(fields: [subAccountId], references: [id])
   subAccountId String?
@@ -99,7 +99,7 @@ model Transaction {
 
   @@index([createdAt])
   @@index([bankAccountId])
-  @@index([companyId])
+  @@index([applicationId])
   @@index([subAccountId])
 }
 
@@ -122,16 +122,16 @@ model SubAccount {
 }
 
 model subAccountToken {
-  id           String     @id @default(cuid())
-  subAccount   SubAccount @relation(fields: [subAccountId], references: [id])
-  subAccountId String
-  token        String
-  Company      Company    @relation(fields: [companyId], references: [id])
-  companyId    String
-  limit        Int
+  id            String      @id @default(cuid())
+  subAccount    SubAccount  @relation(fields: [subAccountId], references: [id])
+  subAccountId  String
+  token         String
+  application   Application @relation(fields: [applicationId], references: [id])
+  applicationId String
+  limit         Int
 
   @@index([subAccountId])
-  @@index([companyId])
+  @@index([applicationId])
 }
 
 // model SubAccountLoggedIn {
@@ -159,13 +159,14 @@ model QuickSendMoney {
   @@index([savedBankAccountId])
 }
 
-model Company {
-  id           String        @id @default(cuid())
-  logo         String?
-  name         String
-  email        String
-  transactions Transaction[]
-  createdAt    DateTime      @default(now())
+model Application {
+  id            String        @id @default(cuid())
+  applicationId String
+  logo          String?
+  name          String
+  email         String
+  transactions  Transaction[]
+  createdAt     DateTime      @default(now())
 
   balance Int
 
@@ -181,14 +182,14 @@ model Company {
 }
 
 model APIKey {
-  id        String   @id @default(cuid())
-  key       String
-  secret    String
-  company   Company  @relation(fields: [companyId], references: [id])
-  companyId String
-  createdAt DateTime @default(now())
+  id            String      @id @default(cuid())
+  key           String
+  secret        String
+  application   Application @relation(fields: [applicationId], references: [id])
+  applicationId String
+  createdAt     DateTime    @default(now())
 
-  @@unique([companyId], name: "OneToOneCompanyAPIKey")
+  @@unique([applicationId], name: "OneToOneApplicationtoAPIKey")
 }
 
 enum TransactionType {

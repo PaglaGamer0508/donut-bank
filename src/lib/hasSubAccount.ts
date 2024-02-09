@@ -11,10 +11,7 @@ export const hasSubAccount = async (bankAccountId: string) => {
       },
     });
 
-    if (subAccountExist) {
-      return true;
-    }
-    return false;
+    return subAccountExist ? true : false;
   } catch (error) {
     console.error("There was a error checking for Sub Account", error);
   } finally {

@@ -159,7 +159,7 @@ const AddMoney: React.FC<AddMoneyProps> = ({
             Add Money
           </h1>
           <p className={`${lato.className} text-xl text-green-900 text-center`}>
-            Sub Account Balance: {formatAmountWithCommas(subAccount.balance)}
+            Bank Account Balance: {formatAmountWithCommas(balance)}
           </p>
           <div className="flex flex-col gap-y-1 items-center">
             <div

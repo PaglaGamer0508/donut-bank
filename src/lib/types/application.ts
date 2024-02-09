@@ -1,6 +1,7 @@
-export type Company = {
+export type Application = {
   id: string;
-  logo: string | null;
+  applicationId: string;
+  logo: string;
   name: string;
   email: string;
   createdAt: Date;

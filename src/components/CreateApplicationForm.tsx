@@ -3,7 +3,7 @@
 import Logo from "@/../public/donut.png";
 import { useImagePreviewState } from "@/lib/global-state-store/imagePreviewState";
 import { cn } from "@/lib/utils";
-import { CreateCompanyValidatorType } from "@/lib/validators/CreateCompanyValidator";
+import { CreateApplicationValidatorType } from "@/lib/validators/CreateApplicationValidator";
 import { Trash2 } from "lucide-react";
 import { User } from "next-auth";
 import { Lato } from "next/font/google";
@@ -18,29 +18,36 @@ import { useRouter } from "next/navigation";
 
 const lato = Lato({ weight: ["900"], subsets: ["latin"] });
 
-interface CreateCompanyFormProps {
+interface CreateApplicationFormProps {
   user: User;
 }
 
-const CreateCompanyForm: React.FC<CreateCompanyFormProps> = ({ user }) => {
+const CreateApplicationForm: React.FC<CreateApplicationFormProps> = ({
+  user,
+}) => {
   const router = useRouter();
 
   const { imageUrl, removePreviewImage } = useImagePreviewState();
 
+  const clearData = () => {
+    removePreviewImage();
+    setapplicationName("");
+  };
+
   // states
-  const [companyName, setCompanyName] = useState("");
+  const [applicationName, setapplicationName] = useState("");
   const [errorMassage, setErrorMessage] = useState("");
 
-  const createCompanyData: CreateCompanyValidatorType = {
-    companyLogo: imageUrl!,
-    companyName,
+  const createapplicationData: CreateApplicationValidatorType = {
+    applicationLogo: imageUrl!,
+    applicationName,
     userId: user.id,
     email: user.email!,
   };
 
-  const { mutate: createCompany, isPending } = useMutation({
+  const { mutate: createapplication, isPending } = useMutation({
     mutationFn: async () => {
-      await axios.post("/api/company/create", createCompanyData);
+      await axios.post("/api/application/create", createapplicationData);
     },
     onError: (error: any) => {
       return toast({
@@ -50,6 +57,7 @@ const CreateCompanyForm: React.FC<CreateCompanyFormProps> = ({ user }) => {
       });
     },
     onSuccess: () => {
+      clearData();
       router.refresh();
       return toast({
         title: "Success",
@@ -60,20 +68,23 @@ const CreateCompanyForm: React.FC<CreateCompanyFormProps> = ({ user }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const cleanedCompanyName = companyName.replace(/^\s+|\s+$|\s+(?=\s)/g, "");
-    setCompanyName(cleanedCompanyName);
+    const cleanedapplicationName = applicationName.replace(
+      /^\s+|\s+$|\s+(?=\s)/g,
+      ""
+    );
+    setapplicationName(cleanedapplicationName);
 
-    if (cleanedCompanyName.length < 5) {
-      setErrorMessage("Company name must be at least 5 characters");
-    } else if (cleanedCompanyName.length > 50) {
-      setErrorMessage("Company name can't be more than 50 characters");
-    } else if (/^\d+$/.test(cleanedCompanyName)) {
-      setErrorMessage("Company name cannot contain only numbers");
+    if (cleanedapplicationName.length < 5) {
+      setErrorMessage("application name must be at least 5 characters");
+    } else if (cleanedapplicationName.length > 50) {
+      setErrorMessage("application name can't be more than 50 characters");
+    } else if (/^\d+$/.test(cleanedapplicationName)) {
+      setErrorMessage("application name cannot contain only numbers");
     } else if (!imageUrl) {
       setErrorMessage("Please select a logo");
     } else {
       setErrorMessage("");
-      createCompany();
+      createapplication();
     }
   };
 
@@ -95,7 +106,7 @@ const CreateCompanyForm: React.FC<CreateCompanyFormProps> = ({ user }) => {
       <h1
         className={`${lato.className} text-green-500 text-2xl text-center hover:cursor-default`}
       >
-        Create a Company
+        Create a application
       </h1>
       <form onSubmit={handleSubmit} className="mt-3">
         <div className="space-y-2">
@@ -130,21 +141,21 @@ const CreateCompanyForm: React.FC<CreateCompanyFormProps> = ({ user }) => {
               />
             </div>
           )}
-          {/* Company Name */}
+          {/* application Name */}
           <div className="flex flex-col">
             <label
               htmlFor="account-name"
               className="text-lg font-semibold text-green-500"
             >
-              Company Name
+              application Name
             </label>
             <input
               type="text"
               spellCheck="false"
               id="account-name"
-              value={companyName}
-              onChange={(e) => setCompanyName(e.target.value)}
-              placeholder="Enter Company Name"
+              value={applicationName}
+              onChange={(e) => setapplicationName(e.target.value)}
+              placeholder="Enter application Name"
               minLength={5}
               maxLength={30}
               required
@@ -165,7 +176,7 @@ const CreateCompanyForm: React.FC<CreateCompanyFormProps> = ({ user }) => {
               type="submit"
               className="w-full text-xl font-semibold rounded p-2 text-green-500 hover:text-white border border-green-500 bg-white hover:bg-green-500 transition-all duration-75 active:scale-95"
             >
-              Create Company
+              Create application
             </Button>
           </div>
         </div>
@@ -174,4 +185,4 @@ const CreateCompanyForm: React.FC<CreateCompanyFormProps> = ({ user }) => {
   );
 };
 
-export default CreateCompanyForm;
+export default CreateApplicationForm;

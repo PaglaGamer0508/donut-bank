@@ -130,7 +130,7 @@ const CreateSubAccountForm: React.FC<CreateSubAccountFormProps> = ({
               htmlFor="password"
               className="text-lg font-semibold text-green-500"
             >
-              Password G
+              Password
             </label>
             <input
               id="password"

@@ -78,6 +78,7 @@ const SendMoneyToAccount: React.FC<SendMoneyToAccountProps> = ({
       setAmount(0);
       setPassword("");
       setErrorMessage("");
+      router.refresh();
       return toast({
         title: "Success",
         description: "Money sent successfully",

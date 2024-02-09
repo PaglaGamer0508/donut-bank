@@ -5,14 +5,14 @@ import SlideMenu from "./SlideMenu";
 import { useSlideMenuState } from "@/lib/global-state-store/slideMenuState";
 
 interface SlideMenuContainerProps {
-  hasCompany: boolean;
+  hasApplication: boolean;
 }
 
 const SlideMenuContainer: React.FC<SlideMenuContainerProps> = ({
-  hasCompany,
+  hasApplication,
 }) => {
   const { isOpen } = useSlideMenuState();
-  return <>{isOpen && <SlideMenu hasCompany={hasCompany} />}</>;
+  return <>{isOpen && <SlideMenu hasApplication={hasApplication} />}</>;
 };
 
 export default SlideMenuContainer;

@@ -7,10 +7,10 @@ import React, { HTMLAttributes, useEffect, useState } from "react";
 import DashBoardNavbar from "./DashBoardNavbar";
 
 interface SlideMenuProps {
-  hasCompany: boolean;
+  hasApplication: boolean;
 }
 
-const SlideMenu: React.FC<SlideMenuProps> = ({ hasCompany }) => {
+const SlideMenu: React.FC<SlideMenuProps> = ({ hasApplication }) => {
   const { isOpen, closeSlider } = useSlideMenuState();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -40,7 +40,7 @@ const SlideMenu: React.FC<SlideMenuProps> = ({ hasCompany }) => {
           menuOpen ? "" : "-translate-x-full"
         } transition-all duration-75`}
       >
-        <DashBoardNavbar hasCompany={hasCompany} />
+        <DashBoardNavbar hasApplication={hasApplication} />
       </div>
       <div>Hello</div>
     </div>

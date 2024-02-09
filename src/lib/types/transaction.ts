@@ -14,7 +14,7 @@ export type Transaction = {
   transactionType: TransactionType;
   createdAt: Date;
   receiverBankAccountId: string | null;
-  registeredCompanyId: string | null;
+  registeredapplicationId: string | null;
   product: string | null;
   subAccountId: string | null;
 };

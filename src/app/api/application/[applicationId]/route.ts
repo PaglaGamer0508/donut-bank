@@ -2,27 +2,27 @@ import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
 interface paramProps {
-  ownerId: string;
+  applicationId: string;
 }
 
 export const GET = async (req: Request, { params }: { params: paramProps }) => {
   try {
-    const { ownerId } = params;
+    const { applicationId } = params;
 
-    const company = await db.company.findFirst({
+    const application = await db.application.findFirst({
       where: {
-        ownerId,
+        applicationId,
       },
     });
 
-    if (!company) {
-      return new NextResponse("Company not found", {
+    if (!application) {
+      return new NextResponse("Application not found", {
         status: 404,
       });
     }
 
     return NextResponse.json(
-      { message: "Company found", company },
+      { message: "Application found", application },
       { status: 200 }
     );
   } catch (error) {
