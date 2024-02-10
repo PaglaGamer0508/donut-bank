@@ -4,8 +4,8 @@ import CreditCardIconLowOpacity from "@/../public/credit-card-low.png";
 import CreditCardIcon from "@/../public/credit-card.png";
 import DashBoardIconLowOpacity from "@/../public/dashboard-low.png";
 import DashBoardIcon from "@/../public/dashboard.png";
-import applicationIcon from "@/../public/company.png";
-import applicationIconLowOpacity from "@/../public/company-low.png";
+import ApplicationIcon from "@/../public/application.png";
+import ApplicationIconLowOpacity from "@/../public/application-low.png";
 import Logo from "@/../public/donut.png";
 import Image from "next/image";
 import Link from "next/link";
@@ -105,7 +105,7 @@ const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({
                 >
                   {pathName === "application" ? (
                     <Image
-                      src={applicationIcon}
+                      src={ApplicationIcon}
                       alt="accounts"
                       width={64}
                       height={64}
@@ -113,7 +113,7 @@ const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({
                     />
                   ) : (
                     <Image
-                      src={applicationIconLowOpacity}
+                      src={ApplicationIconLowOpacity}
                       alt="accounts"
                       width={64}
                       height={64}

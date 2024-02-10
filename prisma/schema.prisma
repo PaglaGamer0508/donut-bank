@@ -184,7 +184,6 @@ model Application {
 model APIKey {
   id            String      @id @default(cuid())
   key           String
-  secret        String
   application   Application @relation(fields: [applicationId], references: [id])
   applicationId String
   createdAt     DateTime    @default(now())
