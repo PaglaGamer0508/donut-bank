@@ -64,18 +64,22 @@ const SendMoneySection: React.FC<SendMoneySectionProps> = ({
         </h1>
 
         <div className="mb-1">
-          <h1 className={`${lato.className} text-lg text-green-500`}>
-            Quick Send Money Accounts
-          </h1>
+          {quickSendMoneyAccounts.length > 0 && (
+            <>
+              <h1 className={`${lato.className} text-lg text-green-500`}>
+                Quick Send Money Accounts
+              </h1>
 
-          <div className="flex gap-x-1">
-            {quickSendMoneyAccounts.map((quickSendMoneyAccount) => (
-              <QuickTransferAavtar
-                key={quickSendMoneyAccount.id}
-                quickSendMoneyAccount={quickSendMoneyAccount}
-              />
-            ))}
-          </div>
+              <div className="flex gap-x-1">
+                {quickSendMoneyAccounts.map((quickSendMoneyAccount) => (
+                  <QuickTransferAavtar
+                    key={quickSendMoneyAccount.id}
+                    quickSendMoneyAccount={quickSendMoneyAccount}
+                  />
+                ))}
+              </div>
+            </>
+          )}
         </div>
 
         <form onSubmit={onSubmit} autoComplete="off">

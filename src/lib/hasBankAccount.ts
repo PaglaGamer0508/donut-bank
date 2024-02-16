@@ -1,10 +1,13 @@
+import { getAuthSession } from "./auth";
 import { db } from "./db";
 
-export const hasBankAccount = async (userId: string) => {
+export const hasBankAccount = async () => {
+  const session = await getAuthSession();
+
   try {
     const hasBankAccount = await db.bankAccount.findFirst({
       where: {
-        ownerId: userId,
+        ownerId: session?.user?.id,
       },
       select: {
         id: true,

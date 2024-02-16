@@ -4,7 +4,7 @@ interface loadingProps {}
 
 const loading: React.FC<loadingProps> = ({}) => {
   return (
-    <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-10">
+    <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-6">
       <div className="flex items-center gap-x-2 mb-4">
         <h1 className="text-2xl font-semibold text-green-500">Search Result</h1>
         <div role="status">

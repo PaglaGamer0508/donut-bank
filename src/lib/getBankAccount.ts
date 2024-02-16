@@ -3,9 +3,9 @@ import { BankAccount } from "./types/bank-account";
 
 export const getBankAccount = async (userId: string): Promise<BankAccount> => {
   const bankAccountResponse = await fetch(
-    `${hostName}/api/bank-account/${userId}`,
+    `${hostName}/api/bank-account?userId=${userId}`,
     {
-      cache: "no-store",
+      // cache: "no-store",
       method: "GET",
       headers: {
         "Content-Type": "application/json",

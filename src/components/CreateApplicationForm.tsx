@@ -38,7 +38,7 @@ const CreateApplicationForm: React.FC<CreateApplicationFormProps> = ({
   const [applicationName, setapplicationName] = useState("");
   const [errorMassage, setErrorMessage] = useState("");
 
-  const createapplicationData: CreateApplicationValidatorType = {
+  const createApplicationData: CreateApplicationValidatorType = {
     applicationLogo: imageUrl!,
     applicationName,
     userId: user.id,
@@ -47,7 +47,7 @@ const CreateApplicationForm: React.FC<CreateApplicationFormProps> = ({
 
   const { mutate: createapplication, isPending } = useMutation({
     mutationFn: async () => {
-      await axios.post("/api/application/create", createapplicationData);
+      await axios.post("/api/application", createApplicationData);
     },
     onError: (error: any) => {
       return toast({

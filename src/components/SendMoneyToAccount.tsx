@@ -85,7 +85,7 @@ const SendMoneyToAccount: React.FC<SendMoneyToAccountProps> = ({
         action: (
           <Button
             className="active:scale-95 transition-all duration-75"
-            onClick={() => router.push("/dashboard/sub-accounts")}
+            onClick={() => router.push("/dashboard/sub-account")}
             variant={"secondary"}
           >
             Sub Accounts

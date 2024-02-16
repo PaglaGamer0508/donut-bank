@@ -6,6 +6,7 @@ import React from "react";
 import CopyText from "./CopyText";
 import { Icons } from "./Icons";
 import Link from "next/link";
+import { Code2 } from "lucide-react";
 
 const lato = Lato({ weight: ["900"], subsets: ["latin"] });
 
@@ -18,7 +19,7 @@ const ApplicationDashboard: React.FC<applicationDashboardProps> = ({
 }) => {
   return (
     <div className="px-1 md:px-3 lg:px-6 pt-3 mb-2 md:mb-0">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <div className="flex items-center gap-x-2">
           <Image
             alt="Logo"
@@ -64,8 +65,10 @@ const ApplicationDashboard: React.FC<applicationDashboardProps> = ({
       <div>
         <Link
           href={`/dashboard/application/${application.applicationId}/developers`}
+          className={`flex items-center gap-x-1 w-fit bg-green-500 hover:bg-green-600 text-white text-lg font-semibold rounded-lg py-1 px-3 mt-2 transition-all duration-75`}
         >
-          Developers Options
+          <Code2 />
+          <span>Developers Options</span>
         </Link>
       </div>
     </div>

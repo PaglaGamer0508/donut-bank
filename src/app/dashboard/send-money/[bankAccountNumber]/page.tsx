@@ -1,11 +1,8 @@
-import BankAccountSearchResult from "@/components/BankAccountSearchResult";
 import SendMoneyToAccount from "@/components/SendMoneyToAccount";
-import { Button, buttonVariants } from "@/components/ui/Button";
+import { buttonVariants } from "@/components/ui/Button";
 import { getAuthSession } from "@/lib/auth";
 import { getBankAccount } from "@/lib/getBankAccount";
-import { getBankAccountId } from "@/lib/getBankAccountId";
 import { getBankAccountWithNumber } from "@/lib/getBankAccountWithNumber";
-import { getQuickSendMoneyAccounts } from "@/lib/getQuickSendMoneyAccounts";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -24,6 +21,16 @@ const page: React.FC<pageProps> = async ({ params }) => {
   // Searched bank account
   const searchedBankAccount = await getBankAccountWithNumber(bankAccountNumber);
 
+  if (searchedBankAccount === null) {
+    return (
+      <div>
+        <h1 className="text-center text-2xl text-red-500 font-semibold">
+          Bank Account Not Found
+        </h1>
+      </div>
+    );
+  }
+
   // Checking the format of the bank account number
   const bankAccountNumberFormater = (bankAccountNumber: string) => {
     const parrent = /^\d{10}$/;
@@ -32,14 +39,9 @@ const page: React.FC<pageProps> = async ({ params }) => {
   const isBankAccountNumberFormated =
     bankAccountNumberFormater(bankAccountNumber);
 
-  // Quick send money accounts
-  const quickSendMoneyAccounts = await getQuickSendMoneyAccounts(
-    userBankAccount.id
-  );
-
   if (userBankAccount.id === searchedBankAccount.id) {
     return (
-      <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-10">
+      <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-6">
         <div>
           <h1 className="text-center text-2xl text-red-500 font-semibold">
             Bank Account is your own
@@ -61,7 +63,7 @@ const page: React.FC<pageProps> = async ({ params }) => {
   }
 
   return (
-    <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-10">
+    <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-6">
       {isBankAccountNumberFormated ? (
         <div>
           {searchedBankAccount ? (

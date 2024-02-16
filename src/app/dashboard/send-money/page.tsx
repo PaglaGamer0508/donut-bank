@@ -15,7 +15,7 @@ const page: React.FC<pageProps> = async ({}) => {
 
   return (
     <div>
-      <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-10">
+      <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-6">
         <SendMoneySection quickSendMoneyAccounts={quickSendMoneyAccounts} />
       </div>
     </div>

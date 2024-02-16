@@ -35,7 +35,7 @@ const QuickSendMoneyAccountsOptionDropdown: React.FC<
   // delete quick send money account
   const { mutate: deleteQuickSendMoneyAccount, isPending } = useMutation({
     mutationFn: async () => {
-      await axios.delete(`/api/quick-send-money-account/remove`, {
+      await axios.delete(`/api/quick-send-money-account`, {
         data: deleteQuickSendMoneyAccountData,
       });
     },

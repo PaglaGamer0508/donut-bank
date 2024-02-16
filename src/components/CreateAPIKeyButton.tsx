@@ -23,7 +23,7 @@ const CreateAPIKeyButton: React.FC<CreateAPIKeyButtonProps> = ({
 
   const { mutate: createAPIKey, isPending } = useMutation({
     mutationFn: async () => {
-      await axios.post("/api/application/api-key/create", createAPIKeyData);
+      await axios.post("/api/application/api-key", createAPIKeyData);
     },
     onError: (error: any) => {
       return toast({

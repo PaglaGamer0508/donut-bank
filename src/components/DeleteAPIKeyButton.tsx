@@ -13,25 +13,35 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/AlertDialog";
-import { Trash2 } from "lucide-react";
+import { Loader2Icon, Trash2 } from "lucide-react";
 import { buttonVariants } from "./ui/Button";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "@/hooks/useToast";
 import { useRouter } from "next/navigation";
+import { DeleteAPIKeyValidatorType } from "@/lib/validators/DeleteAPIKeyValidator";
 
 interface DeleteAPIKeyButtonProps {
   apiKeyId: string;
+  applicationId: string;
 }
 
 const DeleteAPIKeyButton: React.FC<DeleteAPIKeyButtonProps> = ({
   apiKeyId,
+  applicationId,
 }) => {
   const router = useRouter();
 
+  const DeleteAPIkeyData: DeleteAPIKeyValidatorType = {
+    apiKeyId,
+    applicationId,
+  };
+
   const { mutate: deleteAPIKey, isPending } = useMutation({
     mutationFn: async () => {
-      await axios.delete(`/api/application/api-key/delete/${apiKeyId}`);
+      await axios.delete(`/api/application/api-key`, {
+        data: DeleteAPIkeyData,
+      });
     },
     onError: (error: any) => {
       console.log(error);
@@ -58,6 +68,7 @@ const DeleteAPIKeyButton: React.FC<DeleteAPIKeyButtonProps> = ({
         className={`${buttonVariants({
           variant: "destructive",
         })} flex items-center gap-x-1`}
+        disabled={isPending}
       >
         <span>Delete</span>
         <Trash2 className="h-4 w-4" />
@@ -79,7 +90,7 @@ const DeleteAPIKeyButton: React.FC<DeleteAPIKeyButtonProps> = ({
             disabled={isPending}
             onClick={() => deleteAPIKey()}
           >
-            Continue
+            Delete
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

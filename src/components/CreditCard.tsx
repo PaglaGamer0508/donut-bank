@@ -13,11 +13,12 @@ import React from "react";
 import { Icons } from "./Icons";
 
 const lato2 = Lato({ weight: ["700"], subsets: ["latin"] });
+const roboto_slab = Roboto_Slab({ weight: ["300"], subsets: ["latin"] });
+
 interface CreditCardProps {
   subAccount: SubAccount;
 }
 
-const roboto_slab = Roboto_Slab({ weight: ["300"], subsets: ["latin"] });
 
 const CreditCard: React.FC<CreditCardProps> = ({ subAccount }) => {
   const { id, name, balance, creditCard_color, creditCard_number } = subAccount;
@@ -64,7 +65,7 @@ const CreditCard: React.FC<CreditCardProps> = ({ subAccount }) => {
 
       {/* add money button */}
       <Link
-        href={`/dashboard/sub-accounts/add-money/${id}`}
+        href={`/dashboard/sub-account/add-money/${id}`}
         className="group grid place-items-center absolute -top-3 -right-3 z-20 w-16 h-16 bg-[#75757569] hover:bg-green-500 transition-all duration-75 rounded-full focus:outline-none"
       >
         <Plus

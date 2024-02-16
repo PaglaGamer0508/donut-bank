@@ -53,7 +53,7 @@ const BankAccountSearchResult: React.FC<BankAccountSearchResultProps> = ({
   const { mutate: addQuickSendMoneyAccount, isPending } = useMutation({
     mutationFn: async () => {
       await axios.post(
-        `/api/quick-send-money-account/add`,
+        `/api/quick-send-money-account`,
         AddQuickSendMoneyAccountData
       );
     },
@@ -77,7 +77,7 @@ const BankAccountSearchResult: React.FC<BankAccountSearchResultProps> = ({
             onClick={() => router.push("/dashboard/quick-send-money-accounts")}
             variant={"secondary"}
           >
-            Check
+            See All
           </Button>
         ),
       });

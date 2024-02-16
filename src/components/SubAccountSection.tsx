@@ -22,7 +22,7 @@ const SubAccountSection: React.FC<SubAccountSectionProps> = async ({
         </h1>
         {subAccounts.length < 3 ? (
           <Link
-            href={`/dashboard/sub-accounts/create`}
+            href={`/dashboard/sub-account/create`}
             className="flex items-center gap-x-1 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded px-1 active:scale-90 transition-all duration-75 focus:outline-none"
           >
             <span>New</span>

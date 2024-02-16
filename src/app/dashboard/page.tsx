@@ -8,7 +8,7 @@ import React from "react";
 const page: React.FC = async () => {
   const session = await getAuthSession();
 
-  const bankAccountExist = await hasBankAccount(session?.user?.id!);
+  const bankAccountExist = await hasBankAccount();
 
   if (bankAccountExist === false) {
     return (

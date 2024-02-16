@@ -31,7 +31,7 @@ const page: React.FC<pageProps> = async ({ params }) => {
   if (!apiKey) {
     return (
       <div>
-        <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-10">
+        <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-6">
           <div>
             <h1>No API Key Found</h1>
             <CreateAPIKeyButton applicationId={application.id} />
@@ -43,10 +43,13 @@ const page: React.FC<pageProps> = async ({ params }) => {
 
   return (
     <div>
-      <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-10">
+      <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-6">
         <div>
           <p>API Key: {apiKey.key}</p>
-          <DeleteAPIKeyButton apiKeyId={apiKey.id} />
+          <DeleteAPIKeyButton
+            apiKeyId={apiKey.id}
+            applicationId={application.id}
+          />
         </div>
       </div>
     </div>

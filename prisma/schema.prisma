@@ -123,6 +123,7 @@ model SubAccount {
 
 model subAccountToken {
   id            String      @id @default(cuid())
+  name          String?
   subAccount    SubAccount  @relation(fields: [subAccountId], references: [id])
   subAccountId  String
   token         String
@@ -162,7 +163,7 @@ model QuickSendMoney {
 model Application {
   id            String        @id @default(cuid())
   applicationId String
-  logo          String?
+  logo          String
   name          String
   email         String
   transactions  Transaction[]
@@ -170,8 +171,8 @@ model Application {
 
   balance Int
 
-  subAccountToken subAccountToken[]
-  apiKey          APIKey[]
+  subAccountTokens subAccountToken[]
+  apiKey           APIKey[]
 
   websiteUrl String?
 

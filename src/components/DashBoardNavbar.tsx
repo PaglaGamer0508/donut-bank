@@ -53,7 +53,7 @@ const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({
                 {!pathName ? (
                   <Image
                     src={DashBoardIcon}
-                    alt="accounts"
+                    alt="account"
                     width={64}
                     height={64}
                     className="w-9 select-none"
@@ -61,7 +61,7 @@ const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({
                 ) : (
                   <Image
                     src={DashBoardIconLowOpacity}
-                    alt="accounts"
+                    alt="account"
                     width={64}
                     height={64}
                     className="w-9 select-none"
@@ -74,12 +74,12 @@ const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({
               <Link
                 title="Sub-Accounts"
                 onClick={() => closeSlider()}
-                href="/dashboard/sub-accounts"
+                href="/dashboard/sub-account"
               >
-                {pathName === "sub-accounts" ? (
+                {pathName === "sub-account" ? (
                   <Image
                     src={CreditCardIcon}
-                    alt="accounts"
+                    alt="sub-accounts"
                     width={64}
                     height={64}
                     className="w-9 select-none"
@@ -87,7 +87,7 @@ const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({
                 ) : (
                   <Image
                     src={CreditCardIconLowOpacity}
-                    alt="accounts"
+                    alt="sub-accounts"
                     width={64}
                     height={64}
                     className="w-9 select-none"
@@ -99,14 +99,14 @@ const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({
             {hasApplication ? (
               <li>
                 <Link
-                  title="application"
+                  title="Application"
                   onClick={() => closeSlider()}
                   href="/dashboard/application"
                 >
                   {pathName === "application" ? (
                     <Image
                       src={ApplicationIcon}
-                      alt="accounts"
+                      alt="application"
                       width={64}
                       height={64}
                       className="w-9 select-none"
@@ -114,7 +114,7 @@ const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({
                   ) : (
                     <Image
                       src={ApplicationIconLowOpacity}
-                      alt="accounts"
+                      alt="application"
                       width={64}
                       height={64}
                       className="w-9 select-none"

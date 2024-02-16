@@ -39,7 +39,7 @@ const CreateSubAccountForm: React.FC<CreateSubAccountFormProps> = ({
 
   const { mutate: createSubAccount, isPending } = useMutation({
     mutationFn: async () => {
-      await axios.post("/api/sub-account/create", CreateSubAccountData);
+      await axios.post("/api/sub-account", CreateSubAccountData);
     },
     onError: (error: any) => {
       return toast({
@@ -50,7 +50,7 @@ const CreateSubAccountForm: React.FC<CreateSubAccountFormProps> = ({
     },
     onSuccess: () => {
       setSubAccountName("");
-      router.push("/dashboard/sub-accounts");
+      router.push("/dashboard/sub-account");
       return toast({
         title: "Success",
         description: "Sub account created successfully",

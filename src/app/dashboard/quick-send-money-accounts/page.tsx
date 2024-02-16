@@ -22,7 +22,7 @@ const page: React.FC<pageProps> = async ({}) => {
 
   return (
     <div>
-      <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-10">
+      <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-6">
         <div className="flex items-center justify-between mb-4">
           <h1 className={`${lato.className} text-xl text-green-500`}>
             Quick Send Money Accounts
@@ -35,6 +35,17 @@ const page: React.FC<pageProps> = async ({}) => {
             <Plus className="text-white w-4 h-4 group-active:scale-90" />
           </Link>
         </div>
+        {quickSendMoneyAccounts.length === 0 && (
+          <div>
+            <h1>No Quick Send Money Accounts Found</h1>
+            <Link
+              href={`/dashboard/quick-send-money-accounts/add`}
+              className="text-red-500"
+            >
+              Add
+            </Link>
+          </div>
+        )}
         <div className="flex flex-col gap-y-2">
           {quickSendMoneyAccounts.map((quickSendMoneyAccount) => (
             <QuickSendMoneyAccountItems

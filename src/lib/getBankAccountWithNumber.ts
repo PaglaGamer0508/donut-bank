@@ -3,9 +3,9 @@ import { BankAccount } from "./types/bank-account";
 
 export const getBankAccountWithNumber = async (
   bankAccountNumber: string
-): Promise<BankAccount> => {
+): Promise<BankAccount | null> => {
   const bankAccountResponse = await fetch(
-    `${hostName}/api/quick-send-money-account/${bankAccountNumber}`,
+    `${hostName}/api/bank-account/${bankAccountNumber}`,
     {
       method: "GET",
       headers: {
@@ -13,6 +13,10 @@ export const getBankAccountWithNumber = async (
       },
     }
   );
+
+  if (bankAccountResponse.status === 404) {
+    return null;
+  }
 
   const bankAccountData = await bankAccountResponse.json();
   const { bankAccount } = bankAccountData;

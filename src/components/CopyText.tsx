@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "@/hooks/useToast";
 import { Copy, CopyCheck } from "lucide-react";
 import React from "react";
 
@@ -15,7 +16,11 @@ const CopyText: React.FC<CopyTextProps> = ({ text, ...props }) => {
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
-    }, 3000);
+    }, 2000);
+    return toast({
+      title: "Copied to clipboard",
+      duration: 2000,
+    });
   };
 
   return (
