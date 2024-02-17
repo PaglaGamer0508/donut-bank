@@ -64,7 +64,7 @@ export const GET = async (req: Request, res: NextResponse) => {
 export const POST = async (req: Request, res: NextResponse) => {
   try {
     const body = await req.json();
-    const { name, applicationId, limit, subAccountId } =
+    const { applicationId, limit, subAccountId } =
       CreateSubAccountTokenValidator.parse(body);
 
     const subAccountToken = await db.subAccountToken.findFirst({
@@ -82,7 +82,6 @@ export const POST = async (req: Request, res: NextResponse) => {
     await db.subAccountToken.create({
       data: {
         limit,
-        name,
         applicationId,
         subAccountId,
         token,
