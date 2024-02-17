@@ -52,7 +52,7 @@ export const POST = async (req: Request, res: NextResponse) => {
 
     const application = await db.aPIKey.findFirst({
       where: {
-        applicationId,
+        id: applicationId,
       },
     });
 

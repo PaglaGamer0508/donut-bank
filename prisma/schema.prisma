@@ -90,7 +90,8 @@ model Transaction {
 
   application   Application? @relation(fields: [applicationId], references: [id])
   applicationId String?
-  product       String?
+  productName   String?
+  productId     String?
 
   subAccount   SubAccount? @relation(fields: [subAccountId], references: [id])
   subAccountId String?
@@ -123,7 +124,6 @@ model SubAccount {
 
 model subAccountToken {
   id            String      @id @default(cuid())
-  name          String?
   subAccount    SubAccount  @relation(fields: [subAccountId], references: [id])
   subAccountId  String
   token         String
