@@ -27,6 +27,7 @@
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "limiter": "^2.1.0",
     "lucide-react": "^0.293.0",
     "next": "14.0.3",
     "next-auth": "^4.24.5",

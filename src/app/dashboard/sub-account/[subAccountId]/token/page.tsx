@@ -66,6 +66,7 @@ const page: React.FC<pageProps> = async ({ params }) => {
             />
             <div>
               <h1>{token.token}</h1>
+              <p>Limit: {token.limit}</p>
             </div>
           </div>
         ))}

@@ -44,7 +44,6 @@ const DeleteAPIKeyButton: React.FC<DeleteAPIKeyButtonProps> = ({
       });
     },
     onError: (error: any) => {
-      console.log(error);
       return toast({
         title: "Error",
         description: error.response.data,
@@ -56,7 +55,7 @@ const DeleteAPIKeyButton: React.FC<DeleteAPIKeyButtonProps> = ({
       router.refresh();
       return toast({
         title: "Success",
-        description: "API Key Deleted Successfully",
+        description: "API Key Deleted",
         duration: 5000,
       });
     },

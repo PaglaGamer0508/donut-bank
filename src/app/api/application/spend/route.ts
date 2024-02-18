@@ -2,10 +2,24 @@ import { db } from "@/lib/db";
 import { SpendMoneyValidator } from "@/lib/validators/SpendMoneyValidator";
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { limiter } from "../../config/limiter";
 // import { SpendMoneyValidator } from '@/lib/validators/S';
 
 export const POST = async (req: Request, res: NextResponse) => {
   try {
+    const origin = req.headers.get("origin");
+    // Rate limiting logic 100 tokens per minute, fire immediately if there are tokens available.
+    const remaining = await limiter.removeTokens(1);
+    if (remaining < 0) {
+      return new NextResponse("Too many requests", {
+        status: 429,
+        headers: {
+          "Access-Control-Allow-Origin": origin || "*",
+          "Content-Type": "text/plain",
+        },
+      });
+    }
+
     const body = await req.json();
     const { amount, apiKey, subAccountToken, productName, productId } =
       SpendMoneyValidator.parse(body);
@@ -133,6 +147,10 @@ export const POST = async (req: Request, res: NextResponse) => {
         productName: productName,
         productId: productId,
       },
+    });
+
+    return new NextResponse("Transaction successful", {
+      status: 200,
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
