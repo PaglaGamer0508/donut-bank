@@ -8,17 +8,21 @@ export function middleware(request: Request) {
   const origin = request.headers.get("origin");
 
   if (isProduction) {
-    if (origin === hostName) {
+    if (origin === "https://donutbank.vercel.app") {
+      console.log(origin);
       return NextResponse.next();
     } else {
       if (request.url.includes("/api/application/spend")) {
+        console.log(origin);
         return NextResponse.next();
       } else {
+        console.log(origin);
         return new NextResponse();
       }
     }
   }
 
+  console.log(origin);
   return NextResponse.next();
 }
 
