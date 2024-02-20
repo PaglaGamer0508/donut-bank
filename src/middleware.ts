@@ -1,31 +1,43 @@
 import { NextResponse } from "next/server";
-import { hostName } from "./lib/hostName";
+import type { NextRequest } from "next/server";
 
-const isProduction = process.env.NODE_ENV === "production";
+const allowedOrigins =
+  process.env.NODE_ENV === "production"
+    ? ["https://donutbank.vercel.app"]
+    : ["http://localhost:3000"];
 
 // This function can be marked `async` if using `await` inside
-export function middleware(request: Request) {
+export function middleware(request: NextRequest) {
   const origin = request.headers.get("origin");
 
-  if (isProduction) {
-    if (origin === "https://donutbank.vercel.app") {
-      console.log(origin);
-      return NextResponse.next();
-    } else {
-      if (request.url.includes("/api/application/spend")) {
-        console.log(origin);
-        return NextResponse.next();
-      } else {
-        console.log(origin);
-        return new NextResponse();
-      }
-    }
+  // Allow requests to the "/api/application/spend" route from any origin
+  if (request.nextUrl.pathname === "/api/application/spend") {
+    return NextResponse.next();
   }
 
-  console.log(origin);
+  if (origin && !allowedOrigins.includes(origin)) {
+    return new NextResponse(null, {
+      status: 400,
+      statusText: "Bad Request",
+      headers: {
+        "Content-Type": "text/plain",
+      },
+    });
+  }
+
+  // For all other requests, check if the request is coming from a browser
+  if (!request.headers.get("user-agent")) {
+    return new NextResponse(null, {
+      status: 400,
+      statusText: "Bad Request",
+      headers: {
+        "Content-Type": "text/plain",
+      },
+    });
+  }
+
   return NextResponse.next();
 }
-
 export const config = {
   matcher: "/api/:path*",
 };
