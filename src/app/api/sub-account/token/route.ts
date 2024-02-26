@@ -78,7 +78,7 @@ export const POST = async (req: Request, res: NextResponse) => {
       return new NextResponse("Token already exists", { status: 400 });
     }
 
-    const token = generateString(16);
+    const token = generateString(20);
     await db.subAccountToken.create({
       data: {
         limit,
