@@ -40,13 +40,14 @@ const DeleteAPIKeyButton: React.FC<DeleteAPIKeyButtonProps> = ({
   const { mutate: deleteAPIKey, isPending } = useMutation({
     mutationFn: async () => {
       await axios.delete(
-        `/api/application/api-key?apiKey=${process.env.API_KEY}`,
+        `/api/application/api-key?apiKey=${process.env.API_KEY!}`,
         {
           data: DeleteAPIkeyData,
         }
       );
     },
     onError: (error: any) => {
+      console.log(error);
       return toast({
         title: "Error",
         description: error.response.data,
