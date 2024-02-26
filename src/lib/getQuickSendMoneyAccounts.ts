@@ -5,7 +5,7 @@ export const getQuickSendMoneyAccounts = async (
   bankAccountId: string
 ): Promise<QuickSendMoneyAccount[]> => {
   const quickSendMoneyAccountsResponse = await fetch(
-    `${hostName}/api/quick-send-money-account?bankAccountId=${bankAccountId}`
+    `${hostName}/api/quick-send-money-account?apiKey=${process.env.API_KEY}&bankAccountId=${bankAccountId}`
   );
 
   if (quickSendMoneyAccountsResponse.status === 404) {

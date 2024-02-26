@@ -16,6 +16,7 @@ import axios from "axios";
 import { toast } from "@/hooks/useToast";
 import { useRouter } from "next/navigation";
 
+
 const lato = Lato({ weight: ["900"], subsets: ["latin"] });
 
 interface CreateApplicationFormProps {
@@ -47,7 +48,10 @@ const CreateApplicationForm: React.FC<CreateApplicationFormProps> = ({
 
   const { mutate: createapplication, isPending } = useMutation({
     mutationFn: async () => {
-      await axios.post("/api/application", createApplicationData);
+      await axios.post(
+        `/api/application?apiKey=${process.env.API_KEY}`,
+        createApplicationData
+      );
     },
     onError: (error: any) => {
       return toast({

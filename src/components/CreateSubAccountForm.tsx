@@ -39,7 +39,10 @@ const CreateSubAccountForm: React.FC<CreateSubAccountFormProps> = ({
 
   const { mutate: createSubAccount, isPending } = useMutation({
     mutationFn: async () => {
-      await axios.post("/api/sub-account", CreateSubAccountData);
+      await axios.post(
+        `/api/sub-account?apiKey=${process.env.API_KEY}`,
+        CreateSubAccountData
+      );
     },
     onError: (error: any) => {
       return toast({

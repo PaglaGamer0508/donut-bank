@@ -53,7 +53,7 @@ const BankAccountSearchResult: React.FC<BankAccountSearchResultProps> = ({
   const { mutate: addQuickSendMoneyAccount, isPending } = useMutation({
     mutationFn: async () => {
       await axios.post(
-        `/api/quick-send-money-account`,
+        `/api/quick-send-money-account?apiKey=${process.env.API_KEY}`,
         AddQuickSendMoneyAccountData
       );
     },

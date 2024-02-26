@@ -49,7 +49,10 @@ const CreateBankAccountForm: React.FC<CreateBankAccountFormProps> = ({
 
   const { mutate: createBankAccount, isPending } = useMutation({
     mutationFn: async () => {
-      await axios.post("/api/bank-account", createBankAccountData);
+      await axios.post(
+        `/api/bank-account?apiKey=${process.env.API_KEY}`,
+        createBankAccountData
+      );
     },
     onError: () => {
       return toast({

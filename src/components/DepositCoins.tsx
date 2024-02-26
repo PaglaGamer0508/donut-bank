@@ -87,7 +87,10 @@ const DepositCoins: React.FC<DepositCoinsProps> = ({
 
   const { mutate: depositMoney, isPending } = useMutation({
     mutationFn: async () => {
-      await axios.post("/api/deposit", depositData);
+      await axios.post(
+        `/api/deposit?apiKey=${process.env.API_KEY}`,
+        depositData
+      );
     },
     onError: (error: any) => {
       return toast({

@@ -8,6 +8,7 @@ import { toast } from "@/hooks/useToast";
 import { CreateAPIKeyValidatorType } from "@/lib/validators/CreateAPIKeyValidator";
 import { useRouter } from "next/navigation";
 
+
 interface CreateAPIKeyButtonProps {
   applicationId: string;
 }
@@ -23,7 +24,10 @@ const CreateAPIKeyButton: React.FC<CreateAPIKeyButtonProps> = ({
 
   const { mutate: createAPIKey, isPending } = useMutation({
     mutationFn: async () => {
-      await axios.post("/api/application/api-key", createAPIKeyData);
+      await axios.post(
+        `/api/application/api-key?apiKey=${process.env.API_KEY}`,
+        createAPIKeyData
+      );
     },
     onError: (error: any) => {
       return toast({

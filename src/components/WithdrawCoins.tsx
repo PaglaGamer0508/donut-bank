@@ -88,7 +88,10 @@ const WithdrawCoins: React.FC<WithdrawCoinsProps> = ({
 
   const { mutate: withdrawMoney, isPending } = useMutation({
     mutationFn: async () => {
-      await axios.post("/api/withdraw", withdrawData);
+      await axios.post(
+        `/api/withdraw?apiKey=${process.env.API_KEY}`,
+        withdrawData
+      );
     },
     onError: (error: any) => {
       return toast({

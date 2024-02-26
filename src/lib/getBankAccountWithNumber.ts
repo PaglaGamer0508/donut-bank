@@ -5,7 +5,7 @@ export const getBankAccountWithNumber = async (
   bankAccountNumber: string
 ): Promise<BankAccount | null> => {
   const bankAccountResponse = await fetch(
-    `${hostName}/api/bank-account/${bankAccountNumber}`,
+    `${hostName}/api/bank-account/${bankAccountNumber}?apiKey=${process.env.API_KEY}`,
     {
       method: "GET",
       headers: {

@@ -5,7 +5,7 @@ export const getAllSubAccount = async (
   bankAccountId: string
 ): Promise<SubAccount[]> => {
   const subAccountResponse = await fetch(
-    `${hostName}/api/sub-account?bankAccountId=${bankAccountId}`,
+    `${hostName}/api/sub-account?apiKey=${process.env.API_KEY}&bankAccountId=${bankAccountId}`,
     {
       method: "GET",
       headers: {

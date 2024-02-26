@@ -65,7 +65,10 @@ const SendMoneyToAccount: React.FC<SendMoneyToAccountProps> = ({
 
   const { mutate: SendMoney, isPending } = useMutation({
     mutationFn: async () => {
-      await axios.post("/api/send-money", SendMoneyData);
+      await axios.post(
+        `/api/send-money?apiKey=${process.env.API_KEY}`,
+        SendMoneyData
+      );
     },
     onError: (error: any) => {
       return toast({

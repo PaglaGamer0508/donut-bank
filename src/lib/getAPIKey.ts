@@ -5,7 +5,7 @@ export const getAPIKey = async (
   applicationId: string
 ): Promise<APIKey | null> => {
   const apiKeyResponse = await fetch(
-    `${hostName}/api/application/api-key?applicationId=${applicationId}`,
+    `${hostName}/api/application/api-key?apiKey=${process.env.API_KEY}&applicationId=${applicationId}`,
     {
       method: "GET",
       headers: {

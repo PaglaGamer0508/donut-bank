@@ -2,8 +2,7 @@ import { db } from "@/lib/db";
 import { SpendMoneyValidator } from "@/lib/validators/SpendMoneyValidator";
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { limiter } from "../../config/limiter";
-// import { SpendMoneyValidator } from '@/lib/validators/S';
+import { limiter } from "./limiter";
 
 export const POST = async (req: Request, res: NextResponse) => {
   try {

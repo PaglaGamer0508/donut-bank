@@ -3,6 +3,7 @@
 import Logo from "@/../public/donut.png";
 import { toast } from "@/hooks/useToast";
 import { formatAmountWithCommas } from "@/lib/formatAmountWithCommas ";
+import { SubAccount } from "@/lib/types/sub-account";
 import { AddMoneyValidatorType } from "@/lib/validators/AddMoneyValidator";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
@@ -13,7 +14,6 @@ import React, { useState } from "react";
 import { Icons } from "./Icons";
 import styles from "./style/WithdrawCoins.module.css";
 import { Button } from "./ui/Button";
-import { SubAccount } from "@/lib/types/sub-account";
 
 const lato = Lato({ weight: ["900"], subsets: ["latin"] });
 
@@ -90,7 +90,10 @@ const AddMoney: React.FC<AddMoneyProps> = ({
 
   const { mutate: AddMoney, isPending } = useMutation({
     mutationFn: async () => {
-      await axios.post("/api/sub-account/add-money", AddMoneyData);
+      await axios.post(
+        `/api/sub-account/add-money?apiKey=${process.env.API_KEY}`,
+        AddMoneyData
+      );
     },
     onError: (error: any) => {
       return toast({
