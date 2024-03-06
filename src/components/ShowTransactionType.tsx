@@ -65,7 +65,7 @@ const ShowTransactionType: React.FC<ShowTransactionTypeProps> = ({
     <div
       className={`${
         getTransactionStyle(transactionType).bg
-      } flex items-center gap-2 py-1 px-2 rounded-md`}
+      } flex items-center w-fit gap-2 py-1 px-2 rounded-md`}
     >
       {transactionTypeIcon && (
         <Image

@@ -1,12 +1,11 @@
+import CreditCard from "@/../public/credit-card.svg";
+import DonutCoin from "@/../public/donut-coin.svg";
 import { formatDate } from "@/lib/formatDate";
 import { Transaction, TransactionType } from "@/lib/types/transaction";
+import Link from "next/link";
 import React from "react";
 import ShowTransactionType from "./ShowTransactionType";
-import Image from "next/image";
-import DonutCoin from "@/../public/donut-coin.svg";
-import CreditCard from "@/../public/credit-card.svg";
 import TransactionImage from "./TransactionImage";
-import Link from "next/link";
 
 interface TransactionItemProps {
   transaction: Transaction;
@@ -118,15 +117,17 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
           </div>
         </div>
 
-        <ShowTransactionType transactionType={transactionType} />
+        <div className="flex flex-col sm:flex-row gap-1 sm:w-1/2 items-end sm:justify-between">
+          <ShowTransactionType transactionType={transactionType} />
 
-        <p
-          className={`${
-            ammountChange === "+" ? "text-green-600" : "text-red-500"
-          } font-semibold`}
-        >
-          {`${ammountChange}` + `${transaction.amount}`}
-        </p>
+          <p
+            className={`${
+              ammountChange === "+" ? "text-green-600" : "text-red-500"
+            } font-semibold`}
+          >
+            {`${ammountChange}` + `${transaction.amount}`}
+          </p>
+        </div>
       </div>
     </Link>
   );

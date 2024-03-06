@@ -1,16 +1,9 @@
 export const formatDate = (inputDate: Date): string => {
-  const options: Intl.DateTimeFormatOptions = {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  };
-
   const date = new Date(inputDate);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = date.toLocaleString("en-US", { month: "long" });
   const currentYear = new Date().getFullYear();
+  const year = date.getFullYear() === currentYear ? "" : date.getFullYear();
 
-  if (date.getFullYear() === currentYear) {
-    delete options.year;
-  }
-
-  return date.toLocaleDateString("en-US", options).replace(",", "");
+  return `${day} ${month} ${year}`;
 };
