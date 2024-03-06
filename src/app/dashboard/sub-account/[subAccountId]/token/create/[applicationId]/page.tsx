@@ -5,6 +5,7 @@ import { getAuthSession } from "@/lib/auth";
 import { getApplication } from "@/lib/getApplication";
 import { getBankAccount } from "@/lib/getBankAccount";
 import { getSubAccount } from "@/lib/getSubAccount";
+import { getSubAccountTokens } from "@/lib/getSubAccountTokens";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -39,6 +40,8 @@ const page: React.FC<pageProps> = async ({ params }) => {
       </div>
     );
   }
+
+  const subAccountTokens = await getSubAccountTokens(subAccount?.id);
 
   if (!application) {
     return (

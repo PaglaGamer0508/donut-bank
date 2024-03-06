@@ -4,7 +4,6 @@ import Logo from "@/../public/donut.png";
 import { toast } from "@/hooks/useToast";
 import { formatAmountWithCommas } from "@/lib/formatAmountWithCommas ";
 import { SendMoneyValidatorType } from "@/lib/validators/SendMoneyValidator";
-import { BankAccount } from "@prisma/client";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { Lato } from "next/font/google";
@@ -14,6 +13,7 @@ import React, { useState } from "react";
 import { Icons } from "./Icons";
 import styles from "./style/WithdrawCoins.module.css";
 import { Button } from "./ui/Button";
+import { BankAccount } from "@/lib/types/bank-account";
 
 const lato = Lato({ weight: ["900"], subsets: ["latin"] });
 

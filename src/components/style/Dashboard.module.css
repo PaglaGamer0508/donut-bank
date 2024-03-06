@@ -18,6 +18,10 @@
 }
 
 /* Transaction section scroll section */
+.transactions_scroll_container {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 .transactions_scroll_container::-webkit-scrollbar {
   width: 5px;
 }

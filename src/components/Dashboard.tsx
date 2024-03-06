@@ -1,3 +1,4 @@
+import { getAllTransactions } from "@/lib/getAllTransactions";
 import { getQuickSendMoneyAccounts } from "@/lib/getQuickSendMoneyAccounts";
 import { hasSubAccount } from "@/lib/hasSubAccount";
 import { BankAccount } from "@/lib/types/bank-account";
@@ -26,9 +27,10 @@ const Dashboard: React.FC<DashboardProps> = async ({
   session,
   bankAccount,
 }) => {
-  const { balance, id: bankAccountId, accountName, transactions } = bankAccount;
+  const { balance, id: bankAccountId, accountName } = bankAccount;
   const hasSubAccounts = await hasSubAccount(bankAccountId);
   const quickSendMoneyAccounts = await getQuickSendMoneyAccounts(bankAccountId);
+  const transactions = await getAllTransactions(bankAccountId);
 
   return (
     <div className="px-1 md:px-3 lg:px-6 pt-3 mb-2 md:mb-0">
@@ -95,7 +97,7 @@ const Dashboard: React.FC<DashboardProps> = async ({
               </Link>
             </div>
             <div
-              className={`${styles.transactions_scroll_container} flex flex-col gap-y-4 md:h-[280px] md:overflow-y-scroll bg-green-100/60 border border-green-300 p-3 rounded-lg`}
+              className={`${styles.transactions_scroll_container} flex flex-col gap-y-4 md:h-[275px] md:overflow-y-scroll bg-white p-3 rounded-lg`}
             >
               {transactions.map((transaction) => (
                 <TransactionItem
@@ -126,9 +128,6 @@ const Dashboard: React.FC<DashboardProps> = async ({
                   >
                     See All
                   </Link>
-                  {/* <span className="group grid place-items-center bg-emerald-500 hover:bg-emerald-600 active:scale-90 transition-all duration-75 w-4 h-4 rounded-full">
-                      <Plus className="text-green-900 w-4 h-4 group-active:scale-90 group-hover:text-white" />
-                    </span> */}
                 </div>
 
                 {/* quick send money accounts */}

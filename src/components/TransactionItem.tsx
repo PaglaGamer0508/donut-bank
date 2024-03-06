@@ -1,7 +1,12 @@
 import { formatDate } from "@/lib/formatDate";
-import { Transaction } from "@/lib/types/transaction";
-import { TransactionType } from "@prisma/client";
+import { Transaction, TransactionType } from "@/lib/types/transaction";
 import React from "react";
+import ShowTransactionType from "./ShowTransactionType";
+import Image from "next/image";
+import DonutCoin from "@/../public/donut-coin.svg";
+import CreditCard from "@/../public/credit-card.svg";
+import TransactionImage from "./TransactionImage";
+import Link from "next/link";
 
 interface TransactionItemProps {
   transaction: Transaction;
@@ -12,22 +17,25 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
   transaction,
   bankAccountId,
 }) => {
-  const showTransactionType = (transactionType: TransactionType) => {
+  const getTransactionType = (transactionType: TransactionType) => {
     if (transactionType === TransactionType.SEND) {
       if (transaction.bankAccountId === bankAccountId) {
-        return "SEND";
+        return TransactionType.SEND;
       } else {
-        return "RECEIVE";
+        return TransactionType.RECEIVED;
       }
     } else {
       return transactionType;
     }
   };
 
-  const showAmountChange = (transactionType: TransactionType) => {
+  // Transaction Type
+  const transactionType = getTransactionType(transaction.transactionType);
+
+  const getAmmountChange = (transactionType: TransactionType) => {
     if (
-      transactionType === "DEPOSIT" ||
-      transaction.receiverBankAccountId === bankAccountId
+      transactionType === TransactionType.DEPOSIT ||
+      transactionType === TransactionType.RECEIVED
     ) {
       return "+";
     } else {
@@ -35,20 +43,92 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
     }
   };
 
+  const ammountChange = getAmmountChange(transactionType);
+
+  const internalTransaction =
+    transactionType !== TransactionType.SEND &&
+    transactionType !== TransactionType.RECEIVED &&
+    transactionType !== TransactionType.SPEND &&
+    transactionType !== TransactionType.ADD;
+
   return (
-    <div>
-      <div
-        key={transaction.id}
-        className="flex justify-between items-center gap-x-4"
-      >
-        <p>{formatDate(transaction.createdAt)}</p>
-        <p>{showTransactionType(transaction.transactionType)}</p>
-        <p>
-          {`${showAmountChange(transaction.transactionType)}` +
-            `${transaction.amount}`}
+    <Link
+      href={`/dashboard/transactions/${transaction.id}`}
+      className="p-2 border border-transparent hover:border-green-200 rounded-lg"
+    >
+      <div className="flex justify-between items-center gap-x-4">
+        {/* transaction info */}
+        <div className="flex gap-2">
+          {/* Transaction Image */}
+          <div className="bg-green-100/70 p-2 rounded-lg">
+            {transactionType === TransactionType.RECEIVED && (
+              <TransactionImage
+                alt="Profile Picture"
+                src={transaction.bankAccount.image}
+              />
+            )}
+            {transactionType === TransactionType.SEND && (
+              <TransactionImage
+                alt="Profile Picture"
+                src={transaction.receiverBankAccount?.image!}
+              />
+            )}
+            {transactionType === TransactionType.SPEND && (
+              <TransactionImage
+                alt="Logo"
+                src={transaction.application?.logo!}
+              />
+            )}
+            {transactionType === TransactionType.ADD && (
+              <TransactionImage alt="Logo" src={CreditCard} />
+            )}
+            {/* Internal Transaction */}
+            {internalTransaction && (
+              <TransactionImage alt="Logo" src={DonutCoin} />
+            )}
+          </div>
+          <div>
+            {transactionType === TransactionType.RECEIVED && (
+              <h1 className="text-green-500 text-lg font-semibold">
+                {transaction.bankAccount.accountName}
+              </h1>
+            )}
+            {transactionType === TransactionType.SEND && (
+              <h1 className="text-green-500 text-lg font-semibold">
+                {transaction.receiverBankAccount?.accountName}
+              </h1>
+            )}
+            {transactionType === TransactionType.SPEND && (
+              <h1 className="text-green-500 text-lg font-semibold">
+                {transaction.application?.name}
+              </h1>
+            )}
+            {transactionType === TransactionType.ADD && (
+              <h1 className="text-green-500 text-lg font-semibold">
+                {transaction.subAccount?.name}
+              </h1>
+            )}
+            {internalTransaction && (
+              <h1 className="text-green-500 text-lg font-semibold">Internal</h1>
+            )}
+
+            <p className="text-gray-500 text-sm font-medium">
+              {formatDate(transaction.createdAt)}
+            </p>
+          </div>
+        </div>
+
+        <ShowTransactionType transactionType={transactionType} />
+
+        <p
+          className={`${
+            ammountChange === "+" ? "text-green-600" : "text-red-500"
+          } font-semibold`}
+        >
+          {`${ammountChange}` + `${transaction.amount}`}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 

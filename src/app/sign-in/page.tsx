@@ -17,7 +17,7 @@ const page: React.FC<pageProps> = async ({}) => {
       <div className="md:flex md:flex-row-reverse justify-center md:justify-normal min-h-screen pt-3 md:p-0">
         {/* right */}
         <div className="flex justify-center md:justify-start md:items-center w-full md:w-[40%]">
-          <div className="flex items-center">
+          <div className="flex items-center w-fit">
             <Image
               src={Logo}
               alt="logo"

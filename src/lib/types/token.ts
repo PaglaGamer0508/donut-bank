@@ -1,4 +1,4 @@
-import { Application } from "@prisma/client";
+import { Application } from "./application";
 
 export type Token = {
   id: string;

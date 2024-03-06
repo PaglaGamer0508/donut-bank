@@ -62,6 +62,18 @@ export const POST = async (req: Request, res: NextResponse) => {
       });
     }
 
+    const apiKey = await db.aPIKey.findFirst({
+      where: {
+        applicationId,
+      },
+    });
+
+    if (apiKey) {
+      return new NextResponse(`API key already exists`, {
+        status: 400,
+      });
+    }
+
     // Generate API key
     const generatedAPIKey = generateString(40);
 

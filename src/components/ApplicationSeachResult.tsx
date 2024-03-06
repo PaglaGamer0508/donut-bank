@@ -105,6 +105,7 @@ const ApplicationSeachResult: React.FC<ApplicationSeachResultProps> = ({
       setErrorMessage("");
       setSetshowCreateTokenForm(false);
       router.push(`/dashboard/sub-account/${subAccount.id}/token`);
+      router.refresh();
       return toast({
         title: "Success",
         description: "Token Created",

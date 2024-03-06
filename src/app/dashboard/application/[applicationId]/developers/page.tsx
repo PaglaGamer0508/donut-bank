@@ -1,9 +1,9 @@
 import CreateAPIKeyButton from "@/components/CreateAPIKeyButton";
 import DeleteAPIKeyButton from "@/components/DeleteAPIKeyButton";
+import ShowAPIKey from "@/components/ShowAPIKey";
 import { getAuthSession } from "@/lib/auth";
 import { getAPIKey } from "@/lib/getAPIKey";
 import { getApplication } from "@/lib/getApplication";
-import { hasAPIKey } from "@/lib/hasAPIKey";
 import React from "react";
 
 interface pageProps {
@@ -32,8 +32,10 @@ const page: React.FC<pageProps> = async ({ params }) => {
     return (
       <div>
         <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-6">
-          <div>
-            <h1>No API Key Found</h1>
+          <div className="grid place-items-center">
+            <h1 className="text-2xl text-red-500 font-semibold mb-2">
+              No API Key Found
+            </h1>
             <CreateAPIKeyButton applicationId={application.id} />
           </div>
         </div>
@@ -45,11 +47,19 @@ const page: React.FC<pageProps> = async ({ params }) => {
     <div>
       <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-6">
         <div>
-          <p className="">API Key: {apiKey.key}</p>
-          <DeleteAPIKeyButton
-            apiKeyId={apiKey.id}
-            applicationId={application.id}
-          />
+          <div className="mb-2">
+            <p className="text-red-500 font-semibold">
+              Delete this key first to create a new one
+            </p>
+            <DeleteAPIKeyButton
+              apiKeyId={apiKey.id}
+              applicationId={application.id}
+            />
+          </div>
+          <ShowAPIKey apiKey={apiKey.key} />
+          <p className="text-center text-green-500 font-semibold">
+            Do not share this key with anyone
+          </p>
         </div>
       </div>
     </div>

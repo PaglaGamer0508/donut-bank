@@ -1,10 +1,11 @@
-// ************************ THIS file has 2 APIs ****************************
+// ************************ THIS file has 3 APIs ****************************
 
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { CreateSubAccountTokenValidator } from "@/lib/validators/CreateSubAccountTokenValidator";
 import { generateString } from "@/lib/generateString";
 import { z } from "zod";
+import { DeleteSubAccountTokenValidator } from "@/lib/validators/DeleteSubAccountTokenValidator";
 
 // ************ GET all the token of a subAccount *************
 export const GET = async (req: Request, res: NextResponse) => {
@@ -98,6 +99,42 @@ export const POST = async (req: Request, res: NextResponse) => {
       });
     }
 
+    return new NextResponse(`Error processing the request: ` + error, {
+      status: 500,
+    });
+  } finally {
+    await db.$disconnect();
+  }
+};
+
+// ************************ Delete a subAccountToken ****************************
+export const DELETE = async (req: Request, res: NextResponse) => {
+  try {
+    const body = await req.json();
+    const { subAccountId, tokenId } =
+      DeleteSubAccountTokenValidator.parse(body);
+
+    const subAccountToken = await db.subAccountToken.findFirst({
+      where: {
+        id: tokenId,
+        subAccountId,
+      },
+    });
+
+    if (!subAccountToken) {
+      return new NextResponse("Token not found", { status: 404 });
+    }
+
+    await db.subAccountToken.delete({
+      where: {
+        id: tokenId,
+      },
+    });
+
+    return new NextResponse(`SubAccount Token Deleted`, {
+      status: 200,
+    });
+  } catch (error) {
     return new NextResponse(`Error processing the request: ` + error, {
       status: 500,
     });

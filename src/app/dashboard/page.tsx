@@ -28,9 +28,9 @@ const page: React.FC = async () => {
   } else {
     const bankAccount = await getBankAccount(session?.user?.id!);
     return (
-      <>
+      <div>
         <Dashboard session={session!} bankAccount={bankAccount} />
-      </>
+      </div>
     );
   }
 };

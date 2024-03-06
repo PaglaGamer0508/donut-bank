@@ -1,9 +1,12 @@
-import SubAccountDashboard from "@/components/SubAccountDashboard";
+import CopyText from "@/components/CopyText";
+import { Icons } from "@/components/Icons";
+import SubAccountTokenItem from "@/components/SubAccountTokenItem";
+import { buttonVariants } from "@/components/ui/Button";
 import { getAuthSession } from "@/lib/auth";
 import { getBankAccount } from "@/lib/getBankAccount";
 import { getSubAccount } from "@/lib/getSubAccount";
 import { getSubAccountTokens } from "@/lib/getSubAccountTokens";
-import { getToken } from "next-auth/jwt";
+import { Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -43,33 +46,26 @@ const page: React.FC<pageProps> = async ({ params }) => {
     <div>
       <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-6">
         {tokens.length === 0 ? (
-          <div>
-            <h1>No tokens found</h1>
+          <div className="mb-2">
+            <h1 className="text-center text-2xl text-red-500">
+              No tokens found
+            </h1>
           </div>
         ) : null}
 
         <Link
-          className="text-red-500"
+          className={buttonVariants({ variant: "primary" })}
           href={`/dashboard/sub-account/${subAccountId}/token/create`}
         >
-          Create a new token
+          <span>Create a new token</span>
+          <Plus />
         </Link>
 
-        {tokens.map((token) => (
-          <div key={token.id}>
-            <Image
-              alt="Profile Picture"
-              className="w-12 h-12 rounded-lg"
-              src={token.application.logo}
-              width={128}
-              height={128}
-            />
-            <div>
-              <h1>{token.token}</h1>
-              <p>Limit: {token.limit}</p>
-            </div>
-          </div>
-        ))}
+        <div className="flex flex-col gap-2 mt-2">
+          {tokens.map((token) => (
+            <SubAccountTokenItem key={token.id} token={token} />
+          ))}
+        </div>
       </div>
     </div>
   );

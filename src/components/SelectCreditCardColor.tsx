@@ -32,7 +32,7 @@ const SelectCreditCardColor: React.FC = ({}) => {
     switch (color) {
       case "blue":
         return {
-          bg: "bg-blue-500",
+          bg: "bg-green-500",
           border: "border-blue-500",
           text: "text-blue-500",
         };

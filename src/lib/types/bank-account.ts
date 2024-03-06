@@ -1,4 +1,3 @@
-import { Transaction } from "./transaction";
 
 export type BankAccount = {
   id: string;
@@ -11,5 +10,4 @@ export type BankAccount = {
   balance: number;
   createdAt: Date;
   updatedAt: Date;
-  transactions: Transaction[];
 };

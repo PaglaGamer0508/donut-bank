@@ -20,31 +20,28 @@ import axios from "axios";
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { buttonVariants } from "./ui/Button";
+import { DeleteSubAccountTokenValidatorType } from "@/lib/validators/DeleteSubAccountTokenValidator";
 
-interface DeleteAPIKeyButtonProps {
-  apiKeyId: string;
-  applicationId: string;
+interface DeleteSubAccountTokenButtonProps {
+  tokenId: string;
+  subAccountId: string;
 }
 
-const DeleteAPIKeyButton: React.FC<DeleteAPIKeyButtonProps> = ({
-  apiKeyId,
-  applicationId,
-}) => {
+const DeleteSubAccountTokenButton: React.FC<
+  DeleteSubAccountTokenButtonProps
+> = ({ subAccountId, tokenId }) => {
   const router = useRouter();
 
-  const DeleteAPIkeyData: DeleteAPIKeyValidatorType = {
-    apiKeyId,
-    applicationId,
+  const DeleteSubAccountTokenData: DeleteSubAccountTokenValidatorType = {
+    subAccountId,
+    tokenId,
   };
 
-  const { mutate: deleteAPIKey, isPending } = useMutation({
+  const { mutate: deleteSubAccountToken, isPending } = useMutation({
     mutationFn: async () => {
-      await axios.delete(
-        `/api/application/api-key?apiKey=${process.env.API_KEY!}`,
-        {
-          data: DeleteAPIkeyData,
-        }
-      );
+      await axios.delete(`/api/sub-account/token`, {
+        data: DeleteSubAccountTokenData,
+      });
     },
     onError: (error: any) => {
       return toast({
@@ -71,15 +68,14 @@ const DeleteAPIKeyButton: React.FC<DeleteAPIKeyButtonProps> = ({
         })} flex items-center gap-x-1`}
         disabled={isPending}
       >
-        <span>Delete</span>
         <Trash2 className="h-4 w-4" />
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your API
-            Key and make it Unusable.
+            This action cannot be undone. This will permanently delete your Sub
+            Account Token and make it Unusable.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -89,7 +85,7 @@ const DeleteAPIKeyButton: React.FC<DeleteAPIKeyButtonProps> = ({
               variant: "destructive",
             })}`}
             disabled={isPending}
-            onClick={() => deleteAPIKey()}
+            onClick={() => deleteSubAccountToken()}
           >
             Delete
           </AlertDialogAction>
@@ -99,4 +95,4 @@ const DeleteAPIKeyButton: React.FC<DeleteAPIKeyButtonProps> = ({
   );
 };
 
-export default DeleteAPIKeyButton;
+export default DeleteSubAccountTokenButton;

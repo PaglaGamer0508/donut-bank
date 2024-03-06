@@ -70,21 +70,22 @@ model BankAccount {
 
   balance Int
 
-  transactions   Transaction[]
-  subAccount     SubAccount[]
-  createdAt      DateTime         @default(now())
-  updatedAt      DateTime         @updatedAt
-  QuickSendMoney QuickSendMoney[]
+  transactions         Transaction[]    @relation("bankAccountTransaction")
+  recievedTransactions Transaction[]    @relation("recievedTransaction")
+  subAccount           SubAccount[]
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+  QuickSendMoney       QuickSendMoney[]
 }
 
 model Transaction {
-  id     String @id @default(cuid())
-  amount Int
-
-  bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id])
+  id            String      @id @default(cuid())
+  amount        Int
   bankAccountId String
+  bankAccount   BankAccount @relation("bankAccountTransaction", fields: [bankAccountId], references: [id])
 
   receiverBankAccountId String?
+  receiverBankAccount   BankAccount? @relation("recievedTransaction", fields: [receiverBankAccountId], references: [id])
 
   transactionType TransactionType
 
@@ -102,6 +103,7 @@ model Transaction {
   @@index([bankAccountId])
   @@index([applicationId])
   @@index([subAccountId])
+  @@index([receiverBankAccountId])
 }
 
 model SubAccount {
