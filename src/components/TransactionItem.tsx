@@ -117,7 +117,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-1 sm:w-1/2 items-end sm:justify-between">
+        <div className="flex flex-col sm:flex-row gap-1 sm:w-1/2 items-end sm:items-center sm:justify-between">
           <ShowTransactionType transactionType={transactionType} />
 
           <p

@@ -97,7 +97,7 @@ const Dashboard: React.FC<DashboardProps> = async ({
               </Link>
             </div>
             <div
-              className={`${styles.transactions_scroll_container} flex flex-col gap-y-4 md:h-[275px] md:overflow-y-scroll bg-white p-3 rounded-lg`}
+              className={`${styles.transactions_scroll_container} ${styles.shadow_box} flex flex-col gap-y-3 md:h-[275px] md:overflow-y-scroll bg-white p-3 rounded-lg`}
             >
               {transactions.map((transaction) => (
                 <TransactionItem

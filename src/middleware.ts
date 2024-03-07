@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 const allowedOrigins =
   process.env.NODE_ENV === "production"
     ? ["https://donutbank.vercel.app"]
-    : ["http://localhost:3000"];
+    : ["http://localhost:3000", "https://www.google.com"];
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {

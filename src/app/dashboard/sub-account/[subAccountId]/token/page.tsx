@@ -46,8 +46,8 @@ const page: React.FC<pageProps> = async ({ params }) => {
     <div>
       <div className="w-[90%] md:w-[60%] lg:w-[40%] mx-auto mt-4 md:mt-6">
         {tokens.length === 0 ? (
-          <div className="mb-2">
-            <h1 className="text-center text-2xl text-red-500">
+          <div className="mb-4">
+            <h1 className="text-center text-2xl text-red-500 font-semibold">
               No tokens found
             </h1>
           </div>

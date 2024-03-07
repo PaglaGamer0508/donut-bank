@@ -54,7 +54,7 @@ const DeleteSubAccountTokenButton: React.FC<
     onSuccess: () => {
       router.refresh();
       return toast({
-        title: "API Key Deleted",
+        title: "Token Deleted",
         duration: 5000,
       });
     },

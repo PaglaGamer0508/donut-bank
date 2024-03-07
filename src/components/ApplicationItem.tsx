@@ -19,15 +19,15 @@ const ApplicationItem: React.FC<ApplicationItemProps> = ({ application }) => {
   return (
     <Link
       href={`/dashboard/application/${application.applicationId}`}
-      className="p-3 border-2 border-gray-300 hover:border-green-500 transition-all duration-150 rounded-lg"
+      className="bg-white p-3 border-2 border-gray-300 hover:border-green-500 transition-all duration-150 rounded-lg shadow-md"
     >
       <div className="flex items-center gap-x-2">
         <Image
           alt="logo"
           src={application.logo}
-          width={100}
-          height={100}
-          className="w-12 h-12"
+          width={128}
+          height={128}
+          className="w-12 h-12 rounded-md"
         />
         <div>
           <h1 className={`${lato.className} text-xl text-green-500`}>
