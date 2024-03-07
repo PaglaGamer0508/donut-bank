@@ -1,6 +1,5 @@
 import CreateBankAccountForm from "@/components/CreateBankAccountForm";
 import Dashboard from "@/components/Dashboard";
-import TransactionSecation from "@/components/TransactionSecation";
 import { getAuthSession } from "@/lib/auth";
 import { getBankAccount } from "@/lib/getBankAccount";
 import { hasBankAccount } from "@/lib/hasBankAccount";
