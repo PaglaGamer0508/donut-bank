@@ -53,6 +53,7 @@ const CreateSubAccountForm: React.FC<CreateSubAccountFormProps> = ({
     },
     onSuccess: () => {
       setSubAccountName("");
+      router.refresh();
       router.push("/dashboard/sub-account");
       return toast({
         title: "Success",
@@ -84,7 +85,7 @@ const CreateSubAccountForm: React.FC<CreateSubAccountFormProps> = ({
   };
 
   return (
-    <div className="shadow-lg rounded-lg w-[98%] md:w-[60%] lg:w-[40%] border-2 border-green-500 p-2 sm:px-5 pt-0 pb-5">
+    <div className="shadow-lg rounded-lg w-[98%] md:w-[60%] lg:w-[40%] bg-white border-2 border-green-500 p-2 sm:px-5 pt-0 pb-5">
       <div className="flex justify-center py-2">
         <Image
           alt="Logo"

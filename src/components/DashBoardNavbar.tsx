@@ -37,7 +37,8 @@ const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({
                 alt="logo"
                 width={96}
                 height={96}
-                className="w-12 select-none"
+                className="w-12 h-12 select-none"
+                priority
               />
             </Link>
           </div>

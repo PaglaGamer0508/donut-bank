@@ -95,7 +95,7 @@ const CreateBankAccountForm: React.FC<CreateBankAccountFormProps> = ({
   return (
     <div
       className={cn(
-        "shadow-lg rounded-lg w-fit border-2 border-green-500 p-5 pt-0"
+        "shadow-lg rounded-lg w-fit bg-white border-2 border-green-500 p-5 pt-0"
       )}
     >
       <div className="flex justify-center py-2">
@@ -110,8 +110,8 @@ const CreateBankAccountForm: React.FC<CreateBankAccountFormProps> = ({
       <h1
         className={`${lato.className} text-green-500 text-2xl text-center hover:cursor-default`}
       >
-        Create a
-        <span className="text-white bg-green-500 px-1 rounded">DonutBank</span>
+        Create a{" "}
+        <span className="text-white bg-green-500 px-1 rounded">DonutBank</span>{" "}
         account
       </h1>
       {/* Form */}

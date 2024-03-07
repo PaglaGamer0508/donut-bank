@@ -1,9 +1,10 @@
 import CreateBankAccountForm from "@/components/CreateBankAccountForm";
 import Dashboard from "@/components/Dashboard";
+import TransactionSecation from "@/components/TransactionSecation";
 import { getAuthSession } from "@/lib/auth";
 import { getBankAccount } from "@/lib/getBankAccount";
 import { hasBankAccount } from "@/lib/hasBankAccount";
-import React from "react";
+import React, { Suspense } from "react";
 
 const page: React.FC = async () => {
   const session = await getAuthSession();

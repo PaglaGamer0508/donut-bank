@@ -1,4 +1,3 @@
-import { getAllTransactions } from "@/lib/getAllTransactions";
 import { getQuickSendMoneyAccounts } from "@/lib/getQuickSendMoneyAccounts";
 import { hasSubAccount } from "@/lib/hasSubAccount";
 import { BankAccount } from "@/lib/types/bank-account";
@@ -11,10 +10,11 @@ import React from "react";
 import QuickTransferAavtar from "./QuickTransferAvatar";
 import ShowBalance from "./ShowBalance";
 import SubAccountSection from "./SubAccountSection";
-import TransactionItem from "./TransactionItem";
 import UserAccountNav from "./UserAccountNav";
 import styles from "./style/Dashboard.module.css";
 import { buttonVariants } from "./ui/Button";
+import { getAllTransactions } from "@/lib/getAllTransactions";
+import TransactionItem from "./TransactionItem";
 
 interface DashboardProps {
   session: Session;
@@ -74,7 +74,7 @@ const Dashboard: React.FC<DashboardProps> = async ({
             </h1>
             <Link
               className={cn(buttonVariants({ variant: "primary" }))}
-              href="dashboard/sub-accounts/create"
+              href="dashboard/sub-account/create"
             >
               Create Sub Account
             </Link>
@@ -96,6 +96,7 @@ const Dashboard: React.FC<DashboardProps> = async ({
                 See All
               </Link>
             </div>
+            {/* transactions list */}
             <div
               className={`${styles.transactions_scroll_container} ${styles.shadow_box} flex flex-col gap-y-3 md:h-[275px] md:overflow-y-scroll bg-white p-3 rounded-lg`}
             >
@@ -106,6 +107,14 @@ const Dashboard: React.FC<DashboardProps> = async ({
                   bankAccountId={bankAccountId}
                 />
               ))}
+              {transactions.length >= 10 && (
+                <Link
+                  href="/dashboard/transactions"
+                  className="text-slate-500 hover:text-green-500 text-center font-medium"
+                >
+                  More...
+                </Link>
+              )}
             </div>
           </div>
 

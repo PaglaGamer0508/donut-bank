@@ -11,7 +11,7 @@ export default function Home() {
             <span className="bg-green-500 px-2 rounded-lg text-white">
               DonutBank
             </span>{" "}
-            <span>{"is a dummy payment system using Donut Coins"}</span>
+            <span>{"is a Dummy Payment System using Donut Coins"}</span>
           </h1>
         </div>
 
