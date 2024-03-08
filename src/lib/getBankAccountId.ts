@@ -1,17 +1,24 @@
 import { db } from "./db";
+import { hostName } from "./hostName";
 
-export const getBankAccountId = async (userId: string) => {
+export const getBankAccountId = async (
+  userId: string
+): Promise<string | undefined> => {
   try {
-    const bankAccount = await db.bankAccount.findFirst({
-      where: {
-        ownerId: userId,
-      },
-      select: {
-        id: true,
-      },
-    });
+    const bankAccountIdResponse = await fetch(
+      `${hostName}/api/bank-account/id?apiKey=${process.env.API_KEY}&userId=${userId}`,
+      {
+        cache: "force-cache",
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    
+    const bankAccountIdData = await bankAccountIdResponse.json();
 
-    const bankAccountId = bankAccount?.id;
+    const { bankAccountId } = bankAccountIdData;
 
     return bankAccountId;
   } catch (error) {

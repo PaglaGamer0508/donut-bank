@@ -6,7 +6,7 @@ import OpenSlideMuneButton from "./OpenSlideMenuButton";
 
 const HorizontalNavbar: React.FC = ({}) => {
   return (
-    <div className="flex justify-between items-center w-full h-14 fixed top-0 left-0 px-4 bg-green-500 z-50">
+    <div className="flex justify-between items-center w-full h-14 px-4 bg-green-500 z-50">
       <div className="flex items-center gap-x-1">
         <Link href="/">
           <Image

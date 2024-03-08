@@ -15,6 +15,7 @@ import styles from "./style/Dashboard.module.css";
 import { buttonVariants } from "./ui/Button";
 import { getAllTransactions } from "@/lib/getAllTransactions";
 import TransactionItem from "./TransactionItem";
+import LoadingSpinner from "./LoadingSpinner";
 
 interface DashboardProps {
   session: Session;

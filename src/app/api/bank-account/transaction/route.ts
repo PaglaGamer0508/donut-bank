@@ -4,6 +4,20 @@ import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export const GET = async (req: Request, res: NextResponse) => {
+  // ********* PAGINATION **********
+  // page number
+  const { searchParams } = new URL(req.url);
+  const pageQueryParam = searchParams.get("page");
+  const page = pageQueryParam ? Number.parseInt(pageQueryParam) : 1;
+
+  // page size
+  const pageSizeQueryParam = searchParams.get("pageSize");
+  const pageSize = pageSizeQueryParam
+    ? Number.parseInt(pageSizeQueryParam)
+    : 10;
+
+  const startIndex = (page - 1) * pageSize;
+
   try {
     const { searchParams } = new URL(req.url);
     const bankAccountId = searchParams.get("bankAccountId");
@@ -57,7 +71,8 @@ export const GET = async (req: Request, res: NextResponse) => {
       orderBy: {
         createdAt: "desc",
       },
-      take: 10,
+      skip: startIndex,
+      take: pageSize,
     });
 
     if (!transactions) {
@@ -66,8 +81,21 @@ export const GET = async (req: Request, res: NextResponse) => {
       });
     }
 
+    const totalTransactions = await db.transaction.count({
+      where: {
+        OR: [
+          {
+            bankAccountId: bankAccountId,
+          },
+          {
+            receiverBankAccountId: bankAccountId,
+          },
+        ],
+      },
+    });
+
     return NextResponse.json(
-      { message: "Transactions found", transactions },
+      { message: "Transactions found", transactions, totalTransactions },
       { status: 200 }
     );
   } catch (error) {

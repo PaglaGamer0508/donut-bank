@@ -27,13 +27,12 @@ const layout: React.FC<layoutProps> = async ({ children }) => {
         <DashBoardNavbar hasApplication={applicationExist} />
       </div>
 
-      {/* the horizontal navbar */}
-      <div className="sm:hidden">
-        <HorizontalNavbar />
-      </div>
-
       {/* the Dashboard */}
-      <div className="pt-14 sm:pt-0 sm:pl-[5.5rem] w-full max-w-[1600px] min-h-screen mx-auto">
+      <div className="sm:pt-0 sm:pl-[5.5rem] w-full max-w-[1600px] min-h-screen mx-auto">
+        {/* the horizontal navbar */}
+        <div className="sm:hidden">
+          <HorizontalNavbar />
+        </div>
         {children}
       </div>
     </div>

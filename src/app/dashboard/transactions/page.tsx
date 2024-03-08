@@ -1,13 +1,20 @@
-import React from 'react';
+import Transactions from "@/components/Transactions";
+import { getAuthSession } from "@/lib/auth";
+import { getBankAccountId } from "@/lib/getBankAccountId";
+import React from "react";
 
-interface pageProps {
+const page: React.FC = async () => {
+  const session = await getAuthSession();
 
-};
+  const bankAccountId = await getBankAccountId(session?.user?.id!);
 
-const page: React.FC<pageProps> = ({}) => {
+  if (!bankAccountId) {
+    return <div>No bank account Id found</div>;
+  }
+
   return (
     <div>
-      page
+      <Transactions bankAccountId={bankAccountId} />
     </div>
   );
 };
