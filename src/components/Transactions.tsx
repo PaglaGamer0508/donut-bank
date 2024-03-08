@@ -16,9 +16,10 @@ interface TransactionsProps {
 }
 
 const Transactions: React.FC<TransactionsProps> = ({ bankAccountId }) => {
+  const apiKey = "afy762jla4d5ykwqagx4fqsr5op8i6uj";
   const pageSize = 10;
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
 
@@ -26,7 +27,7 @@ const Transactions: React.FC<TransactionsProps> = ({ bankAccountId }) => {
   const getTransactions = async () => {
     setIsLoading(true);
     const transactionsResponse = await fetch(
-      `/api/bank-account/transaction?apiKey=${process.env.NEXT_PUBLIC_API_KEY}&bankAccountId=${bankAccountId}&page=${page}&pageSize=${pageSize}`
+      `/api/bank-account/transaction?apiKey=${apiKey}&bankAccountId=${bankAccountId}&page=${page}&pageSize=${pageSize}`
     );
     const transactionsData = await transactionsResponse.json();
 
@@ -39,9 +40,9 @@ const Transactions: React.FC<TransactionsProps> = ({ bankAccountId }) => {
   // get more transactions
   const getMoreTransactions = async () => {
     const transactionsResponse = await fetch(
-      `/api/bank-account/transaction?apiKey=${
-        process.env.NEXT_PUBLIC_API_KEY
-      }&bankAccountId=${bankAccountId}&page=${page + 1}&pageSize=${pageSize}`
+      `/api/bank-account/transaction?apiKey=${apiKey}&bankAccountId=${bankAccountId}&page=${
+        page + 1
+      }&pageSize=${pageSize}`
     );
     const transactionsData = await transactionsResponse.json();
 
