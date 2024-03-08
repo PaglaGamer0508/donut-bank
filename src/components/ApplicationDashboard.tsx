@@ -19,7 +19,7 @@ const ApplicationDashboard: React.FC<applicationDashboardProps> = ({
 }) => {
   return (
     <div className="px-1 md:px-3 lg:px-6 pt-3 mb-2 md:mb-0">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+      <div className="sm:flex sm:items-center sm:justify-between gap-2">
         <div className="flex items-center gap-x-2">
           <Image
             alt="Logo"

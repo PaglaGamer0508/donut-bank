@@ -19,7 +19,7 @@ const ApplicationItem: React.FC<ApplicationItemProps> = ({ application }) => {
   return (
     <Link
       href={`/dashboard/application/${application.applicationId}`}
-      className="bg-white p-3 border-2 border-gray-300 hover:border-green-500 transition-all duration-150 rounded-lg shadow-md"
+      className="bg-white p-3 border-2 border-gray-300 hover:border-green-500 transition-all duration-150 rounded-lg shadow-sm"
     >
       <div className="flex items-center gap-x-2">
         <Image

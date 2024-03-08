@@ -33,7 +33,7 @@ const page: React.FC<pageProps> = async ({}) => {
           </div>
         </div>
         {/* left */}
-        <div className="flex md:items-center justify-end w-full md:w-[60%] pt-4 mx-auto">
+        <div className="flex md:items-center justify-end w-fit md:w-[60%] pt-4 mx-auto">
           <SignIn />
         </div>
       </div>

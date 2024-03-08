@@ -7,9 +7,9 @@ import { buttonVariants } from "./ui/Button";
 
 const SignIn: React.FC = () => {
   return (
-    <div className="container mx-auto flex flex-col justify-center space-y-6 sm:w-[400px]">
-      <div className="flex flex-col space-y-2 text-center">
-        <h1 className="w-fit text-xl sm:text-2xl font-semibold mx-auto px-4 py-1 rounded-lg bg-green-500 text-white">
+    <div className="container mx-auto flex flex-col justify-center items-center space-y-6">
+      <div className="flex flex-col gap-y-2 w-fit text-center">
+        <h1 className="text-xl sm:text-2xl font-semibold mx-auto px-4 py-1 rounded-lg bg-green-500 text-white">
           Sign In
         </h1>
         <p className="text-sm max-w-xs mx-auto">

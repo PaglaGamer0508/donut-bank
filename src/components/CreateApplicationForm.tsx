@@ -63,6 +63,7 @@ const CreateApplicationForm: React.FC<CreateApplicationFormProps> = ({
     onSuccess: () => {
       clearData();
       router.refresh();
+      router.push("/dashboard/application");
       return toast({
         title: "Success",
         description: "Sub account created successfully",

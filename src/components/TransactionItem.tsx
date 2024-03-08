@@ -117,13 +117,13 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-1 sm:w-1/2 items-end sm:items-center sm:justify-between">
+        <div className="sm:flex  sm:items-center sm:justify-between sm:gap-1 sm:w-1/2">
           <ShowTransactionType transactionType={transactionType} />
 
           <p
             className={`${
               ammountChange === "+" ? "text-green-600" : "text-red-500"
-            } font-semibold`}
+            } font-semibold text-right sm:w-fit`}
           >
             {`${ammountChange}` + `${transaction.amount}`}
           </p>
