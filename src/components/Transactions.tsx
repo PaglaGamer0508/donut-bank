@@ -1,13 +1,12 @@
 "use client";
 
-import { getAllTransactions } from "@/lib/getAllTransactions";
 import { Transaction } from "@/lib/types/transaction";
+import { Lato } from "next/font/google";
 import React, { useEffect, useState } from "react";
-import LoadingSpinner from "./LoadingSpinner";
 import InfiniteScroll from "react-infinite-scroll-component";
+import LoadingSpinner from "./LoadingSpinner";
 import TransactionItem from "./TransactionItem";
 import styles from "./style/Dashboard.module.css";
-import { Lato } from "next/font/google";
 
 const lato = Lato({ weight: ["900"], subsets: ["latin"] });
 
@@ -16,7 +15,6 @@ interface TransactionsProps {
 }
 
 const Transactions: React.FC<TransactionsProps> = ({ bankAccountId }) => {
-  const apiKey = "afy762jla4d5ykwqagx4fqsr5op8i6uj";
   const pageSize = 10;
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -27,7 +25,7 @@ const Transactions: React.FC<TransactionsProps> = ({ bankAccountId }) => {
   const getTransactions = async () => {
     setIsLoading(true);
     const transactionsResponse = await fetch(
-      `/api/bank-account/transaction?apiKey=${apiKey}&bankAccountId=${bankAccountId}&page=${page}&pageSize=${pageSize}`
+      `/api/bank-account/transaction?bankAccountId=${bankAccountId}&page=${page}&pageSize=${pageSize}`
     );
     const transactionsData = await transactionsResponse.json();
 
@@ -40,7 +38,7 @@ const Transactions: React.FC<TransactionsProps> = ({ bankAccountId }) => {
   // get more transactions
   const getMoreTransactions = async () => {
     const transactionsResponse = await fetch(
-      `/api/bank-account/transaction?apiKey=${apiKey}&bankAccountId=${bankAccountId}&page=${
+      `/api/bank-account/transaction?bankAccountId=${bankAccountId}&page=${
         page + 1
       }&pageSize=${pageSize}`
     );

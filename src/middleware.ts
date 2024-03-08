@@ -18,6 +18,10 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  if (request.url.includes("/bank-account/transaction")) {
+    return NextResponse.next();
+  }
+
   if (
     request.method === "POST" ||
     request.method === "PUT" ||
