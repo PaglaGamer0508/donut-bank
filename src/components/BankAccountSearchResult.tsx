@@ -1,7 +1,6 @@
 "use client";
 
 import { toast } from "@/hooks/useToast";
-import { BankAccount } from "@/lib/types/bank-account";
 import { QuickSendMoneyAccount } from "@/lib/types/quick-send-money-account";
 import { AddQuickSendMoneyAccountType } from "@/lib/validators/AddQuickSendMoneyAccountValidator";
 import { useMutation } from "@tanstack/react-query";

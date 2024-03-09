@@ -6,7 +6,7 @@ import { SubAccount } from "@/lib/types/sub-account";
 import { CreateSubAccountTokenValidatorType } from "@/lib/validators/CreateSubAccountTokenValidator";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { Plus } from "lucide-react";
+import { Check, Plus } from "lucide-react";
 import { Lato } from "next/font/google";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -14,17 +14,20 @@ import React, { useState } from "react";
 import { Icons } from "./Icons";
 import styles from "./style/WithdrawCoins.module.css";
 import { Button } from "./ui/Button";
+import { Token } from "@/lib/types/token";
 
 const lato = Lato({ weight: ["900"], subsets: ["latin"] });
 
 interface ApplicationSeachResultProps {
   application: Application;
-  subAccount: SubAccount;
+  subAccountId: string;
+  tokens: Token[];
 }
 
 const ApplicationSeachResult: React.FC<ApplicationSeachResultProps> = ({
   application,
-  subAccount,
+  subAccountId,
+  tokens,
 }) => {
   const router = useRouter();
   const tokenLimitMax = 100000;
@@ -33,6 +36,9 @@ const ApplicationSeachResult: React.FC<ApplicationSeachResultProps> = ({
   const [setshowCreateTokenForm, setSetshowCreateTokenForm] = useState(false);
   const [tokenLimit, setTokenLimit] = useState(1000);
   const [errorMessage, setErrorMessage] = useState("");
+
+  // new array of application IDs
+  const applicationIds: string[] = tokens.map((token) => token.applicationId);
 
   const handleUpClick = () => {
     const newAmount = tokenLimit + 1000;
@@ -82,7 +88,7 @@ const ApplicationSeachResult: React.FC<ApplicationSeachResultProps> = ({
 
   const createSubAccountTokenData: CreateSubAccountTokenValidatorType = {
     applicationId: application.id,
-    subAccountId: subAccount.id,
+    subAccountId: subAccountId,
     limit: tokenLimit,
   };
 
@@ -104,7 +110,7 @@ const ApplicationSeachResult: React.FC<ApplicationSeachResultProps> = ({
       setTokenLimit(1000);
       setErrorMessage("");
       setSetshowCreateTokenForm(false);
-      router.push(`/dashboard/sub-account/${subAccount.id}/token`);
+      router.push(`/dashboard/sub-account/${subAccountId}/token`);
       router.refresh();
       return toast({
         title: "Success",
@@ -147,13 +153,19 @@ const ApplicationSeachResult: React.FC<ApplicationSeachResultProps> = ({
         </div>
 
         <div>
-          <button
-            onClick={() => setSetshowCreateTokenForm(!setshowCreateTokenForm)}
-            title="Create a new Token"
-            className="bg-green-500 hover:bg-green-600 active:scale-90 transition-all duration-75 grid place-items-center w-10 h-10 rounded-full focus:outline-none"
-          >
-            <Plus className="text-white w-10 h-10" />
-          </button>
+          {applicationIds.includes(application.id) ? (
+            <div title="Account Already Added">
+              <Check className="w-10 h-10 bg-green-500 text-white rounded-full p-1" />
+            </div>
+          ) : (
+            <button
+              onClick={() => setSetshowCreateTokenForm(!setshowCreateTokenForm)}
+              title="Create a new Token"
+              className="bg-green-500 hover:bg-green-600 active:scale-90 transition-all duration-75 grid place-items-center w-10 h-10 rounded-full focus:outline-none"
+            >
+              <Plus className="text-white w-10 h-10" />
+            </button>
+          )}
         </div>
       </div>
 

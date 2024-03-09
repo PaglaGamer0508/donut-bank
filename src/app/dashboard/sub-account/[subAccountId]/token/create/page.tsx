@@ -3,7 +3,7 @@ import SubAccountDashboard from "@/components/SubAccountDashboard";
 import { getAuthSession } from "@/lib/auth";
 import { getBankAccount } from "@/lib/getBankAccount";
 import { getSubAccount } from "@/lib/getSubAccount";
-import { getSubAccountTokens } from "@/lib/getSubAccountTokens";
+import { getAllSubAccountTokens } from "@/lib/getAllSubAccountTokens";
 import { getToken } from "next-auth/jwt";
 import Image from "next/image";
 import Link from "next/link";

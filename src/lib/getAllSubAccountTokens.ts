@@ -1,7 +1,7 @@
 import { hostName } from "./hostName";
 import { Token } from "./types/token";
 
-export const getSubAccountTokens = async (
+export const getAllSubAccountTokens = async (
   subAccountId: string
 ): Promise<Token[]> => {
   const tokensResponse = await fetch(

@@ -5,7 +5,7 @@ import { getAuthSession } from "@/lib/auth";
 import { getApplication } from "@/lib/getApplication";
 import { getBankAccount } from "@/lib/getBankAccount";
 import { getSubAccount } from "@/lib/getSubAccount";
-import { getSubAccountTokens } from "@/lib/getSubAccountTokens";
+import { getAllSubAccountTokens } from "@/lib/getAllSubAccountTokens";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -41,7 +41,7 @@ const page: React.FC<pageProps> = async ({ params }) => {
     );
   }
 
-  const subAccountTokens = await getSubAccountTokens(subAccount?.id);
+  const subAccountTokens = await getAllSubAccountTokens(subAccount?.id);
 
   if (!application) {
     return (
@@ -59,7 +59,8 @@ const page: React.FC<pageProps> = async ({ params }) => {
         </h1>
         <ApplicationSeachResult
           application={application}
-          subAccount={subAccount}
+          subAccountId={subAccount.id}
+          tokens={subAccountTokens}
         />
 
         <div className="grid place-content-center">

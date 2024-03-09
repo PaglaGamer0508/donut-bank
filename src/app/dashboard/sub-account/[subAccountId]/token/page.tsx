@@ -5,7 +5,7 @@ import { buttonVariants } from "@/components/ui/Button";
 import { getAuthSession } from "@/lib/auth";
 import { getBankAccount } from "@/lib/getBankAccount";
 import { getSubAccount } from "@/lib/getSubAccount";
-import { getSubAccountTokens } from "@/lib/getSubAccountTokens";
+import { getAllSubAccountTokens } from "@/lib/getAllSubAccountTokens";
 import { Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -40,7 +40,7 @@ const page: React.FC<pageProps> = async ({ params }) => {
     );
   }
 
-  const tokens = await getSubAccountTokens(subAccount.id);
+  const tokens = await getAllSubAccountTokens(subAccount.id);
 
   return (
     <div>
