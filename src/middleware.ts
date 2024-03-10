@@ -21,6 +21,9 @@ export function middleware(request: NextRequest) {
   if (request.url.includes("/bank-account/transaction")) {
     return NextResponse.next();
   }
+  if (request.url.includes("/sub-account/transaction")) {
+    return NextResponse.next();
+  }
 
   if (
     request.method === "POST" ||

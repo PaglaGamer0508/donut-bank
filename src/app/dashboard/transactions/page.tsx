@@ -9,7 +9,7 @@ const page: React.FC = async () => {
   const bankAccountId = await getBankAccountId(session?.user?.id!);
 
   if (!bankAccountId) {
-    return <div>No bank account Id found</div>;
+    return <div>No bank account found</div>;
   }
 
   return (

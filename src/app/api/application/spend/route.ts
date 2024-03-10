@@ -31,6 +31,18 @@ export const POST = async (req: Request, res: NextResponse) => {
       });
     }
 
+    if (productName.length < 3) {
+      return new NextResponse("Product name must be more than 3 characters", {
+        status: 422,
+      });
+    }
+
+    if (productName.length > 30) {
+      return new NextResponse("Product name must be less than 30 characters", {
+        status: 422,
+      });
+    }
+
     const ApplicationAPIKey = await db.aPIKey.findFirst({
       where: {
         key: apiKey,

@@ -1,3 +1,4 @@
+import { getAllTransactions } from "@/lib/getAllTransactions";
 import { getQuickSendMoneyAccounts } from "@/lib/getQuickSendMoneyAccounts";
 import { hasSubAccount } from "@/lib/hasSubAccount";
 import { BankAccount } from "@/lib/types/bank-account";
@@ -10,19 +11,17 @@ import React from "react";
 import QuickTransferAavtar from "./QuickTransferAvatar";
 import ShowBalance from "./ShowBalance";
 import SubAccountSection from "./SubAccountSection";
+import TransactionItem from "./TransactionItem";
 import UserAccountNav from "./UserAccountNav";
 import styles from "./style/Dashboard.module.css";
 import { buttonVariants } from "./ui/Button";
-import { getAllTransactions } from "@/lib/getAllTransactions";
-import TransactionItem from "./TransactionItem";
-import LoadingSpinner from "./LoadingSpinner";
+
+const lato = Lato({ weight: ["900"], subsets: ["latin"] });
 
 interface DashboardProps {
   session: Session;
   bankAccount: BankAccount;
 }
-
-const lato = Lato({ weight: ["900"], subsets: ["latin"] });
 
 const Dashboard: React.FC<DashboardProps> = async ({
   session,
@@ -37,18 +36,16 @@ const Dashboard: React.FC<DashboardProps> = async ({
     <div className="px-1 md:px-3 lg:px-6 pt-3 mb-2 md:mb-0">
       {/* upper section */}
       <div className="flex justify-between items-start">
+        {/* header and name */}
         <div>
-          {/* header and name */}
-          <div>
-            <h1
-              className={`${lato.className} text-3xl sm:text-4xl text-green-500`}
-            >
-              Dashboard
-            </h1>
-            <p className="text-slate-500 font-medium">
-              Welcome back, {accountName}
-            </p>
-          </div>
+          <h1
+            className={`${lato.className} text-3xl sm:text-4xl text-green-500`}
+          >
+            Dashboard
+          </h1>
+          <p className="text-slate-500 font-medium">
+            Welcome back, {accountName}
+          </p>
         </div>
         {/* balance */}
         <div className="hidden sm:block">

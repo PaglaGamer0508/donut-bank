@@ -13,7 +13,7 @@ const TransactionImage: React.FC<TransactionImageProps> = ({ alt, src }) => {
       src={src}
       width={64}
       height={64}
-      className="w-10 h-10 rounded-lg object-cover"
+      className="w-12 h-12 rounded-lg object-cover"
     />
   );
 };

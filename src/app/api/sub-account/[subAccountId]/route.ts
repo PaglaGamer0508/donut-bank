@@ -13,6 +13,14 @@ export const GET = async (req: Request, { params }: { params: paramProps }) => {
       where: {
         id: subAccountId,
       },
+      select: {
+        id: true,
+        name: true,
+        balance: true,
+        bankAccountId: true,
+        creditCard_color: true,
+        creditCard_number: true,
+      },
     });
 
     if (!subAccount) {

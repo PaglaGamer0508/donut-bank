@@ -5,8 +5,8 @@ import { SubAccount } from "./sub-account";
 export enum TransactionType {
   DEPOSIT = "DEPOSIT",
   WITHDRAW = "WITHDRAW",
-  SPEND = "SPEND",
   SEND = "SEND",
+  SPEND = "SPEND",
   ADD = "ADD",
   TAKE = "TAKE",
   RECEIVED = "RECEIVED",

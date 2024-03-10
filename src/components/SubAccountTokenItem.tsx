@@ -11,10 +11,10 @@ interface SubAccountTokenItemProps {
 
 const SubAccountTokenItem: React.FC<SubAccountTokenItemProps> = ({ token }) => {
   return (
-    <div className="flex items-center justify-between p-3 gap-2 rounded-lg border-2 border-green-500">
+    <div className="flex items-center justify-between bg-white p-3 gap-2 rounded-lg border-2 border-green-500">
       <Image
         alt="Profile Picture"
-        className="w-14 h-14 rounded-lg my-auto"
+        className="w-12 sm:w-14 h-12 sm:h-14 rounded-lg my-auto"
         src={token.application.logo}
         width={128}
         height={128}

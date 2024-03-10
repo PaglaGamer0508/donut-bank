@@ -42,11 +42,11 @@ const UserAccountNav: React.FC<UserAccountNavProps> = ({ user }) => {
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          onClick={() => router.push("/dashboard/my-account")}
+          onClick={() => router.push("/dashboard/bank-account")}
           className="flex items-center gap-x-3"
         >
           <Icons.user className="w-6 h-6" />
-          <p className="font-semibold">My Account</p>
+          <p className="font-semibold">Bank Account</p>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -1,31 +1,33 @@
 "use client";
 
-import { Transaction } from "@/lib/types/transaction";
+import { SubAccountTransaction } from "@/lib/types/sub-account-transaction";
 import { Lato } from "next/font/google";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import LoadingSpinner from "./LoadingSpinner";
-import TransactionItem from "./TransactionItem";
+import SubAccountTransactionItem from "./SubAccountTransactionItem";
 import styles from "./style/Dashboard.module.css";
 
 const lato = Lato({ weight: ["900"], subsets: ["latin"] });
 
-interface TransactionsProps {
-  bankAccountId: string;
+interface SubAccountTransactionsProps {
+  subAccountId: string;
 }
 
-const Transactions: React.FC<TransactionsProps> = ({ bankAccountId }) => {
+const SubAccountTransactions: React.FC<SubAccountTransactionsProps> = ({
+  subAccountId,
+}) => {
   const pageSize = 10;
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [transactions, setTransactions] = useState<SubAccountTransaction[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
 
   // initialise transactions
-  const getTransactions = async () => {
+  const getSubAccountTransactions = async () => {
     setIsLoading(true);
     const transactionsResponse = await fetch(
-      `/api/bank-account/transaction?bankAccountId=${bankAccountId}&page=${page}&pageSize=${pageSize}`,
+      `/api/sub-account/transaction?subAccountId=${subAccountId}&page=${page}&pageSize=${pageSize}`,
       {
         method: "GET",
         headers: {
@@ -42,9 +44,9 @@ const Transactions: React.FC<TransactionsProps> = ({ bankAccountId }) => {
   };
 
   // get more transactions
-  const getMoreTransactions = async () => {
+  const getMoreSubAccountTransactions = async () => {
     const transactionsResponse = await fetch(
-      `/api/bank-account/transaction?bankAccountId=${bankAccountId}&page=${
+      `/api/sub-account/transaction?subAccountId=${subAccountId}&page=${
         page + 1
       }&pageSize=${pageSize}`,
       {
@@ -67,7 +69,7 @@ const Transactions: React.FC<TransactionsProps> = ({ bankAccountId }) => {
   };
 
   useEffect(() => {
-    getTransactions();
+    getSubAccountTransactions();
   }, []);
 
   return (
@@ -75,23 +77,22 @@ const Transactions: React.FC<TransactionsProps> = ({ bankAccountId }) => {
       <h1
         className={`${lato.className} text-green-500 text-2xl text-center mb-6`}
       >
-        Transactions
+        Sub Account Transactions
       </h1>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
         <InfiniteScroll
           dataLength={transactions.length}
-          next={getMoreTransactions}
+          next={getMoreSubAccountTransactions}
           hasMore={transactions.length < totalResults}
           loader={<LoadingSpinner />}
           className={`${styles.shadow_box} flex flex-col gap-y-3 bg-white p-3 overflow-auto rounded-lg`}
         >
           {transactions.map((transaction) => (
-            <TransactionItem
+            <SubAccountTransactionItem
               key={transaction.id}
               transaction={transaction}
-              bankAccountId={bankAccountId}
             />
           ))}
           {transactions.length >= totalResults && (
@@ -105,4 +106,4 @@ const Transactions: React.FC<TransactionsProps> = ({ bankAccountId }) => {
   );
 };
 
-export default Transactions;
+export default SubAccountTransactions;
