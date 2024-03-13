@@ -24,7 +24,7 @@ const SubAccountDashboard: React.FC<SubAccountDashboardProps> = async ({
   const subAccountTransactions = await getAllSubAccountTransactions(
     subAccountId
   );
-  const fewTokens = tokens.slice(0, 3);
+  const fewTokens = tokens.slice(0, 2);
 
   return (
     <div className="lg:flex lg:gap-2 px-1 lg:px-3 pt-3 mb-2 lg:mb-0">
@@ -93,7 +93,7 @@ const SubAccountDashboard: React.FC<SubAccountDashboardProps> = async ({
               {fewTokens.map((token) => (
                 <SubAccountTokenItem key={token.id} token={token} />
               ))}
-              {tokens.length >= 3 && (
+              {tokens.length >= 2 && (
                 <Link
                   href={`/dashboard/sub-account/${subAccountId}/token`}
                   className="text-slate-500 hover:text-green-500 text-center font-medium"
