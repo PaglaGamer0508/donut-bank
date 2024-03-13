@@ -53,13 +53,15 @@ const page: React.FC<pageProps> = async ({ params }) => {
           </div>
         ) : null}
 
-        <Link
-          className={buttonVariants({ variant: "primary" })}
-          href={`/dashboard/sub-account/${subAccountId}/token/create`}
-        >
-          <span>Create a new token</span>
-          <Plus />
-        </Link>
+        <div className="grid place-items-center">
+          <Link
+            className={buttonVariants({ variant: "primary" })}
+            href={`/dashboard/sub-account/${subAccountId}/token/create`}
+          >
+            <span>Create a new token</span>
+            <Plus />
+          </Link>
+        </div>
 
         <div className="flex flex-col gap-2 mt-2">
           {tokens.map((token) => (

@@ -11,6 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Icons } from "./Icons";
+import { usePathname } from "next/navigation";
 
 const lato2 = Lato({ weight: ["700"], subsets: ["latin"] });
 const roboto_slab = Roboto_Slab({ weight: ["300"], subsets: ["latin"] });
@@ -19,11 +20,13 @@ interface CreditCardProps {
   subAccount: SubAccount;
 }
 
-
 const CreditCard: React.FC<CreditCardProps> = ({ subAccount }) => {
   const { id, name, balance, creditCard_color, creditCard_number } = subAccount;
 
   const creditCardColor = getCreditCardColor(creditCard_color);
+
+  const pathname = usePathname().split("/")[2];
+  const isSubAccountPage = pathname === "sub-account";
 
   const handleCopyCreditCardNumber = (creditCardNumber: string) => {
     navigator.clipboard.writeText(creditCardNumber);
@@ -42,9 +45,27 @@ const CreditCard: React.FC<CreditCardProps> = ({ subAccount }) => {
         className="absolute inset-0 select-none z-10"
       />
       {/* Sub-account name */}
-      <p className="absolute top-4 left-5 z-20 text-white text-xl font-bold cursor-default">
-        {name}
-      </p>
+      {isSubAccountPage ? (
+        <p className="absolute top-4 left-5 z-20 text-white text-xl font-bold cursor-default">
+          {name}
+        </p>
+      ) : (
+        <div className="flex items-center absolute top-4 left-1 z-20">
+          <Link title="Details" href={`/dashboard/sub-account/${id}`}>
+            <svg
+              width="25px"
+              height="25px"
+              viewBox="0 0 16 16"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#ffffff"
+              className="bi bi-three-dots-vertical"
+            >
+              <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+            </svg>
+          </Link>
+          <p className="text-white text-xl font-bold cursor-default">{name}</p>
+        </div>
+      )}
       {/* sub-account Balance */}
       <h1 className="flex items-end gap-x-1 absolute top-20 left-5 z-20 cursor-default">
         <Icons.donutCoin className="w-9" fill="#ffffff" />{" "}

@@ -16,18 +16,30 @@ export type Transaction = {
   id: string;
   amount: number;
   bankAccountId: string;
-  bankAccount: Pick<BankAccount, "id" | "accountName" | "image">;
+  bankAccount: Pick<
+    BankAccount,
+    "id" | "accountName" | "image" | "bankAccountNumber"
+  >;
   transactionType: TransactionType;
   createdAt: Date;
 
   subAccountId: string | null;
-  subAccount: Pick<SubAccount, "id" | "name"> | null;
+  subAccount: Pick<
+    SubAccount,
+    "id" | "name" | "creditCard_number" | "creditCard_color"
+  > | null;
 
   applicationId: string | null;
-  application: Pick<Application, "id" | "name" | "logo"> | null;
+  application: Pick<
+    Application,
+    "id" | "name" | "logo" | "applicationId"
+  > | null;
   productName: string | null;
   productId: string | null;
 
   receiverBankAccountId: string | null;
-  receiverBankAccount: Pick<BankAccount, "id" | "accountName" | "image"> | null;
+  receiverBankAccount: Pick<
+    BankAccount,
+    "id" | "accountName" | "image" | "bankAccountNumber"
+  > | null;
 };

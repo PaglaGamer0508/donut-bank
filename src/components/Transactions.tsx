@@ -68,6 +68,7 @@ const Transactions: React.FC<TransactionsProps> = ({ bankAccountId }) => {
 
   useEffect(() => {
     getTransactions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -78,34 +78,36 @@ const SubAccountTransactionItem: React.FC<SubAccountTransactionItemProps> = ({
     >
       <div className="flex justify-between items-center gap-x-4">
         {/* transaction info */}
-        <div className="flex gap-2">
-          {/* Transaction Image */}
-          <div className="bg-green-100/70 p-2 rounded-lg">
-            {transactionType === SubAccountTransactionType.SPEND && (
-              <TransactionImage
-                alt="Logo"
-                src={transaction.application?.logo!}
-              />
-            )}
-            {transactionType === SubAccountTransactionType.ADD && (
-              <TransactionImage alt="Logo" src={CreditCard} />
-            )}
-          </div>
-          <div>
-            {transactionType === SubAccountTransactionType.SPEND && (
-              <h1 className="text-green-500 text-lg font-semibold">
-                {transaction.application?.name}
-              </h1>
-            )}
-            {transactionType === SubAccountTransactionType.ADD && (
-              <h1 className="text-green-500 text-lg font-semibold">
-                Add Money
-              </h1>
-            )}
+        <div>
+          <div className="flex gap-2">
+            {/* Transaction Image */}
+            <div className="bg-green-100/70 p-2 rounded-lg">
+              {transactionType === SubAccountTransactionType.SPEND && (
+                <TransactionImage
+                  alt="Logo"
+                  src={transaction.application?.logo!}
+                />
+              )}
+              {transactionType === SubAccountTransactionType.ADD && (
+                <TransactionImage alt="Logo" src={CreditCard} />
+              )}
+            </div>
+            <div>
+              {transactionType === SubAccountTransactionType.SPEND && (
+                <h1 className="text-green-500 text-lg font-semibold">
+                  {transaction.application?.name}
+                </h1>
+              )}
+              {transactionType === SubAccountTransactionType.ADD && (
+                <h1 className="text-green-500 text-lg font-semibold">
+                  Add Money
+                </h1>
+              )}
 
-            <p className="text-gray-500 text-sm font-medium">
-              {formatDate(transaction.createdAt)}
-            </p>
+              <p className="text-gray-500 text-sm font-medium">
+                {formatDate(transaction.createdAt)}
+              </p>
+            </div>
           </div>
         </div>
 
@@ -147,6 +149,15 @@ const SubAccountTransactionItem: React.FC<SubAccountTransactionItemProps> = ({
           </p>
         </div>
       </div>
+
+      {transactionType === SubAccountTransactionType.SPEND && (
+        <div className="mt-2">
+          <p className="text-gray-500 text-lg font-semibold">
+            Product:{" "}
+            <span className="text-amber-500">{transaction.productName}</span>
+          </p>
+        </div>
+      )}
     </Link>
   );
 };

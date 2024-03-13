@@ -37,13 +37,17 @@ const page: React.FC<pageProps> = async ({}) => {
         </div>
         {quickSendMoneyAccounts.length === 0 && (
           <div>
-            <h1>No Quick Send Money Accounts Found</h1>
-            <Link
-              href={`/dashboard/quick-send-money-accounts/add`}
-              className="text-red-500"
-            >
-              Add
-            </Link>
+            <h1 className="text-red-500 text-xl text-center font-semibold">
+              No Quick Send Money Accounts Found
+            </h1>
+            <div className="grid place-items-center mt-3">
+              <Link
+                href={`/dashboard/quick-send-money-accounts/add`}
+                className={buttonVariants({ variant: "primary" })}
+              >
+                Add
+              </Link>
+            </div>
           </div>
         )}
         <div className="flex flex-col gap-y-2">

@@ -71,8 +71,17 @@ const SubAccountDashboard: React.FC<SubAccountDashboardProps> = async ({
           </div>
           <div>
             <div
-              className={`${styles.transactions_scroll_container} ${styles.shadow_box} flex flex-col gap-y-3 lg:h-[298px] lg:overflow-y-scroll bg-white p-3 rounded-lg`}
+              className={`${styles.transactions_scroll_container} ${styles.shadow_box} flex flex-col gap-y-3 lg:h-[298px] lg:overflow-y-scroll bg-white p-3 rounded-lg min-h-[200px]`}
             >
+              {/* No tokens found */}
+              {tokens.length === 0 && (
+                <div className="flex-1 grid place-items-center h-full">
+                  <h1 className="text-center text-2xl text-red-500 font-semibold">
+                    No tokens found
+                  </h1>
+                </div>
+              )}
+
               {fewTokens.map((token) => (
                 <SubAccountTokenItem key={token.id} token={token} />
               ))}
@@ -102,8 +111,17 @@ const SubAccountDashboard: React.FC<SubAccountDashboardProps> = async ({
           </Link>
         </div>
         <div
-          className={`${styles.transactions_scroll_container} ${styles.shadow_box} flex-1 flex flex-col gap-y-3 md:overflow-y-scroll bg-white p-3 rounded-lg`}
+          className={`${styles.transactions_scroll_container} ${styles.shadow_box} flex-1 flex flex-col gap-y-3 md:overflow-y-scroll bg-white p-3 rounded-lg min-h-[200px]`}
         >
+          {/* No transactions found */}
+          {subAccountTransactions.length === 0 && (
+            <div className="flex-1 grid place-items-center">
+              <h1 className="text-center text-2xl text-red-500 font-semibold">
+                No transactions found
+              </h1>
+            </div>
+          )}
+
           {subAccountTransactions.map((transaction) => (
             <SubAccountTransactionItem
               key={transaction.id}

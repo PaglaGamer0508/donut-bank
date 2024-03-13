@@ -18,10 +18,10 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
 }) => {
   const getTransactionType = (transactionType: TransactionType) => {
     if (transactionType === TransactionType.SEND) {
-      if (transaction.bankAccountId === bankAccountId) {
-        return TransactionType.SEND;
-      } else {
+      if (transaction.receiverBankAccountId === bankAccountId) {
         return TransactionType.RECEIVED;
+      } else {
+        return TransactionType.SEND;
       }
     } else {
       return transactionType;
@@ -129,6 +129,14 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
           </p>
         </div>
       </div>
+      {transactionType === TransactionType.SPEND && (
+        <div className="mt-2">
+          <p className="text-gray-500 text-lg font-semibold">
+            Product:{" "}
+            <span className="text-amber-500">{transaction.productName}</span>
+          </p>
+        </div>
+      )}
     </Link>
   );
 };

@@ -135,7 +135,7 @@ const ApplicationSeachResult: React.FC<ApplicationSeachResultProps> = ({
       <div className="flex items-center justify-between gap-x-2 border-2 border-green-500 rounded-xl p-2 md:px-6">
         <div className="flex items-center gap-x-1">
           <Image
-            alt="Profile Picture"
+            alt="Logo"
             className="w-12 h-12 rounded-lg"
             src={application.logo}
             width={128}

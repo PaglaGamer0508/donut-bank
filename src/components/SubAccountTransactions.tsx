@@ -70,6 +70,7 @@ const SubAccountTransactions: React.FC<SubAccountTransactionsProps> = ({
 
   useEffect(() => {
     getSubAccountTransactions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

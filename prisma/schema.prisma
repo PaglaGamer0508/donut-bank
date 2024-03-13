@@ -138,22 +138,6 @@ model subAccountToken {
   @@index([applicationId])
 }
 
-// model SubAccountLoggedIn {
-//   id            String      @id @default(cuid())
-//   bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id])
-//   bankAccountId String
-//   subAccount    SubAccount  @relation(fields: [subAccountId], references: [id])
-//   subAccountId  String
-
-//   company   RegisteredCompany @relation(fields: [companyId], references: [id])
-//   companyId String
-//   createdAt DateTime          @default(now())
-
-//   @@index([bankAccountId])
-//   @@index([companyId])
-//   @@index([subAccountId])
-// }
-
 model QuickSendMoney {
   id                 String      @id @default(cuid())
   bankAccountId      String
