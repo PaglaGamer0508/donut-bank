@@ -62,6 +62,14 @@ const SubAccountDashboard: React.FC<SubAccountDashboardProps> = async ({
             <h1 className={`${lato.className} text-xl text-green-500`}>
               Tokens
             </h1>
+
+            <Link
+              href={`/dashboard/sub-account/${subAccountId}/token/create`}
+              className="bg-green-500 hover:bg-green-600 text-white text-sm font-medium px-1 rounded-sm"
+            >
+              Create New
+            </Link>
+
             <Link
               href={`/dashboard/sub-account/${subAccountId}/token`}
               className="text-slate-500 hover:text-green-500 text-sm font-medium font-serif"
