@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 const allowedOrigins =
   process.env.NODE_ENV === "production"
     ? ["https://donutbank.vercel.app"]
-    : ["http://localhost:3000", "https://www.google.com"];
+    : ["http://localhost:3000"];
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
@@ -22,6 +22,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
   if (request.url.includes("/sub-account/transaction")) {
+    return NextResponse.next();
+  }
+  if (request.url.includes("/api/applications")) {
     return NextResponse.next();
   }
 

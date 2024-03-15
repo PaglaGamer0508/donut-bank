@@ -4,8 +4,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <Navbar />
-      <div className="px-10 md:px-40 pt-3 md:pt-36">
+      <div className="px-10 md:px-40 pt-3 md:pt-36 mt-[74px]">
         <div>
           <h1 className={`font-bold text-3xl md:text-4xl max-w-[600px]`}>
             <span className="bg-green-500 px-2 rounded-lg text-white">
@@ -34,6 +33,7 @@ export default function Home() {
 
         {/* services section */}
       </div>
+      <div className="h-[1000px]"></div>
     </>
   );
 }

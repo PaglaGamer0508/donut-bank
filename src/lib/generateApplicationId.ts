@@ -1,6 +1,6 @@
 export const generateApplicationId = () => {
   const length = 16;
-  const prefix = "c";
+  const prefix = "a";
 
   const randomChars = Array.from({ length: length - 1 }, () => {
     const randomType = Math.random() < 0.5 ? "letter" : "number";

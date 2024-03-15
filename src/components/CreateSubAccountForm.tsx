@@ -27,14 +27,14 @@ const CreateSubAccountForm: React.FC<CreateSubAccountFormProps> = ({
   const { creditCardColor } = useSelectCreditCardColorState();
 
   const [subAccountName, setSubAccountName] = useState("");
-  const [password, setPassword] = useState("");
+  // const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const CreateSubAccountData: CreateSubAccountValidatorType = {
     bankAccountId,
     creditCard_color: creditCardColor,
     name: subAccountName,
-    password: password,
+    // password: password,
   };
 
   const { mutate: createSubAccount, isPending } = useMutation({
@@ -74,9 +74,11 @@ const CreateSubAccountForm: React.FC<CreateSubAccountFormProps> = ({
       setErrorMessage("Sub Account name must be at least 5 characters");
     } else if (/^\d+$/.test(cleanedSubAccountName)) {
       setErrorMessage("Sub Account name cannot contain only numbers");
-    } else if (password.length !== 8) {
-      setErrorMessage("Password has be 8 characters");
-    } else if (cleanedSubAccountName.length > 30) {
+    }
+    // else if (password.length !== 8) {
+    //   setErrorMessage("Password has be 8 characters");
+    // }
+    else if (cleanedSubAccountName.length > 30) {
       setErrorMessage("Sub Account name can't be more than 30 characters");
     } else {
       setErrorMessage("");
@@ -129,7 +131,7 @@ const CreateSubAccountForm: React.FC<CreateSubAccountFormProps> = ({
             required
             className="text-lg font-medium border border-green-500 rounded focus:outline-none py-1 px-3"
           />
-          <div className="flex flex-col">
+          {/* <div className="flex flex-col">
             <label
               htmlFor="password"
               className="text-lg font-semibold text-green-500"
@@ -146,7 +148,7 @@ const CreateSubAccountForm: React.FC<CreateSubAccountFormProps> = ({
               required
               className="text-lg font-medium border border-green-500 rounded focus:outline-none py-1 px-3"
             />
-          </div>
+          </div> */}
 
           {/* Select Credit Card Color */}
           <div className="mt-2">

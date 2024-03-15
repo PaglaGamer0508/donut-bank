@@ -3,6 +3,7 @@ import { Toaster } from "@/components/ui/Toaster";
 import "@uploadthing/react/styles.css";
 import type { Metadata } from "next";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Donut Bank",
@@ -17,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Navbar />
         <Providers>{children}</Providers>
         <Toaster />
       </body>

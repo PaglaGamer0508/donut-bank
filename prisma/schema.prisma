@@ -108,9 +108,9 @@ model Transaction {
 }
 
 model SubAccount {
-  id       String @id @default(cuid())
+  id       String  @id @default(cuid())
   name     String
-  password String
+  password String?
 
   balance           Int
   creditCard_number String

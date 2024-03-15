@@ -70,6 +70,15 @@ const ApplicationDashboard: React.FC<applicationDashboardProps> = ({
           <Code2 />
           <span>Developers Options</span>
         </Link>
+
+        {!application.websiteUrl ? (
+          <Link
+            href={`/dashboard/application/${application.applicationId}/developers`}
+            className="block h-4 text-red-500 font-medium text-center hover:underline"
+          >
+            Set the URL to your Website
+          </Link>
+        ) : null}
       </div>
     </div>
   );

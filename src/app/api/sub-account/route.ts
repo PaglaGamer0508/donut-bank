@@ -55,7 +55,7 @@ export const GET = async (req: Request, res: NextResponse) => {
 export const POST = async (req: Request, res: NextResponse) => {
   try {
     const body = await req.json();
-    const { bankAccountId, creditCard_color, name, password } =
+    const { bankAccountId, creditCard_color, name } =
       CreateSubAccountValidator.parse(body);
 
     // Check if the user already has three sub-accounts
@@ -89,8 +89,8 @@ export const POST = async (req: Request, res: NextResponse) => {
     const creditCardNumber = generateCreditCardNumber();
 
     //? this section is for generating a secure password with bcrypt
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    // const salt = await bcrypt.genSalt(10);
+    // const hashedPassword = await bcrypt.hash(password, salt);
 
     // Create the sub-account
     await db.subAccount.create({
@@ -100,7 +100,7 @@ export const POST = async (req: Request, res: NextResponse) => {
         creditCard_color,
         creditCard_number: creditCardNumber,
         balance: 0,
-        password: hashedPassword,
+        // password: hashedPassword,
       },
     });
 
