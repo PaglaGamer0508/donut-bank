@@ -39,6 +39,7 @@ const WebsiteURL: React.FC<WebsiteURLProps> = ({
 
   useEffect(() => {
     if (!websiteURL) {
+      console.log("This Funtion is not working properly");
       setURL("");
     } else {
       setURL(websiteURL);
@@ -84,6 +85,10 @@ const WebsiteURL: React.FC<WebsiteURLProps> = ({
       });
     }
     UpdateApplicationURL();
+  };
+
+  const clearUrl = () => {
+    setURL("");
   };
 
   return (
@@ -139,7 +144,10 @@ const WebsiteURL: React.FC<WebsiteURLProps> = ({
                 >
                   Edit
                 </Button>
-                <DeleteUrlButton application_id={application_id} />
+                <DeleteUrlButton
+                  clearUrl={clearUrl}
+                  application_id={application_id}
+                />
               </div>
             ) : (
               <Button

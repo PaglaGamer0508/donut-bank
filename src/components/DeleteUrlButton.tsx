@@ -3,15 +3,15 @@
 import React from "react";
 
 import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
 } from "@/components/ui/AlertDialog";
 import { toast } from "@/hooks/useToast";
 import { DeleteURLValidatorType } from "@/lib/validators/DeleteURLValidator";
@@ -23,10 +23,12 @@ import { buttonVariants } from "./ui/Button";
 
 interface DeleteUrlButtonProps {
   application_id: string;
+  clearUrl: () => void;
 }
 
 const DeleteUrlButton: React.FC<DeleteUrlButtonProps> = ({
   application_id,
+  clearUrl,
 }) => {
   const router = useRouter();
 
@@ -49,6 +51,7 @@ const DeleteUrlButton: React.FC<DeleteUrlButtonProps> = ({
       });
     },
     onSuccess: () => {
+      clearUrl();
       router.refresh();
       return toast({
         title: "Url Deleted",
