@@ -2,7 +2,7 @@
 
 import { toast } from "@/hooks/useToast";
 import { Application } from "@/lib/types/application";
-import { SubAccount } from "@/lib/types/sub-account";
+import { Token } from "@/lib/types/token";
 import { CreateSubAccountTokenValidatorType } from "@/lib/validators/CreateSubAccountTokenValidator";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
@@ -14,7 +14,6 @@ import React, { useState } from "react";
 import { Icons } from "./Icons";
 import styles from "./style/WithdrawCoins.module.css";
 import { Button } from "./ui/Button";
-import { Token } from "@/lib/types/token";
 
 const lato = Lato({ weight: ["900"], subsets: ["latin"] });
 

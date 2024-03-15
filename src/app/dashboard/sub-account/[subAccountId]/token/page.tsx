@@ -1,13 +1,10 @@
-import CopyText from "@/components/CopyText";
-import { Icons } from "@/components/Icons";
 import SubAccountTokenItem from "@/components/SubAccountTokenItem";
 import { buttonVariants } from "@/components/ui/Button";
 import { getAuthSession } from "@/lib/auth";
+import { getAllSubAccountTokens } from "@/lib/getAllSubAccountTokens";
 import { getBankAccount } from "@/lib/getBankAccount";
 import { getSubAccount } from "@/lib/getSubAccount";
-import { getAllSubAccountTokens } from "@/lib/getAllSubAccountTokens";
 import { Plus } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 

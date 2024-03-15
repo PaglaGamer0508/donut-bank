@@ -22,7 +22,6 @@ const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({
   hasApplication,
 }) => {
   const pathName = usePathname().split("/")[2];
-  const router = useRouter();
 
   const { closeSlider } = useSlideMenuState();
 
