@@ -24,7 +24,7 @@ const page: React.FC<pageProps> = async ({ params }) => {
   if (!subAccount) {
     return (
       <div>
-        <h1>Sub Account not found</h1>
+        <h1 className="text-center text-2xl text-red-500 font-semibold">Sub Account not found</h1>
       </div>
     );
   }
@@ -32,7 +32,7 @@ const page: React.FC<pageProps> = async ({ params }) => {
   if (subAccount.bankAccountId !== bankAccount.id) {
     return (
       <div>
-        <h1>You do not have access to this sub account</h1>
+        <h1 className="text-center text-2xl text-red-500 font-semibold">You do not have access to this sub account</h1>
       </div>
     );
   }

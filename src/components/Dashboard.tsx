@@ -72,7 +72,7 @@ const Dashboard: React.FC<DashboardProps> = async ({
             </h1>
             <Link
               className={cn(buttonVariants({ variant: "primary" }))}
-              href="dashboard/sub-account/create"
+              href="/dashboard/sub-account/create"
             >
               Create a Sub Account
             </Link>

@@ -6,19 +6,21 @@ import { Token } from "@/lib/types/token";
 import { CreateSubAccountTokenValidatorType } from "@/lib/validators/CreateSubAccountTokenValidator";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { Check, Plus } from "lucide-react";
+import { Check, ExternalLink, Plus } from "lucide-react";
 import { Lato } from "next/font/google";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { Icons } from "./Icons";
 import styles from "./style/WithdrawCoins.module.css";
-import { Button } from "./ui/Button";
+import { Button, buttonVariants } from "./ui/Button";
+import { ApplicationPublic } from "@/lib/types/application-public";
+import Link from "next/link";
 
 const lato = Lato({ weight: ["900"], subsets: ["latin"] });
 
 interface ApplicationSeachResultProps {
-  application: Application;
+  application: ApplicationPublic;
   subAccountId: string;
   tokens: Token[];
 }
@@ -131,39 +133,58 @@ const ApplicationSeachResult: React.FC<ApplicationSeachResultProps> = ({
 
   return (
     <div>
-      <div className="flex items-center justify-between gap-x-2 border-2 border-green-500 rounded-xl p-2 md:px-6">
-        <div className="flex items-center gap-x-1">
-          <Image
-            alt="Logo"
-            className="w-12 h-12 rounded-lg"
-            src={application.logo}
-            width={128}
-            height={128}
-          />
+      <div className="border-2 border-green-500 rounded-xl p-2 md:px-6">
+        <div className="flex items-center justify-between gap-x-2">
+          <div className="flex items-center gap-x-1">
+            <Image
+              alt="Logo"
+              className="w-12 h-12 rounded-lg"
+              src={application.logo}
+              width={128}
+              height={128}
+            />
+
+            <div>
+              <h1 className="text-xl font-semibold text-green-500">
+                {application.name}
+              </h1>
+              <p className="text-slate-400 text-sm font-medium">
+                {application.applicationId}
+              </p>
+            </div>
+          </div>
 
           <div>
-            <h1 className="text-xl font-semibold text-green-500">
-              {application.name}
-            </h1>
-            <p className="text-slate-400 text-sm font-medium">
-              {application.applicationId}
-            </p>
+            {applicationIds.includes(application.id) ? (
+              <div title="Account Already Added">
+                <Check className="w-10 h-10 bg-green-500 text-white rounded-full p-1" />
+              </div>
+            ) : (
+              <button
+                onClick={() =>
+                  setSetshowCreateTokenForm(!setshowCreateTokenForm)
+                }
+                title="Create a new Token"
+                className="bg-green-500 hover:bg-green-600 active:scale-90 transition-all duration-75 grid place-items-center w-10 h-10 rounded-full focus:outline-none"
+              >
+                <Plus className="text-white w-10 h-10" />
+              </button>
+            )}
           </div>
         </div>
 
-        <div>
-          {applicationIds.includes(application.id) ? (
-            <div title="Account Already Added">
-              <Check className="w-10 h-10 bg-green-500 text-white rounded-full p-1" />
-            </div>
-          ) : (
-            <button
-              onClick={() => setSetshowCreateTokenForm(!setshowCreateTokenForm)}
-              title="Create a new Token"
-              className="bg-green-500 hover:bg-green-600 active:scale-90 transition-all duration-75 grid place-items-center w-10 h-10 rounded-full focus:outline-none"
+        <div className="mt-2">
+          {application.websiteUrl && (
+            <Link
+              target="_blank"
+              href={application.websiteUrl}
+              className={`${buttonVariants({
+                variant: "primary",
+              })} flex items-center gap-x-1`}
             >
-              <Plus className="text-white w-10 h-10" />
-            </button>
+              <span>Go to Website</span>
+              <ExternalLink className="w-5 h-5" />
+            </Link>
           )}
         </div>
       </div>

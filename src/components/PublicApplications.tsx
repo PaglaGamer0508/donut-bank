@@ -21,7 +21,7 @@ const PublicApplications: React.FC<PublicApplicationsProps> = ({}) => {
   useEffect(() => {
     const getApplications = async () => {
       setIsloading(true);
-      const applicationsResponse = await fetch(`/api/applications`, {
+      const applicationsResponse = await fetch(`/api/application-public`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

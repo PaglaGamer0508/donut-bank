@@ -1,11 +1,11 @@
 import ApplicationSeachResult from "@/components/ApplicationSeachResult";
-import SubAccountDashboard from "@/components/SubAccountDashboard";
+import GoBackButton from "@/components/GoBackButton";
 import { buttonVariants } from "@/components/ui/Button";
 import { getAuthSession } from "@/lib/auth";
-import { getApplication } from "@/lib/getApplication";
-import { getBankAccount } from "@/lib/getBankAccount";
-import { getSubAccount } from "@/lib/getSubAccount";
 import { getAllSubAccountTokens } from "@/lib/getAllSubAccountTokens";
+import { getBankAccount } from "@/lib/getBankAccount";
+import { getPublicApplication } from "@/lib/getPublicApplication";
+import { getSubAccount } from "@/lib/getSubAccount";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -23,12 +23,14 @@ const page: React.FC<pageProps> = async ({ params }) => {
 
   const bankAccount = await getBankAccount(session?.user?.id!);
   const subAccount = await getSubAccount(subAccountId);
-  const application = await getApplication(applicationId);
+  const application = await getPublicApplication(applicationId);
 
   if (!subAccount) {
     return (
       <div>
-        <h1>Sub Account not found</h1>
+        <h1 className="text-center text-2xl text-red-500 font-semibold">
+          Sub Account not found
+        </h1>
       </div>
     );
   }
@@ -46,7 +48,9 @@ const page: React.FC<pageProps> = async ({ params }) => {
   if (!application) {
     return (
       <div>
-        <h1>Application not found</h1>
+        <h1 className="text-center text-2xl text-red-500 font-semibold">
+          Application not found
+        </h1>
       </div>
     );
   }
@@ -63,15 +67,8 @@ const page: React.FC<pageProps> = async ({ params }) => {
           tokens={subAccountTokens}
         />
 
-        <div className="grid place-content-center">
-          <Link
-            className={`${buttonVariants({
-              variant: "primary",
-            })} mt-2`}
-            href={`/dashboard/sub-account/${subAccountId}/token`}
-          >
-            <ArrowLeft />
-          </Link>
+        <div className="grid place-content-center mt-3">
+          <GoBackButton />
         </div>
       </div>
     </div>

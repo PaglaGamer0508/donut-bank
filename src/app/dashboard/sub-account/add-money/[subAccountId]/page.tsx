@@ -17,13 +17,13 @@ const page: React.FC<pageProps> = async ({ params }) => {
   const subAccount = await getSubAccount(subAccountId);
 
   if (!subAccount) {
-    return <div>Sub Account not found</div>;
+    return <div className="text-center text-2xl text-red-500 font-semibold">Sub Account not found</div>;
   }
 
   if (subAccount.bankAccountId !== bankAccount.id) {
     return (
       <div>
-        <h1>You do not have access to this sub account</h1>
+        <h1 className="text-center text-2xl text-red-500 font-semibold">You do not have access to this sub account</h1>
       </div>
     );
   }

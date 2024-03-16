@@ -24,7 +24,7 @@ export function middleware(request: NextRequest) {
   if (request.url.includes("/sub-account/transaction")) {
     return NextResponse.next();
   }
-  if (request.url.includes("/api/applications")) {
+  if (request.url.includes("/api/application-public")) {
     return NextResponse.next();
   }
 

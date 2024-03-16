@@ -6,7 +6,8 @@ import React from "react";
 import CopyText from "./CopyText";
 import { Icons } from "./Icons";
 import Link from "next/link";
-import { Code2 } from "lucide-react";
+import { Code2, ExternalLink, Settings } from "lucide-react";
+import { buttonVariants } from "./ui/Button";
 
 const lato = Lato({ weight: ["900"], subsets: ["latin"] });
 
@@ -61,14 +62,16 @@ const ApplicationDashboard: React.FC<applicationDashboardProps> = ({
         </div>
       </div>
 
-      {/* developers option */}
-      <div>
+      {/* Settings and Website URL */}
+      <div className="md:flex items-center gap-2 mt-2">
         <Link
           href={`/dashboard/application/${application.applicationId}/developers`}
-          className={`flex items-center gap-x-1 w-fit bg-green-500 hover:bg-green-600 text-white text-lg font-semibold rounded-lg py-1 px-3 mt-2 transition-all duration-75`}
+          className={`${buttonVariants({
+            variant: "primary",
+          })} flex items-center gap-x-1`}
         >
-          <Code2 />
-          <span>Developers Options</span>
+          <Settings className="w-6 h-6" />
+          <span>Settings</span>
         </Link>
 
         {!application.websiteUrl ? (
@@ -78,7 +81,18 @@ const ApplicationDashboard: React.FC<applicationDashboardProps> = ({
           >
             Set the URL to your Website
           </Link>
-        ) : null}
+        ) : (
+          <Link
+            target="_blank"
+            href={application.websiteUrl}
+            className={`${buttonVariants({
+              variant: "primary",
+            })} flex items-center gap-x-1`}
+          >
+            <ExternalLink className="w-6 h-6" />
+            <span>Go to Website</span>
+          </Link>
+        )}
       </div>
     </div>
   );

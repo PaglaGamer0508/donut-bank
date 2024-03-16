@@ -24,11 +24,11 @@ const page: React.FC<pageProps> = async ({ params }) => {
   const application = await getApplication(applicationId);
 
   if (!application) {
-    return <div>Application not found</div>;
+    return <div className="text-center text-2xl text-red-500 font-semibold">Application not found</div>;
   }
 
   if (application?.ownerId !== session?.user?.id) {
-    return <div>You are not the owner of this application</div>;
+    return <div className="text-center text-2xl text-red-500 font-semibold">You are not the owner of this application</div>;
   }
 
   const apiKey = await getAPIKey(application?.id!);

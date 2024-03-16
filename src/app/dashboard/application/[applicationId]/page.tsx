@@ -15,7 +15,7 @@ const page: React.FC<pageProps> = async ({ params }) => {
   const application = await getApplication(applicationId);
 
   if (application === null) {
-    return <h1>Application not found</h1>;
+    return <h1 className="text-center text-2xl text-red-500 font-semibold">Application not found</h1>;
   }
 
   if (application.ownerId !== session?.user?.id) {

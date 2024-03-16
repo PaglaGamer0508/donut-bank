@@ -1,5 +1,6 @@
 import Logo from "@/../public/donut.png";
 import { Icons } from "@/components/Icons";
+import { buttonVariants } from "@/components/ui/Button";
 import { getAuthSession } from "@/lib/auth";
 import { getAllSubAccount } from "@/lib/getAllSubAccounts";
 import { getBankAccountId } from "@/lib/getBankAccountId";
@@ -17,6 +18,24 @@ const page: React.FC<pageProps> = async ({}) => {
   const session = await getAuthSession();
   const bankAccountId = await getBankAccountId(session?.user?.id!);
   const subAccounts = await getAllSubAccount(bankAccountId!);
+
+  if (subAccounts.length === 0) {
+    return (
+      <div>
+        <h1 className="text-2xl text-red-500 text-center">
+          You does not have a sub account
+        </h1>
+        <div className="flex justify-center mt-2">
+          <Link
+            className={`${buttonVariants({ variant: "primary" })}`}
+            href="/dashboard/sub-account/create"
+          >
+            Create a Sub Account
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center justify-center gap-y-3 mt-4 md:mt-6">
