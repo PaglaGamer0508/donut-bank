@@ -1,6 +1,7 @@
 "use client";
 
 import Logo from "@/../public/donut.png";
+import { Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -35,11 +36,15 @@ const Navbar: React.FC = () => {
           }`}
         >
           {/* Logo and Link section */}
-          <div className="flex items-center gap-x-6">
+          <div className="flex items-center gap-x-2 md:gap-x-6">
+            <button className="md:hidden">
+              <Menu className="w-10 h-10" />
+            </button>
             <Link href={`/`} className="h-12 w-12 rounded-full">
               <Image alt="logo" src={Logo} width={48} height={48} />
             </Link>
-            <ul className="flex gap-x-5 font-medium">
+
+            <ul className="hidden md:flex gap-x-5 font-medium">
               <li>
                 <Link className="hover:text-green-500" href="#">
                   About
@@ -67,7 +72,7 @@ const Navbar: React.FC = () => {
           <div className="flex items-center gap-x-5">
             <Link
               href="/sign-in"
-              className="font-semibold hover:text-green-500"
+              className="hidden md:inline-block font-semibold hover:text-green-500"
             >
               Sign in
             </Link>

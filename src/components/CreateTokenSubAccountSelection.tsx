@@ -8,15 +8,18 @@ import React from "react";
 
 const lato2 = Lato({ weight: ["700"], subsets: ["latin"] });
 
-interface CreditCardSelectionProps {
+interface CreateTokenSubAccountSelectionProps {
   subAccount: SubAccount;
+  applciationId: SubAccount;
 }
 
-const CreditCardSelection: React.FC<CreditCardSelectionProps> = ({
-  subAccount,
-}) => {
+const CreateTokenSubAccountSelection: React.FC<
+  CreateTokenSubAccountSelectionProps
+> = ({ subAccount, applciationId }) => {
   return (
-    <Link href={`/dashboard/sub-account/${subAccount.id}`}>
+    <Link
+      href={`/dashboard/sub-account/${subAccount.id}/token/create/${applciationId}`}
+    >
       <div
         key={subAccount.id}
         className="group flex items-center justify-between bg-green-100/70 p-2 rounded-md border-2 border-gray-300 hover:border-green-500 transition-all duration-150"
@@ -39,4 +42,4 @@ const CreditCardSelection: React.FC<CreditCardSelectionProps> = ({
   );
 };
 
-export default CreditCardSelection;
+export default CreateTokenSubAccountSelection;

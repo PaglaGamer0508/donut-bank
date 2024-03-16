@@ -1,4 +1,4 @@
-import CreditCardSelection from "@/components/CreditCardSelection";
+import SubAccountSelection from "@/components/SubAccountSelection";
 import { buttonVariants } from "@/components/ui/Button";
 import { getAuthSession } from "@/lib/auth";
 import { getAllSubAccount } from "@/lib/getAllSubAccounts";
@@ -52,7 +52,7 @@ const page: React.FC<pageProps> = async ({}) => {
 
       <div className="flex flex-col gap-y-2 w-[95%] md:w-[60%] lg:w-[40%] mx-auto mt-3">
         {subAccounts.map((subAccount) => (
-          <CreditCardSelection key={subAccount.id} subAccount={subAccount} />
+          <SubAccountSelection key={subAccount.id} subAccount={subAccount} />
         ))}
       </div>
     </div>

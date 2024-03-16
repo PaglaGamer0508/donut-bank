@@ -1,5 +1,4 @@
 import PublicApplications from "@/components/PublicApplications";
-import { getAllPublicApplications } from "@/lib/getAllPublicApplications";
 import React from "react";
 
 interface pageProps {}
