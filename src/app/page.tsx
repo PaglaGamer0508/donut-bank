@@ -33,7 +33,14 @@ export default function Home() {
 
         {/* services section */}
       </div>
-      <div className="h-[1000px]"></div>
+      <div className="grid place-items-center px-2 md:px-20 py-36">
+        <div>
+          <h1 className="text-4xl text-center text-gray-700 font-bold max-w-[600px]">
+            Documentation and Guides{" "}
+            <span className="text-red-500">Upcoming...</span>
+          </h1>
+        </div>
+      </div>
     </>
   );
 }
