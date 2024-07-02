@@ -3,6 +3,7 @@ import { buttonVariants } from "@/components/ui/Button";
 import { getAuthSession } from "@/lib/auth";
 import { getAllSubAccount } from "@/lib/getAllSubAccounts";
 import { getBankAccount } from "@/lib/getBankAccount";
+import { hasBankAccount } from "@/lib/hasBankAccount";
 import { hasSubAccount } from "@/lib/hasSubAccount";
 import { Lato } from "next/font/google";
 import Link from "next/link";
@@ -15,6 +16,16 @@ interface pageProps {}
 
 const page: React.FC<pageProps> = async ({}) => {
   const session = await getAuthSession();
+  const bankAccountExist = await hasBankAccount();
+
+  if (!bankAccountExist) {
+    return (
+      <h1 className="text-center text-2xl text-red-500 font-semibold">
+        Create a Bank Account to create Sub Accounts
+      </h1>
+    );
+  }
+
   const bankAccount = await getBankAccount(session?.user?.id!);
   const hasSubAccounts = await hasSubAccount(bankAccount.id);
 

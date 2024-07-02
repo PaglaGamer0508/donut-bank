@@ -35,7 +35,7 @@ export default function Home() {
       </div>
       <div className="grid place-items-center px-2 md:px-20 py-36">
         <div>
-          <h1 className="text-4xl text-center text-gray-700 font-bold max-w-[600px]">
+          <h1 className="text-3xl md:text-4xl text-center text-gray-700 font-bold max-w-[600px]">
             Documentation and Guides{" "}
             <span className="text-red-500">Upcoming...</span>
           </h1>

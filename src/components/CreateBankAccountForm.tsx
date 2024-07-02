@@ -63,6 +63,7 @@ const CreateBankAccountForm: React.FC<CreateBankAccountFormProps> = ({
     },
     onSuccess: () => {
       clearData();
+      router.push("/dashboard");
       router.refresh();
       return toast({
         title: "Success",

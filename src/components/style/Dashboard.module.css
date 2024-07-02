@@ -1,4 +1,4 @@
-/* credit card section horizontal scroll */
+/* ******************** credit card section horizontal scroll ******************** */
 .scroll_container::-webkit-scrollbar {
   height: 7px;
 }
@@ -17,7 +17,7 @@
   background-color: transparent;
 }
 
-/* Transaction section scroll section */
+/* ******************** Transaction section scroll section ******************** */
 .shadow_box {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

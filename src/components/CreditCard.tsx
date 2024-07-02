@@ -86,6 +86,7 @@ const CreditCard: React.FC<CreditCardProps> = ({ subAccount }) => {
 
       {/* add money button */}
       <Link
+      title="Add Money"
         href={`/dashboard/sub-account/add-money/${id}`}
         className="group grid place-items-center absolute -top-3 -right-3 z-20 w-16 h-16 bg-[#75757569] hover:bg-green-500 transition-all duration-75 rounded-full focus:outline-none"
       >

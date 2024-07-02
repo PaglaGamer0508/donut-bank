@@ -138,7 +138,9 @@ const Dashboard: React.FC<DashboardProps> = async ({
                 </div>
 
                 {/* quick send money accounts */}
-                <div className="flex gap-x-1">
+                <div
+                  className={`${styles.scroll_container} flex pb-2 gap-x-1 overflow-x-scroll`}
+                >
                   {quickSendMoneyAccounts.length > 0 ? (
                     <div className="flex items-center gap-x-1">
                       {quickSendMoneyAccounts.map((quickSendMoneyAccount) => (
@@ -170,7 +172,7 @@ const Dashboard: React.FC<DashboardProps> = async ({
             {/* comapies */}
             <div className="flex flex-col h-1/2">
               <h1 className={`${lato.className} text-xl text-green-500`}>
-                Companies
+                Applications
               </h1>
               <div className="flex-1 border border-green-500 rounded-lg bg-green-100/60"></div>
             </div>

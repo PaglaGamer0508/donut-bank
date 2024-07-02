@@ -16,10 +16,12 @@ import { useSlideMenuState } from "@/lib/global-state-store/slideMenuState";
 
 interface DashBoardNavbarProps {
   hasApplication: boolean;
+  hasBankAccount: boolean;
 }
 
 const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({
   hasApplication,
+  hasBankAccount,
 }) => {
   const pathName = usePathname().split("/")[2];
 
@@ -70,33 +72,35 @@ const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({
               </Link>
             </li>
             {/* application */}
-            <li>
-              <Link
-                title="Sub-Accounts"
-                onClick={() => closeSlider()}
-                href="/dashboard/sub-account"
-              >
-                {pathName === "sub-account" ? (
-                  <Image
-                    src={CreditCardIcon}
-                    alt="sub-accounts"
-                    width={64}
-                    height={64}
-                    className="w-9 select-none"
-                  />
-                ) : (
-                  <Image
-                    src={CreditCardIconLowOpacity}
-                    alt="sub-accounts"
-                    width={64}
-                    height={64}
-                    className="w-9 select-none"
-                  />
-                )}
-              </Link>
-            </li>
+            {hasBankAccount && (
+              <li>
+                <Link
+                  title="Sub-Accounts"
+                  onClick={() => closeSlider()}
+                  href="/dashboard/sub-account"
+                >
+                  {pathName === "sub-account" ? (
+                    <Image
+                      src={CreditCardIcon}
+                      alt="sub-accounts"
+                      width={64}
+                      height={64}
+                      className="w-9 select-none"
+                    />
+                  ) : (
+                    <Image
+                      src={CreditCardIconLowOpacity}
+                      alt="sub-accounts"
+                      width={64}
+                      height={64}
+                      className="w-9 select-none"
+                    />
+                  )}
+                </Link>
+              </li>
+            )}
             {/* sub-accounts */}
-            {hasApplication ? (
+            {hasApplication && (
               <li>
                 <Link
                   title="Application"
@@ -122,7 +126,7 @@ const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({
                   )}
                 </Link>
               </li>
-            ) : null}
+            )}
           </ul>
         </div>
 
