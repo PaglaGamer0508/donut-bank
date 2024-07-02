@@ -23,7 +23,10 @@ const layout: React.FC<layoutProps> = async ({ children }) => {
 
   return (
     <div className="flex bg-[#f5f6fa]">
-      <SlideMenuContainer hasApplication={applicationExist} />
+      <SlideMenuContainer
+        hasBankAccount={bankAccountExist}
+        hasApplication={applicationExist}
+      />
       {/* the vertical navigation bar */}
       <div className="hidden sm:block fixed top-0 left-0 h-full">
         <DashBoardNavbar

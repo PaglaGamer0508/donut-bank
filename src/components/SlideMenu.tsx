@@ -8,9 +8,13 @@ import DashBoardNavbar from "./DashBoardNavbar";
 
 interface SlideMenuProps {
   hasApplication: boolean;
+  hasBankAccount: boolean;
 }
 
-const SlideMenu: React.FC<SlideMenuProps> = ({ hasApplication }) => {
+const SlideMenu: React.FC<SlideMenuProps> = ({
+  hasApplication,
+  hasBankAccount,
+}) => {
   const { isOpen, closeSlider } = useSlideMenuState();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -40,7 +44,10 @@ const SlideMenu: React.FC<SlideMenuProps> = ({ hasApplication }) => {
           menuOpen ? "" : "-translate-x-full"
         } transition-all duration-75`}
       >
-        <DashBoardNavbar hasApplication={hasApplication} />
+        <DashBoardNavbar
+          hasBankAccount={hasBankAccount}
+          hasApplication={hasApplication}
+        />
       </div>
       <div>Hello</div>
     </div>
