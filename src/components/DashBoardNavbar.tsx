@@ -100,33 +100,31 @@ const DashBoardNavbar: React.FC<DashBoardNavbarProps> = ({
               </li>
             )}
             {/* sub-accounts */}
-            {hasApplication && (
-              <li>
-                <Link
-                  title="Application"
-                  onClick={() => closeSlider()}
-                  href="/dashboard/application"
-                >
-                  {pathName === "application" ? (
-                    <Image
-                      src={ApplicationIcon}
-                      alt="application"
-                      width={64}
-                      height={64}
-                      className="w-9 select-none"
-                    />
-                  ) : (
-                    <Image
-                      src={ApplicationIconLowOpacity}
-                      alt="application"
-                      width={64}
-                      height={64}
-                      className="w-9 select-none"
-                    />
-                  )}
-                </Link>
-              </li>
-            )}
+            <li>
+              <Link
+                title="Application"
+                onClick={() => closeSlider()}
+                href="/dashboard/application"
+              >
+                {pathName === "application" ? (
+                  <Image
+                    src={ApplicationIcon}
+                    alt="application"
+                    width={64}
+                    height={64}
+                    className="w-9 select-none"
+                  />
+                ) : (
+                  <Image
+                    src={ApplicationIconLowOpacity}
+                    alt="application"
+                    width={64}
+                    height={64}
+                    className="w-9 select-none"
+                  />
+                )}
+              </Link>
+            </li>
           </ul>
         </div>
 

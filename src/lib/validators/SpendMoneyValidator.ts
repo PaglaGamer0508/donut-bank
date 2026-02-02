@@ -14,7 +14,7 @@ export const SpendMoneyValidator = z.object({
       message: "Product name must be at least 3 characters",
     })
     .max(30, { message: "Product name can't be more than 30 characters" }),
-  productId: z.string().optional(), // Optional
+  productId: z.string().optional(), // (Optional) for tracking sells
 });
 
 export type SpendMoneyValidatorType = z.infer<typeof SpendMoneyValidator>;
