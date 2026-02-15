@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 import { SpendMoneyValidator } from "@/lib/validators/SpendMoneyValidator";
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { limiter } from "./limiter";
+import { limiter } from "@/lib/limiter";
 
 const makeCorsHeaders = (origin: string | null) => {
   // In dev you can use origin || "*" — in prod prefer explicit origin checks
