@@ -17,6 +17,9 @@ export function middleware(request: NextRequest) {
   if (request.url.includes("/application/spend")) {
     return NextResponse.next();
   }
+  if (request.url.includes("/application/validate-token")) {
+    return NextResponse.next();
+  }
 
   if (request.url.includes("/bank-account/transaction")) {
     return NextResponse.next();
