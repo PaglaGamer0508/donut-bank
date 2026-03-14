@@ -32,8 +32,8 @@ export const GET = async (req: Request) => {
     }
 
     const { searchParams } = new URL(req.url);
-    const subAccountToken = searchParams.get("subAccountToken");
-    const ApplicationAPIKey = searchParams.get("ApplicationAPIKey");
+    const subAccountToken = searchParams.get("subaccounttoken");
+    const ApplicationAPIKey = searchParams.get("applicationapikey");
 
     if (!subAccountToken || !ApplicationAPIKey) {
       return NextResponse.json(

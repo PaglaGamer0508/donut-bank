@@ -24,7 +24,7 @@ export const GET = async (req: Request, res: NextResponse) => {
 
     return NextResponse.json(
       { message: "Applications Fetched", applications },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     return new NextResponse(`Error processing the request: ` + error, {
@@ -64,7 +64,7 @@ export const POST = async (req: Request, res: NextResponse) => {
         name: applicationName,
         email,
         ownerId: userId,
-        balance: 1_00_000,
+        balance: 1000,
         applicationId,
       },
     });
